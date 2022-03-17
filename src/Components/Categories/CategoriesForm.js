@@ -47,7 +47,7 @@ const CategoriesForm = () => {
 
     function validate(values) {
       const errors = {}
-      const imageUrlFormat = values.imageUrl.slice(-3).toLowerCase()
+      const imageFormat = values.imageUrl.slice(-3).toLowerCase()
 
       if (!values.name) {
         errors.name = 'Name is required'
@@ -60,9 +60,9 @@ const CategoriesForm = () => {
       }
       
       if (!values.imageUrl) {
-        errors.imageUrl = 'An imageUrl is required'
-      } else if (imageUrlFormat !== 'jpg' && imageUrlFormat !== 'png') {
-        errors.imageUrl = 'The imageUrl must have JPG or PNG extension'
+        errors.imageUrl = 'An image is required'
+      } else if (imageFormat !== 'jpg' && imageFormat !== 'png') {
+        errors.imageUrl = 'The image must have JPG or PNG extension'
       }
 
       return errors
@@ -84,7 +84,7 @@ const CategoriesForm = () => {
 
           <div className='form-input-div'>
             <div className='file-input-div'>
-              <label>Upload an imageUrl for this category</label>
+              <label>Category image</label>
               <input className='input-field' type='file' name='imageUrl' value={formik.values.imageUrl} onChange={formik.handleChange}/>
             </div>
             <p className='error-message'>{formik.errors.imageUrl}</p>
