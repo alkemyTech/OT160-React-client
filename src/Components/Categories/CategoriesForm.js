@@ -22,18 +22,18 @@ const CategoriesForm = () => {
       validateOnChange: false,
       validateOnBlur: false,
       onSubmit: values => {
-        if (category) {
+        if (category.id) {
           axios({
             method: 'patch',
             url: `/categories/${category.id}`,
             data: values
-          }).catch(err => alert(err)) // falta acordar manejo de errores
+          }).catch(err => alert('patch',err)) // falta acordar manejo de errores
         } else {
           axios({
             method: 'post',
             url: '/categories',
             data: values
-          }).catch(err => alert(err)) // falta acordar manejo de errores
+          }).catch(err => alert('post',err)) // falta acordar manejo de errores
         }
       }
     })
