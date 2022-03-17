@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { useFormik } from 'formik'
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import '../FormStyles.css';
 
 const CategoriesForm = () => {
+
     const [initialValues, setInitialValues] = useState({
         name: '',
-        description: ''
+        description: '',
+        image: ''
     })
 
     const handleChange = (e) => {
@@ -23,7 +28,16 @@ const CategoriesForm = () => {
     return (
         <form className="form-container" onSubmit={handleSubmit}>
             <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Title"></input>
-            <input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Write some description"></input>
+            <CKEditor editor={ClassicEditor}
+                      data={initialValues.description}
+                      onChange={(event, editor) => {
+                        setInitialValues(previous => {
+                          previous.description = editor.getData()
+                          return previous
+                        })
+                      }}>
+
+            </CKEditor>
             <button className="submit-btn" type="submit">Send</button>
         </form>
     );
