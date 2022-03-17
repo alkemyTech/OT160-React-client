@@ -1,23 +1,41 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom'
 import { useFormik } from 'formik'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import axios from 'axios'
 import '../FormStyles.css';
 
 const CategoriesForm = () => {
+    const location = useLocation()
+    const category  = (location.state
+                                          ? location.state.category
+                                          : {name: '', description: '', imageUrl: ''})
 
     const formik = useFormik({
       initialValues: {
-        name: '',
-        description: '',
-        image: ''
+        name: category.name,
+        description: category.description,
+        imageUrl: category.imageUrl
       },
       validate,
       validateOnChange: false,
       validateOnBlur: false,
       onSubmit: values => {
-        console.log(values)
-      },
+        if (category) {
+          axios({
+            method: 'patch',
+            url: `/categories/${category.id}`,
+            data: values
+          }).catch(err => alert(err)) // falta acordar manejo de errores
+        } else {
+          axios({
+            method: 'post',
+            url: '/categories',
+            data: values
+          }).catch(err => alert(err)) // falta acordar manejo de errores
+        }
+      }
     })
 
     function handleDescriptionChange (event, editor) {
@@ -29,7 +47,7 @@ const CategoriesForm = () => {
 
     function validate(values) {
       const errors = {}
-      const imageFormat = values.image.slice(-3).toLowerCase()
+      const imageUrlFormat = values.imageUrl.slice(-3).toLowerCase()
 
       if (!values.name) {
         errors.name = 'Name is required'
@@ -41,10 +59,10 @@ const CategoriesForm = () => {
         errors.description = 'Description is required'
       }
       
-      if (!values.image) {
-        errors.image = 'An image is required'
-      } else if (imageFormat !== 'jpg' || imageFormat !== 'png') {
-        errors.image = 'The image must have JPG or PNG extension'
+      if (!values.imageUrl) {
+        errors.imageUrl = 'An imageUrl is required'
+      } else if (imageUrlFormat !== 'jpg' && imageUrlFormat !== 'png') {
+        errors.imageUrl = 'The imageUrl must have JPG or PNG extension'
       }
 
       return errors
@@ -66,10 +84,10 @@ const CategoriesForm = () => {
 
           <div className='form-input-div'>
             <div className='file-input-div'>
-              <label>Upload an image for this category</label>
-              <input className='input-field' type='file' name='image' value={formik.values.image} onChange={formik.handleChange}/>
+              <label>Upload an imageUrl for this category</label>
+              <input className='input-field' type='file' name='imageUrl' value={formik.values.imageUrl} onChange={formik.handleChange}/>
             </div>
-            <p className='error-message'>{formik.errors.image}</p>
+            <p className='error-message'>{formik.errors.imageUrl}</p>
           </div>
 
           <button className="submit-btn" type="submit">Send</button>
