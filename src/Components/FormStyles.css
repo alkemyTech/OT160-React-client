@@ -11,6 +11,12 @@
     border: 1px solid #c1c1c1;
 }
 
+.fileInput-div{
+  display: flex;
+  align-items: center;
+  column-gap: 1.2%;
+}
+
 .select-field{
     padding: 10px;
     border: 1px solid #c1c1c1;

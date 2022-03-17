@@ -6,6 +6,7 @@ import '../FormStyles.css';
 
 const CategoriesForm = () => {
 
+
     const [initialValues, setInitialValues] = useState({
         name: '',
         description: '',
@@ -20,6 +21,13 @@ const CategoriesForm = () => {
         }
     }
 
+    const handleDescriptionChange = (event, editor) => {
+      setInitialValues(previous => {
+        previous.description = editor.getData()
+        return previous
+      })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(initialValues);
@@ -30,14 +38,12 @@ const CategoriesForm = () => {
             <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Title"></input>
             <CKEditor editor={ClassicEditor}
                       data={initialValues.description}
-                      onChange={(event, editor) => {
-                        setInitialValues(previous => {
-                          previous.description = editor.getData()
-                          return previous
-                        })
-                      }}>
-
+                      onChange={handleDescriptionChange}>
             </CKEditor>
+            <div className='fileInput-div'>
+              <label>Upload an image for this category</label>
+              <input className='input-field' type='file' name='image' value={initialValues.image} onChange={handleChange}/>
+            </div>
             <button className="submit-btn" type="submit">Send</button>
         </form>
     );
