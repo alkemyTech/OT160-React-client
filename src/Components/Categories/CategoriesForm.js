@@ -3,37 +3,23 @@ import { useFormik } from 'formik'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import axios from 'axios'
+import { ImageValidator } from '../Validation'
 import '../FormStyles.css';
 
 
 const CategoriesForm = (props) => {
-
     const { category } = props
 
     const formik = useFormik({
       initialValues: {
-        name: category? category.name : '',
-        description: category? category.description : '',
-        image: category? category.image : null
+        name: category?.name || '',
+        description: category?.description || '',
+        image: category?.image || ''
       },
       validate,
       validateOnChange: false,
       validateOnBlur: false,
-      onSubmit: values => {
-        if (category) {
-          axios({
-            method: 'patch',
-            url: `/categories/${category.id}`,
-            data: values
-          }).catch(err => alert('PATCH method',err)) // falta acordar manejo de errores
-        } else {
-          axios({
-            method: 'post',
-            url: '/categories',
-            data: values
-          }).catch(err => alert('POST method',err)) // falta acordar manejo de errores
-        }
-      }
+      onSubmit: handleFormSubmit
     })
 
     function handleDescriptionChange (event, editor) {
@@ -43,25 +29,52 @@ const CategoriesForm = (props) => {
       })
     }
 
-    function validate(values) {
-      const errors = {}
-      const imageFormat = String(values.image).slice(-3).toLowerCase()
+    function handleFormSubmit(values) {
+      if (category) {
+        axios({
+          method: 'patch',
+          url: `/categories/${category.id}`,
+          data: values
+        }).catch(err => alert('PATCH method',err)) // falta acordar manejo de errores
+      } else {
+        axios({
+          method: 'post',
+          url: '/categories',
+          data: values
+        }).catch(err => alert('POST method',err)) // falta acordar manejo de errores
+      }
+    }
 
-      if (!values.name) {
+    function validateName(name, errors) {
+      if (!name) {
         errors.name = 'Name is required'
-      } else if (values.name.length < 4) {
+      } else if (name.length < 4) {
         errors.name = 'Name should have at least 4 characters'
       }
-      
-      if (!values.description) {
+    }
+
+    function validateDescription(description, errors) {
+      if (!description) {
         errors.description = 'Description is required'
       }
+    }
+
+    function validateImage(image, errors) {
+      const imageFormat = String(image).slice(-3).toLowerCase()
       
-      if (!values.image) {
+      if (!image) {
         errors.image = 'An image is required'
-      } else if (imageFormat !== 'jpg' && imageFormat !== 'png') {
-        errors.image = 'The image must have JPG or PNG extension'
-      }
+      } else if (!ImageValidator.isValid(imageFormat)) {
+        errors.image = ImageValidator.formatError
+      } 
+    }
+
+    function validate(values) {
+      const errors = {}
+
+      validateName(values.name, errors)
+      validateDescription(values.description, errors)
+      validateImage(values.image, errors)
 
       return errors
     }
@@ -74,7 +87,7 @@ const CategoriesForm = (props) => {
           </div>
 
           <div className='form-input-div'>
-            <CKEditor editor={ClassicEditor} data={formik.values.description} 
+            <CKEditor editor={ClassicEditor} data={formik.values.description}
                       onChange={handleDescriptionChange}>
             </CKEditor>
             <p className='error-message'>{formik.errors.description}</p>
