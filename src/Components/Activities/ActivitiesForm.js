@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import '../FormStyles.css';
 
-const ActivitiesForm = () => {
+const ActivitiesForm = ({actividad}) => {
+    const [alertInputValidate, setAlertInputValidate] = useState();
+    const valueProps = actividad;
     const [initialValues, setInitialValues] = useState({
         name: '',
-        description: ''
+        description: '',
+        image: ''
     });
+
+
+    const saveImage =(e)=>{
+        if(!(/\.(jpg|png)$/i).test(e.target.files[0].name)){
+            setAlertInputValidate(<p style={{color: 'red'}}>The file must be jpg or png</p>);
+        }else{
+            console.log(e.target.files[0]);
+            setInitialValues({...initialValues, image:`${e.target.files[0].name}` }) ;
+            setAlertInputValidate(<p style={{color: 'green'}}>Selected file</p>);
+        }
+    } 
 
     const handleChange = (e) => {
         if(e.target.name === 'name'){
-            setInitialValues({...initialValues, name: e.target.value})
-        } if(e.target.name === 'description'){
-            setInitialValues({...initialValues, description: e.target.value})
+            setInitialValues({...initialValues, name: e.target.value});
         }
     }
 
@@ -22,8 +36,49 @@ const ActivitiesForm = () => {
     
     return (
         <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Activity Title"></input>
-            <input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Write some activity description"></input>
+            <label>Nombre:</label>
+            {
+                valueProps
+                ?
+                <input className="input-field" type="text" name="name" value={valueProps.name} onChange={handleChange} placeholder="Activity Title" ></input>
+                :
+                <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Activity Title"></input>
+            }
+            <label>Imagen:</label>
+            {
+                valueProps
+                ?
+                <img src={valueProps.image} alt={valueProps.name}/>
+                :
+                <label style={{ backgroundColor: '#2e86c1', padding: 8, color: '#fff', textAlign: 'center' }}>
+                    Seleccionar Imagen
+                    <input
+                        style={{ display: "none" }}
+                        type="file"
+                        onChange={saveImage}
+                    />
+                </label> 
+            }
+            
+            <div>
+                {alertInputValidate}
+            </div>
+            <label>Descripcion:</label>    
+            <div className="App">
+                <CKEditor
+                    editor={ ClassicEditor }
+                    data= {
+                        valueProps
+                        ?
+                        valueProps.description
+                        :
+                        "<p>your description</p>"
+                    }
+                    onChange={ ( event, editor ) => {
+                        setInitialValues({...initialValues, description: (editor.getData())}); 
+                    } }
+                />
+            </div>
             <button className="submit-btn" type="submit">Send</button>
         </form>
     );
