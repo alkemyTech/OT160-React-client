@@ -1,7 +1,4 @@
-import * as yup from 'yup'
-
 const validImageFormats = ['jpg', 'png']
-const emailSchema = yup.object().shape({email: yup.string().email()}) 
 
 const ImageValidator = {
   getFormat: (image) => {
@@ -17,7 +14,7 @@ const ImageValidator = {
 
 const EmailValidator = {
   isValid: (email) => {
-    return emailSchema.isValid(email)
+    return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)
   },
   error: 'Please enter a valid email.'
 }
