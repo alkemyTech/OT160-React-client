@@ -1,6 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import { EmailValidator } from '../FormValidations'
+import { EmailValidator } from '../../Services/formValidationsService'
 import '../FormStyles.css'
 
 const ContactForm = () => {

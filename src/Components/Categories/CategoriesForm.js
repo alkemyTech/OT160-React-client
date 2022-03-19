@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import axios from 'axios'
-import { ImageValidator } from '../FormValidations'
+import { ImageValidator } from '../../Services/formValidationsService'
 import '../FormStyles.css';
 
 
