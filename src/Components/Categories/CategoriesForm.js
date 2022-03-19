@@ -60,8 +60,7 @@ const CategoriesForm = (props) => {
     }
 
     function validateImage(image, errors) {
-      const imageFormat = String(image).slice(-3).toLowerCase()
-      
+      const imageFormat = ImageValidator.getFormat(image)
       if (!image) {
         errors.image = 'An image is required'
       } else if (!ImageValidator.isValid(imageFormat)) {
