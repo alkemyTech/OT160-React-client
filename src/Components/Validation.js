@@ -4,7 +4,7 @@ const ImageValidator = {
   getFormat: (image) => {
     const splitFilePath = image.split('.')
     const extension = splitFilePath[splitFilePath.length -1]
-    return extension
+    return extension?.toLowerCase()
   },
   isValid: (imageFormat) => {
     return ValidImageFormats.some(format => format === imageFormat)
