@@ -33,11 +33,17 @@ const ContactForm = () => {
   }
 
   function validateName(name, errors) {
-    if (!name) {errors.name = 'Name is required'}
+    if (!name) {
+      errors.name = 'Name is required'
+    }
   }
 
   function validateEmail(email, errors) {
-    if (!EmailValidator.isValid(email)) {errors.email = EmailValidator.error}
+    if (!email) {
+      errors.email = 'Email is required'
+    } else if (!EmailValidator.isValid(email)) {
+        errors.email = EmailValidator.error
+    }
   }
 
   function validatePhone(phone, errors) {
