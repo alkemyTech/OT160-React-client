@@ -7,8 +7,8 @@
 }
 
 .input-field{
-    padding: 15px 30px;
-    border: 1px solid #c1c1c1;
+    padding: 15px 30px !important;
+    border: 1px solid #c1c1c1!important;
 }
 
 .select-field{
