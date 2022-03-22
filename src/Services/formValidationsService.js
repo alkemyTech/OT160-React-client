@@ -1,6 +1,6 @@
 const validImageFormats = ['jpg', 'png']
 
-const ImageValidator = {
+const imageValidator = {
   getFormat: (image) => {
     const splitFilePath = image.split('.')
     const extension = splitFilePath[splitFilePath.length -1]
@@ -12,11 +12,11 @@ const ImageValidator = {
   formatError: `Invalid image format. It must be one of these: ${validImageFormats.join(', ')}.`
 }
 
-const EmailValidator = {
+const emailValidator = {
   isValid: (email) => {
     return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)
   },
   error: 'Please enter a valid email.'
 }
 
-export { ImageValidator, EmailValidator }
+export { imageValidator, emailValidator }

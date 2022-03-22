@@ -1,6 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import { EmailValidator } from '../../Services/formValidationsService'
+import { emailValidator } from '../../Services/formValidationsService'
 import '../FormStyles.css'
 
 const ContactForm = () => {
@@ -29,7 +29,7 @@ const ContactForm = () => {
   }
 
   function handleFormSubmit(values) {
-    console.log(values)
+    console.log(values) // POST request to be implemented
   }
 
   function validateName(name, errors) {
@@ -41,8 +41,8 @@ const ContactForm = () => {
   function validateEmail(email, errors) {
     if (!email) {
       errors.email = 'Email is required'
-    } else if (!EmailValidator.isValid(email)) {
-        errors.email = EmailValidator.error
+    } else if (!emailValidator.isValid(email)) {
+        errors.email = emailValidator.error
     }
   }
 
