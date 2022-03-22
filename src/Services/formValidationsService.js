@@ -9,14 +9,14 @@ const imageValidator = {
   isValid: (imageFormat) => {
     return VALID_IMAGE_FORMATS.includes(imageFormat)
   },
-  formatError: `Invalid image format. It must be one of these: ${VALID_IMAGE_FORMATS.join(', ')}.`
+  formatError: `El formato del archivo debe ser uno de los siguientes:  ${VALID_IMAGE_FORMATS.join(', ')}.`
 }
 
 const emailValidator = {
   isValid: (email) => {
     return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)
   },
-  error: 'Please enter a valid email.'
+  error: 'Ingrese un email válido por favor.'
 }
 
 export { imageValidator, emailValidator }

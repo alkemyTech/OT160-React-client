@@ -39,22 +39,22 @@ const CategoriesForm = (props) => {
 
     function validateName(name, errors) {
       if (!name) {
-        errors.name = 'Name is required'
+        errors.name = 'Debes ingresar un nombre'
       } else if (name.length < 4) {
-        errors.name = 'Name should have at least 4 characters'
+        errors.name = 'El nombre debe tener al menos 4 caracteres'
       }
     }
 
     function validateDescription(description, errors) {
       if (!description) {
-        errors.description = 'Description is required'
+        errors.description = 'Debes ingresar una descripción'
       }
     }
 
     function validateImage(image, errors) {
       const imageFormat = imageValidator.getFormat(image)
       if (!image) {
-        errors.image = 'An image is required'
+        errors.image = 'Debes subir una imagen'
       } else if (!imageValidator.isValid(imageFormat)) {
         errors.image = imageValidator.formatError
       } 
@@ -73,7 +73,7 @@ const CategoriesForm = (props) => {
     return (
         <form className="form-container" onSubmit={formik.handleSubmit}>
           <div className='form-input-div'>
-            <input className="input-field" type="text" name="name" value={formik.values.name} onChange={formik.handleChange} placeholder="Name"/>
+            <input className="input-field" type="text" name="name" value={formik.values.name} onChange={formik.handleChange} placeholder="Nombre de la categoría"/>
             <p className='error-message'>{formik.errors.name}</p>
           </div>
 
@@ -86,13 +86,13 @@ const CategoriesForm = (props) => {
 
           <div className='form-input-div'>
             <div className='file-input-div'>
-              <label>Category image</label>
+              <label>Imagen de la categoría</label>
               <input className='input-field' type='file' name='image' value={formik.values.image} onChange={formik.handleChange}/>
             </div>
             <p className='error-message'>{formik.errors.image}</p>
           </div>
 
-          <button className="submit-btn" type="submit">Send</button>
+          <button className="submit-btn" type="submit">Enviar</button>
         </form>
     );
 

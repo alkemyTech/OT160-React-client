@@ -34,13 +34,13 @@ const ContactForm = () => {
 
   function validateName(name, errors) {
     if (!name) {
-      errors.name = 'Name is required'
+      errors.name = 'Debes ingresar un nombre'
     }
   }
 
   function validateEmail(email, errors) {
     if (!email) {
-      errors.email = 'Email is required'
+      errors.email = 'Debes ingresar una dirección de email'
     } else if (!emailValidator.isValid(email)) {
         errors.email = emailValidator.error
     }
@@ -48,43 +48,43 @@ const ContactForm = () => {
 
   function validatePhone(phone, errors) {
     if (!phone) {
-      errors.phone = 'Phone is required'
+      errors.phone = 'Debes ingresar un nro de teléfono'
     } else if (/[^0123456789]/.test(phone)) {
-      errors.phone = 'Phone can only have numbers'
+      errors.phone = 'Sólo puedes ingresar números'
     } else if (phone.length < 8) {
-      errors.phone = 'Phone must have at least 8 characters'
+      errors.phone = 'El número debe tener al menos 8 dígitos'
     }
   }
 
   function validateMessage(message, errors) {
     if (!message) {
-      errors.message = 'Write some message to send'
+      errors.message = 'Debes escribir algún mensaje para enviar'
     }
   }
 
   return (
     <form  className='form-container' onSubmit={formik.handleSubmit}>
       <div className='form-input-div'>
-       <input className='input-field' name='name' placeholder='Enter your name' value={formik.values.name} onChange={formik.handleChange}/>
+       <input className='input-field' name='name' placeholder='Tu nombre' value={formik.values.name} onChange={formik.handleChange}/>
         <p className='error-message'>{formik.errors.name}</p>
       </div>
 
       <div className='form-input-div'>
-       <input className='input-field' name='email' placeholder='Enter your email' value={formik.values.email} onChange={formik.handleChange}/>
+       <input className='input-field' name='email' placeholder='Dirección de email' value={formik.values.email} onChange={formik.handleChange}/>
        <p className='error-message'>{formik.errors.email}</p>
       </div>
 
       <div className='form-input-div'>
-        <input  className='input-field' name='phone' placeholder='Enter your phone number' value={formik.values.phone} onChange={formik.handleChange}/>
+        <input  className='input-field' name='phone' placeholder='Número de teléfono' value={formik.values.phone} onChange={formik.handleChange}/>
         <p className='error-message'>{formik.errors.phone}</p>
       </div>
 
       <div className='form-input-div'>
-        <textarea className='input-field' name='message' placeholder='Write your message here...' value={formik.values.message} onChange={formik.handleChange}/>
+        <textarea className='input-field' name='message' placeholder='Escribe aquí tu mensaje...' value={formik.values.message} onChange={formik.handleChange}/>
         <p className='error-message'>{formik.errors.message}</p>
       </div>
 
-      <button className='submit-btn' type='submit'>Send</button>
+      <button className='submit-btn' type='submit'>Enviar</button>
     </form>
   )
 }
