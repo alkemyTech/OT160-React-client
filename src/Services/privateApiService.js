@@ -11,7 +11,6 @@ const Get = async (url) => {
     const response = await axios.get(url, config)
     return response.data
   }
-
   catch (error) {
     console.log(error) // Error handling to be implemented
   }
@@ -21,7 +20,6 @@ const Post = async (url, data) => {
   try {
     await axios.post(url, data, config)
   }
-
   catch (error) {
     console.log(error) // Error handling to be implemented
   }
@@ -31,7 +29,6 @@ const Patch = async (url, data) => {
   try {
     await axios.patch(url, data, config)
   } 
-  
   catch (error) {
     console.log(error) // Error handling to be implemented
   }
