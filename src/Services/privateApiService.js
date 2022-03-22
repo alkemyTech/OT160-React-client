@@ -6,7 +6,7 @@ const config = {
     }
 }
 
-const Get = async (url) => {
+const get = async (url) => {
   try {
     const response = await axios.get(url, config)
     return response.data
@@ -16,7 +16,7 @@ const Get = async (url) => {
   }
 }
 
-const Post = async (url, data) => {
+const post = async (url, data) => {
   try {
     await axios.post(url, data, config)
   }
@@ -25,7 +25,7 @@ const Post = async (url, data) => {
   }
 }
 
-const Patch = async (url, data) => {
+const patch = async (url, data) => {
   try {
     await axios.patch(url, data, config)
   } 
@@ -34,4 +34,4 @@ const Patch = async (url, data) => {
   }
 }
 
-export { Get, Post, Patch }
+export { get, post, patch }

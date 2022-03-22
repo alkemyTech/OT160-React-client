@@ -29,7 +29,7 @@ const ContactForm = () => {
   }
 
   function handleFormSubmit(values) {
-    console.log(values) // POST request to be implemented
+    console.log(values) // Service to be implemented
   }
 
   function validateName(name, errors) {
