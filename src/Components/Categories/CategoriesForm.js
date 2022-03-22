@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { Patch, Post } from '../../Services/privateApiService'
+import { patch, post } from '../../Services/privateApiService'
 import { imageValidator } from '../../Services/formValidationsService'
 import '../FormStyles.css';
 
@@ -31,9 +31,9 @@ const CategoriesForm = (props) => {
 
     function handleFormSubmit(values) {
       if (category) {
-        Patch(`/categories/${category.id}`, values)
+        patch(`/categories/${category.id}`, values) // Service to be implemented
       } else {
-        Post('/categories', values)
+        post('/categories', values) // Service to be implemented
       }
     }
 
