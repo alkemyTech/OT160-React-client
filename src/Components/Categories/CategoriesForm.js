@@ -2,8 +2,8 @@ import React from 'react';
 import { useFormik } from 'formik'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import axios from 'axios'
-import { ImageValidator } from '../../Services/formValidationsService'
+import { Patch, Post } from '../../Services/privateApiService'
+import { imageValidator } from '../../Services/formValidationsService'
 import '../FormStyles.css';
 
 
@@ -31,17 +31,9 @@ const CategoriesForm = (props) => {
 
     function handleFormSubmit(values) {
       if (category) {
-        axios({
-          method: 'patch',
-          url: `/categories/${category.id}`,
-          data: values
-        }).catch(err => alert('PATCH method',err)) // falta acordar manejo de errores
+        Patch(`/categories/${category.id}`, values)
       } else {
-        axios({
-          method: 'post',
-          url: '/categories',
-          data: values
-        }).catch(err => alert('POST method',err)) // falta acordar manejo de errores
+        Post('/categories', values)
       }
     }
 
@@ -60,11 +52,11 @@ const CategoriesForm = (props) => {
     }
 
     function validateImage(image, errors) {
-      const imageFormat = ImageValidator.getFormat(image)
+      const imageFormat = imageValidator.getFormat(image)
       if (!image) {
         errors.image = 'An image is required'
-      } else if (!ImageValidator.isValid(imageFormat)) {
-        errors.image = ImageValidator.formatError
+      } else if (!imageValidator.isValid(imageFormat)) {
+        errors.image = imageValidator.formatError
       } 
     }
 
