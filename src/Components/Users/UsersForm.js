@@ -1,29 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import '../FormStyles.css';
 import { Formik, Field } from 'formik';
-import { v4 as uuidv4 } from 'uuid';
 
 
 const UserForm = ({prevTestUserData}) => {
-
-    /* const prevTestUserData = {
-      id: 2,
-      name: 'James',
-      email: 'james@gmail.com',
-      roleId: '1',
-      profilePicture: "/picture/dummy.png",
-      password: "password"
-    };  */
-
     const [fileError, setFileError] = useState("");
     const [file, setFile] = useState("");
     const [userData, setUserData] = useState(
       prevTestUserData ? prevTestUserData : {
-            id: uuidv4,
+            id: 1,
             name: '',
             email: '',
-            roleId: '',
-            profilePicture: "",
+            role_id: '',
+            profile_image: "",
             password: ""
       });
     const [prevUserDataExist, setPrevUserDataExist] = useState(false);
@@ -42,23 +31,23 @@ const UserForm = ({prevTestUserData}) => {
         } else if (
           !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
         ) {
-          errors.email = 'Invalid email address';
+          errors.email = 'Email inválido';
         }
     
         if(values.name === ""){
-            errors.name = "Please add your username";
+            errors.name = "Agregue su nombre de usuario";
         } else if (values.name.length < 4){
-            errors.name = "The username musth have at least 4 characters";
+            errors.name = "El nombre de usuario debe ser de al menos 4 caracteres";
         }
     
         if(values.roleId === ""){
-            errors.roleId = "Choose your role";
+            errors.roleId = "Escoja su rol";
         }
     
         if(values.password === ""){
-            errors.password = "Please enter your password";
+            errors.password = "Ingrese su contraseña";
         } else if(values.password.length < 8){
-            errors.password = "The password must have a minimum of 8 characters";
+            errors.password = "La contraseña debe tener un mínimo de 8 caracteres";
         }
         
         return errors;
@@ -69,10 +58,10 @@ const UserForm = ({prevTestUserData}) => {
       const allowedExtensions = /(\.jpg|\.png)$/i;
       
       if(!file){
-        setFileError("Please upload a profile picture");
+        setFileError("Escoja una foto de perfil");
       } else {
         if (!allowedExtensions.exec(file)) {
-          setFileError("Invalid extensiom, the image must be in .jpg or .png format");
+          setFileError("La imagen debe ser de formato .jpg o .png");
         } else {
           setFile(file);
         }
@@ -84,8 +73,8 @@ const UserForm = ({prevTestUserData}) => {
        initialValues={ userData }
        validate= {validate}
        onSubmit={(values) => {
-        setUserData({...values, profilePicture : file});
-        if(prevUserDataExist === true){
+        setUserData({...values, profile_image : file});
+        if(prevUserDataExist){
           fetch("https://ongapi.alkemy.org/api/users/" + userData.id, {
             method: "PUT",
             body: JSON.stringify(userData),
@@ -122,7 +111,7 @@ const UserForm = ({prevTestUserData}) => {
               name="name" 
               onChange={handleChange}
               value={values.name}
-              placeholder="Name"
+              placeholder="Nombre"
             />
             {errors.name && errors.name}
             <Field
@@ -147,7 +136,7 @@ const UserForm = ({prevTestUserData}) => {
               className="input-field" 
               value={values.roleId} 
               onChange={handleChange}>
-                <option value="" disabled >Select the role</option>
+                <option value="" disabled >Escoja su rol</option>
                 <option value="1">Admin</option>
                 <option value="2">User</option>
             </Field>
@@ -156,7 +145,7 @@ const UserForm = ({prevTestUserData}) => {
               className="input-field" 
               type="password"
               name="password"
-              placeholder='Password'
+              placeholder='Contraseña'
               onChange={handleChange}
               value={values.password}
             />
