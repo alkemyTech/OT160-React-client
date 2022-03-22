@@ -1,4 +1,4 @@
-const validImageFormats = ['jpg', 'png']
+const VALID_IMAGE_FORMATS = ['jpg', 'png']
 
 const imageValidator = {
   getFormat: (image) => {
@@ -7,9 +7,9 @@ const imageValidator = {
     return extension?.toLowerCase()
   },
   isValid: (imageFormat) => {
-    return validImageFormats.some(format => format === imageFormat)
+    return VALID_IMAGE_FORMATS.includes(imageFormat)
   },
-  formatError: `Invalid image format. It must be one of these: ${validImageFormats.join(', ')}.`
+  formatError: `Invalid image format. It must be one of these: ${VALID_IMAGE_FORMATS.join(', ')}.`
 }
 
 const emailValidator = {
