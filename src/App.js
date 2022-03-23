@@ -8,6 +8,7 @@ import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
 import SlidesForm from './Components/Slides/SlidesForm';
 import HomeForm from './Components/Home/HomeForm';
+import Detail from './Components/Activities/Detail/Detail';
 import TestimonialForm from './Components/Testimonials/TestimonialsForm';
 import UserForm from './Components/Users/UsersForm';
 import SchoolCampaign from './Campaigns/School/SchoolCampaign';
@@ -22,6 +23,7 @@ function App() {
         <Switch>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
           <Route path="/create-activity" component={ActivitiesForm} />
+          <Route path="/activities/:id" component={Detail} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
