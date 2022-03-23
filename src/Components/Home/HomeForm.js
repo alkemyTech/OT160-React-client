@@ -98,9 +98,9 @@ export default function HomeForm() {
         )}
       </Formik>
 
-      <SlidesForm id={ValuesForm.sliceId_1} />
-      <SlidesForm id={ValuesForm.sliceId_2} />
-      <SlidesForm id={ValuesForm.sliceId_3} />
+      <SlidesForm object={{id:ValuesForm.sliceId_1}} />
+      <SlidesForm object={{id:ValuesForm.sliceId_2}} />
+      <SlidesForm object={{id:ValuesForm.sliceId_3}} />
       <h1>{ValuesForm.welcomeText}</h1>
     </div>
   );
