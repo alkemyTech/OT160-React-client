@@ -65,7 +65,7 @@ const ActivitiesForm = ({actividad}) => {
                 <img src={receptedActiviti.image} alt={receptedActiviti.name}/>
                 :
                 <label style={{ backgroundColor: '#2e86c1', padding: 8, color: '#fff', textAlign: 'center' }}>
-                    Seleccionar Imagen
+                    Select image
                     <input
                         style={{ display: "none" }}
                         type="file"
