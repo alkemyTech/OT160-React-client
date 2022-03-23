@@ -6,9 +6,39 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 function Login() {
 
-    const [ValuesForm , setValuesForm] = useState({})
+    const [valuesForm , setValuesForm] = useState({});
 
-    console.log(ValuesForm)
+    const validate = values => {
+      const errores = {};
+      validateEmail(values, errores);
+      validatePassword(values, errores)
+
+      return errores;
+    };
+    
+    const validateEmail = (values, errores) => {
+      if (!values.email) {
+        errores.email = "Please enter a email";
+      } else if (
+        !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
+          values.email
+        )
+      ) {
+        errores.email =
+          "The email can only have letters, numbers, periods, hyphens and underscore";
+      }
+    };
+    
+    const validatePassword = (values, errores) => {
+      if (!values.password) {
+        errores.password = "Please enter a password";
+      } else if (
+          !/^(?=(?:.*\d))(?=.*[A-z])(?=.*[.,*!?¿¡/#$%&])\S{6,25}$/.test(values.password)) 
+          {
+        errores.password =
+          "The password must have a minimum length of 6 characters, and contain at least one number, one letter and one symbol";
+      }
+    };
     
     return (
         <div className='form-login'>
@@ -17,30 +47,9 @@ function Login() {
           email: "",
           password: "",
         }}
-        validate={(values) => {
-          let errores = {};
 
-          if (!values.email) {
-            errores.email = "Please enter a email";
-          } else if (
-            !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
-              values.email
-            )
-          ) {
-            errores.email =
-              "the email can only have letters, numbers, periods, hyphens and underscore";
-          }
+        validate={validate}
 
-          if (!values.password) {
-            errores.password = "Please enter a password";
-          } else if (
-              !/^(?=(?:.*\d))(?=.*[A-z])(?=.*[.,*!?¿¡/#$%&])\S{6,25}$/.test(values.password)) 
-              {
-            errores.password =
-              "The password must have a minimum length of 6 characters, and contain at least one number, one letter and one symbol";
-          }
-          return errores;
-        }}
         onSubmit={(values, { resetForm }) => {
           resetForm();
           setValuesForm(values)
@@ -54,8 +63,8 @@ function Login() {
             <div className="">
               <Field
                 type="email"
-                className="controls"
-                id="floatingInput"
+                className="input-login"
+                id="Inputemail"
                 name="email"
                 placeholder="name@example.com"
               />
@@ -70,8 +79,8 @@ function Login() {
             <div className="">
               <Field
                 type="password"
-                className="controls"
-                id="InputPassword"
+                className="input-login"
+                id="Inputpassword"
                 name="password"
                 placeholder="Password"
               />
@@ -85,14 +94,11 @@ function Login() {
             </div>
             <div className="">
               <button
-                className="buttons"
+                className="button-login"
                 type="botton"
               >
                 Send
               </button>
-            </div>
-            <div>
-              <p><a href='#'>olvidaste tu contraseña?</a></p>
             </div>
           </Form>
         )}
