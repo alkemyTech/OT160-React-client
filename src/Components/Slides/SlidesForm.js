@@ -6,142 +6,122 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
 const SlidesForm = ({objeto}) => {
-    const botton=useRef()
+
+    const button = useRef()
+
     useEffect(() => {
-if(objeto==null){
-
-     if(initialValues.name=="" || initialValues.description =="" ||
-     initialValues.order =="" || image ==""){   
-      botton.current.disabled=true
-      botton.current.style.cursor='default'
-      botton.current.style.opacity=0.5
-    }
-    else{
-
-        botton.current.disabled=false
-      botton.current.style.cursor='pointer'
-      botton.current.style.opacity=1
-    }
-
-}
-
-else{
-    console.log('we')
-    setInitialValues({
-        name:objeto.name,
-        order:objeto.order,
-        description:objeto.description,
+        if (!objeto) {
+            if (initialValues.name === "" || initialValues.name.length < 4 || initialValues.description === "" || initialValues.order === "" || image === "" ) {
+                button.current.disabled = true
+                button.current.style.cursor = 'default'
+                button.current.style.opacity = 0.5
+            } else {
+                button.current.disabled = false
+                button.current.style.cursor = 'pointer'
+                button.current.style.opacity = 1
+            }
+        } else {
+            setInitialValues({
+                name: objeto.name,
+                order: objeto.order,
+                description: objeto.description,
+            })
+            setimage(objeto.imagen)
+        }
     })
 
-    setimage(objeto.imagen)
-    
-}
-})
-
-    
     const [error, seterror] = useState({
-        name:'',
-        imagen:''
-
+        name: '',
+        imagen: ''
     })
-
-
-const [initialValues, setInitialValues] = useState({
-    name: '',
-    description: '',
-    order: '',
-});
-
-console.log(initialValues.name)
-const [image, setimage] = useState('')
-const handleck = (e, edit) => {
-    setInitialValues({ ...initialValues, description: edit.getData() })}
-
-
-
-const handleChange = (e) => {
-    if (e.target.name === 'name') {
-        setInitialValues({ ...initialValues, name: e.target.value })
-
-    }
-    if (e.target.name === 'order') {
-        setInitialValues({ ...initialValues, order: e.target.value })
-    }
-    if (e.target.name === 'imagen') {
-        if (e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"){
-            setimage(e.target.files[0])
-            seterror({...error,imagen:''})
-        }
-            else{seterror({...error,imagen:'Formato no valido'})}
-
-    }
-}
-
-const validation = (e) => {
-    if (e.target.name == "name") {
-        if (initialValues.name.length <= 4) {
-            seterror({...error,name:"Debe contener minimo 4 caracteres"})
-            
-        }
-        else{seterror({...error,name:""})}
-
-    }
-
-    if (e.target.name == "order") {
-        if (initialValues.order.length < 1) {
-            seterror({...error,order:"Campo obligatorio"})
-            
-        }
-        else{seterror({...error,order:""})}
-
-    }
-
+    const [initialValues, setInitialValues] = useState({
+        name: '',
+        description: '',
+        order: '',
+    });
     
-    if (e.target.name == "description") {
-        if (initialValues.description.length <= 1) {
-            seterror({...error,description:"Campo obligatorio"})
-            
-        }
-        else{seterror({...error,description:""})}
+    const [image, setimage] = useState('')
 
+    const handleckeditor = (e, edit) => {
+        setInitialValues({...initialValues,
+            description: edit.getData()})
     }
-   
-}
 
-const validationCk=(e,edit)=>{
-    if(edit.getData().length<1){
-    seterror({ ...error, description: 'Campo obligatorio' })}
-    else{
-        seterror({ ...error, description: '' })}
-    
-}
+    const handleChange = (e) => {
+        if (e.target.name === 'name') {
+            setInitialValues({...initialValues,
+                name: e.target.value})
+        }
 
+        if (e.target.name === 'order') {
+            setInitialValues({...initialValues,
+                order: e.target.value})
+        }
 
-const handleSubmit = async (e) => {
-    const {name,description,order}=initialValues
-    
-    if(objeto==null){
-        try {
-         
-        axios.post('/Slides/create',{
-            name,description,order,image
-        })   
-        } catch (error) {
-            console.log(error)
+        if (e.target.name === 'imagen') {
+            if (e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png") {
+                setimage(e.target.files[0])
+                seterror({...error,imagen: ''})
+            } else {
+                seterror({...error,imagen: 'Formato no valido'})
+            }
         }
     }
-    else{
-        try {
-         
-        axios.patch(`/Slides/:${objeto.id}`,{
-            name,description,order,image
-        })   
-        } catch (error) {
-            
+
+    const validation = (e) => {
+        if (e.target.name == "name") {
+            if (initialValues.name.length < 4) {
+                seterror({...error,name: "Debe contener minimo 4 caracteres"})
+            } else {
+                seterror({...error,name: ""})
+            }
+        }
+
+        if (e.target.name == "order") {
+            if (initialValues.order.length < 1) {
+                seterror({...error,order: "Campo obligatorio"})
+            } else {
+                seterror({...error,order: ""})
+            }
+        }
+
+     
+    }
+
+    const validationCkeditor = (e, edit) => {
+        if (edit.getData().length < 1) {
+            seterror({...error,description: 'Campo obligatorio'})
+        } else {
+            seterror({...error,description: ''})
         }
     }
-}
 
+    const handleSubmit = async(e) => {
+        const {
+            name,
+            description,
+            order
+        } = initialValues
+        if (!objeto) {
+            try {
+                axios.post('/Slides/create', {
+                    name,
+                    description,
+                    order,
+                    image
+                })
+            } catch (error) {}
+        } else {
+            try {
+                axios.patch(`/Slides/:${objeto.id}`, {
+                    name,
+                    description,
+                    order,
+                    image
+                })
+            } catch (error) {}
+        }
+    }
 
 
 return (
@@ -158,12 +138,12 @@ return (
             <CKEditor
                 editor={ClassicEditor}
                 data={initialValues.description}
-                onBlur={validationCk}
-                onChange={handleck}
+                onBlur={validationCkeditor}
+                onChange={handleckeditor}
 
             />
             {error.description && error.description }
-            <button ref={botton} className="submit-btn" type="submit">Send</button>
+            <button ref={button} className="submit-btn" type="submit">Send</button>
         </form>
     </div>
 );
