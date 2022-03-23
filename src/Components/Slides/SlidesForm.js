@@ -7,63 +7,63 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const SlidesForm = ({objeto}) => {
 
-    const button = useRef()
+    const button = useRef();
 
     useEffect(() => {
         if (!objeto) {
             if (initialValues.name === "" || initialValues.name.length < 4 || initialValues.description === "" || initialValues.order === "" || image === "" ) {
-                button.current.disabled = true
-                button.current.style.cursor = 'default'
-                button.current.style.opacity = 0.5
+                button.current.disabled = true;
+                button.current.style.cursor = 'default';
+                button.current.style.opacity = 0.5;
             } else {
-                button.current.disabled = false
-                button.current.style.cursor = 'pointer'
-                button.current.style.opacity = 1
+                button.current.disabled = false;
+                button.current.style.cursor = 'pointer';
+                button.current.style.opacity = 1;
             }
         } else {
             setInitialValues({
                 name: objeto.name,
                 order: objeto.order,
                 description: objeto.description,
-            })
-            setimage(objeto.imagen)
+            });
+            setimage(objeto.imagen);
         }
     })
 
     const [error, seterror] = useState({
         name: '',
         imagen: ''
-    })
+    });
     const [initialValues, setInitialValues] = useState({
         name: '',
         description: '',
         order: '',
     });
     
-    const [image, setimage] = useState('')
+    const [image, setimage] = useState('');
 
     const handleckeditor = (e, edit) => {
         setInitialValues({...initialValues,
-            description: edit.getData()})
+            description: edit.getData()});
     }
 
     const handleChange = (e) => {
         if (e.target.name === 'name') {
             setInitialValues({...initialValues,
-                name: e.target.value})
+                name: e.target.value});
         }
 
         if (e.target.name === 'order') {
             setInitialValues({...initialValues,
-                order: e.target.value})
+                order: e.target.value});
         }
 
         if (e.target.name === 'imagen') {
             if (e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png") {
-                setimage(e.target.files[0])
-                seterror({...error,imagen: ''})
+                setimage(e.target.files[0]);
+                seterror({...error,imagen: ''});
             } else {
-                seterror({...error,imagen: 'Formato no valido'})
+                seterror({...error,imagen: 'Formato no valido'});
             }
         }
     }
@@ -71,17 +71,17 @@ const SlidesForm = ({objeto}) => {
     const validation = (e) => {
         if (e.target.name == "name") {
             if (initialValues.name.length < 4) {
-                seterror({...error,name: "Debe contener minimo 4 caracteres"})
+                seterror({...error,name: "Debe contener minimo 4 caracteres"});
             } else {
-                seterror({...error,name: ""})
+                seterror({...error,name: ""});
             }
         }
 
         if (e.target.name == "order") {
             if (initialValues.order.length < 1) {
-                seterror({...error,order: "Campo obligatorio"})
+                seterror({...error,order: "Campo obligatorio"});
             } else {
-                seterror({...error,order: ""})
+                seterror({...error,order: ""});
             }
         }
 
@@ -90,9 +90,9 @@ const SlidesForm = ({objeto}) => {
 
     const validationCkeditor = (e, edit) => {
         if (edit.getData().length < 1) {
-            seterror({...error,description: 'Campo obligatorio'})
+            seterror({...error,description: 'Campo obligatorio'});
         } else {
-            seterror({...error,description: ''})
+            seterror({...error,description: ''});
         }
     }
 
@@ -146,7 +146,5 @@ return (
             <button ref={button} className="submit-btn" type="submit">Send</button>
         </form>
     </div>
-);
-}
-
+);}
 export default SlidesForm;
