@@ -1,5 +1,5 @@
-.form-container{
-    width: 40%;
+.form-container {
+    width: 60%;
     margin: 15px auto;
     display: flex;
     flex-direction: column;
@@ -8,18 +8,18 @@
     align-items: center
 }
 
-.input-field{
+.input-field {
     padding: 15px 30px;
     border: 1px solid #c1c1c1;
 }
 
-.file-input-div{
+.file-input-div {
   display: flex;
   align-items: center;
   column-gap: 1.2%;
 }
 
-.form-input-div{
+.form-input-div {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -31,19 +31,19 @@
   height: 1em;
 }
 
-.select-field{
+.select-field {
     padding: 10px;
     border: 1px solid #c1c1c1;
 }
 
-.submit-btn{
+.submit-btn {
     background-color: #2E86C1;
     padding: 10px 15px;
     border: none;
     color: #fff;
 }
 
-.submit-btn:hover{
+.submit-btn:hover {
     cursor: pointer;
     background-color: #3498DB;
 }
