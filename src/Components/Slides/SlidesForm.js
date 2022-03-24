@@ -1,150 +1,76 @@
-import React, { useEffect, useRef, useState } from 'react';
-import axios from 'axios'
-import '../FormStyles.css';
+import React, { useRef } from 'react'
+import { useFormik } from 'formik';
+import * as yup from 'yup'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Patch, Post } from '../../Services/privateApiService';
+import '../FormStyles.css';
 
+export default function Slides({object}) {
+	const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
+	const file = useRef()
+	const formik = useFormik({
+		initialValues: {
+			name: object ? object.name : '',
+			order: object ? object.order : '',
+			description: object ? object.description : '',
+			imagen: object ? object.imagen : ''
+		},
+		onSubmit: value => {
+			
+			if (!object) {
+			Post('/Slides/create',formik.values)
+			} else {
+				Patch(`/Slides/:${object.id}`,formik.values)
+			}
+		},
 
-const SlidesForm = ({objeto}) => {
+		validationSchema: yup.object({
+			name: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Campo obligatorio'),
+			order: yup.string().required('Campo obligatorio'),
+			description: yup.string().required('Campo obligatorio'),
+			imagen: yup.mixed().nullable().required('A file is required').test('format', 'Formato no permitido', (value) => !value || (value && SUPPORTED_FORMATS.includes(value.type)))
+		})
+	})
 
-    const button = useRef();
-
-    useEffect(() => {
-        if (!objeto) {
-            if (initialValues.name === "" || initialValues.name.length < 4 || initialValues.description === "" || initialValues.order === "" || image === "" ) {
-                button.current.disabled = true;
-                button.current.style.cursor = 'default';
-                button.current.style.opacity = 0.5;
-            } else {
-                button.current.disabled = false;
-                button.current.style.cursor = 'pointer';
-                button.current.style.opacity = 1;
-            }
-        } else {
-            setInitialValues({
-                name: objeto.name,
-                order: objeto.order,
-                description: objeto.description,
-            });
-            setimage(objeto.imagen);
-        }
-    })
-
-    const [error, seterror] = useState({
-        name: '',
-        imagen: ''
-    });
-    const [initialValues, setInitialValues] = useState({
-        name: '',
-        description: '',
-        order: '',
-    });
+	const handleChangeCkeditor = (e, editor) => {
+		formik.setValues(previous => {
+			previous.description = editor.getData()
+			return previous
+		})
+	}
     
-    const [image, setimage] = useState('');
+	const handleBlurCkeditor = () => {
+		formik.setTouched({...formik.touched,
+			description: true
+		});
+	}
 
-    const handleckeditor = (e, edit) => {
-        setInitialValues({...initialValues,
-            description: edit.getData()});
+    const handleChangeImage=()=>{
+        formik.setFieldValue('imagen',file.current.files[0])
     }
-
-    const handleChange = (e) => {
-        if (e.target.name === 'name') {
-            setInitialValues({...initialValues,
-                name: e.target.value});
-        }
-
-        if (e.target.name === 'order') {
-            setInitialValues({...initialValues,
-                order: e.target.value});
-        }
-
-        if (e.target.name === 'imagen') {
-            if (e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png") {
-                setimage(e.target.files[0]);
-                seterror({...error,imagen: ''});
-            } else {
-                seterror({...error,imagen: 'Formato no valido'});
-            }
-        }
-    }
-
-    const validation = (e) => {
-        if (e.target.name == "name") {
-            if (initialValues.name.length < 4) {
-                seterror({...error,name: "Debe contener minimo 4 caracteres"});
-            } else {
-                seterror({...error,name: ""});
-            }
-        }
-
-        if (e.target.name == "order") {
-            if (initialValues.order.length < 1) {
-                seterror({...error,order: "Campo obligatorio"});
-            } else {
-                seterror({...error,order: ""});
-            }
-        }
-
-     
-    }
-
-    const validationCkeditor = (e, edit) => {
-        if (edit.getData().length < 1) {
-            seterror({...error,description: 'Campo obligatorio'});
-        } else {
-            seterror({...error,description: ''});
-        }
-    }
-
-    const handleSubmit = async(e) => {
-        const {
-            name,
-            description,
-            order
-        } = initialValues
-        if (!objeto) {
-            try {
-                axios.post('/Slides/create', {
-                    name,
-                    description,
-                    order,
-                    image
-                })
-            } catch (error) {}
-        } else {
-            try {
-                axios.patch(`/Slides/:${objeto.id}`, {
-                    name,
-                    description,
-                    order,
-                    image
-                })
-            } catch (error) {}
-        }
-    }
-
 
 return (
-    <div>
-        <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Slide Title" onBlur={validation}></input>
-            {error.name && error.name }
-           
-            <input className="input-field" type="text" name="order" value={initialValues.order} onChange={handleChange} onBlur={validation} placeholder="Write order" ></input>
-            {error.order && error.order }
-            
-            <input className="input-field" type="file" name="imagen" value={initialValues.imagen} onChange={handleChange} onBlur={validation} placeholder="upload imagen"></input>
-            {error.imagen && error.imagen }
-            <CKEditor
-                editor={ClassicEditor}
-                data={initialValues.description}
-                onBlur={validationCkeditor}
-                onChange={handleckeditor}
+        <div>
+            <form className="form-container" onSubmit={formik.handleSubmit}>
+                <input className="input-field" type="text" name="name" value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder="Slide Title"></input>
+                
+               {formik.touched.name && formik.errors.name }
+                <input className="input-field" type="text" name="order" value={formik.values.order} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder="Write order" ></input>
+                {formik.touched.order && formik.errors.order }
+                <input className="input-field" type="file" name="imagen"  onChange={handleChangeImage} onBlur={formik.handleBlur} ref={file} placeholder="upload imagen"></input>
+                {formik.touched.imagen && formik.errors.imagen }
+                <CKEditor
+                    editor={ClassicEditor}
+                    data={formik.values.description}
+                    onChange={handleChangeCkeditor}
+                    onBlur={handleBlurCkeditor}
+                    
+    
+                />
+                {formik.touched.description && formik.errors.description }
+                <button  className="submit-btn" type="submit">Send</button>
+            </form>
+        </div>
+    );}
 
-            />
-            {error.description && error.description }
-            <button ref={button} className="submit-btn" type="submit">Send</button>
-        </form>
-    </div>
-);}
-export default SlidesForm;

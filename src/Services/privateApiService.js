@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const config = {
     headers: {
-        Group: 01                //Aqui va el ID del equipo!!
+        Group: 160        //Aqui va el ID del equipo!!
     }
 }
 
@@ -12,4 +12,15 @@ const Get = () => {
     .catch(err => console.log(err))
 }
 
-export default Get
+const Post = async (url,data) => {
+   await axios.post(url,data, config)
+}
+
+const Patch = async (url,data) => {
+   await axios.patch(url,data, config)
+    
+}
+
+
+
+export {Post,Patch}
