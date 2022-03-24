@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import '../FormStyles.css';
-import { Formik, Field } from 'formik';
-
+import { Formik, Field } from "formik";
+import {
+  emailValidation, 
+  nameValidationFourLength, 
+  passwordValidationEightLength, 
+  fileValidation_JPG_PNG, 
+  errors
+} from "../../Services/formValidationService";
 
 const UserForm = ({prevTestUserData}) => {
     const [fileError, setFileError] = useState("");
@@ -21,51 +27,30 @@ const UserForm = ({prevTestUserData}) => {
       if(prevTestUserData){
         setPrevUserDataExist(true);
       }
-
-    },[userData]);
+      console.log(userData)
+    },[userData, file]);
 
     const validate = (values) => {
-        const errors = {};
-        if (values.email === "") {
-          errors.email = 'Required';
-        } else if (
-          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-          errors.email = 'Email inválido';
-        }
+        emailValidation(values.email);
     
-        if(values.name === ""){
-            errors.name = "Agregue su nombre de usuario";
-        } else if (values.name.length < 4){
-            errors.name = "El nombre de usuario debe ser de al menos 4 caracteres";
-        }
-    
-        if(values.roleId === ""){
-            errors.roleId = "Escoja su rol";
-        }
-    
-        if(values.password === ""){
-            errors.password = "Ingrese su contraseña";
-        } else if(values.password.length < 8){
-            errors.password = "La contraseña debe tener un mínimo de 8 caracteres";
-        }
+        nameValidationFourLength(values.name);
         
-        return errors;
+        passwordValidationEightLength(values.password);
+
+        const validationErrors = errors;
+        return validationErrors;
     };
+
 
     const fileHandlerValidation = (e) => {
       const file = e.target.value;
-      const allowedExtensions = /(\.jpg|\.png)$/i;
-      
-      if(!file){
-        setFileError("Escoja una foto de perfil");
-      } else {
-        if (!allowedExtensions.exec(file)) {
-          setFileError("La imagen debe ser de formato .jpg o .png");
-        } else {
-          setFile(file);
-        }
-      };
+      const errorMessage = fileValidation_JPG_PNG(e);
+      console.log(file)
+      if(errorMessage !== ""){
+        setFileError(errorMessage);
+      } else{
+        setFile(file);
+      }
     };
 
     return (
@@ -129,18 +114,18 @@ const UserForm = ({prevTestUserData}) => {
             className="input-field"
             onChange={fileHandlerValidation}
             />
-            {fileError !== "" && <p>{fileError}</p>}
+            {fileError && <p>{fileError}</p>}
             <Field 
-              name="roleId"
+              required
+              name="role_id"
               as="select"
               className="input-field" 
-              value={values.roleId} 
+              value={values.role_id} 
               onChange={handleChange}>
                 <option value="" disabled >Escoja su rol</option>
                 <option value="1">Admin</option>
                 <option value="2">User</option>
             </Field>
-            {errors.roleId && errors.roleId}
             <Field
               className="input-field" 
               type="password"
