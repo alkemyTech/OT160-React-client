@@ -1,10 +1,14 @@
 import React from 'react'
+import Stack from 'react-bootstrap/Stack'
 
 function AboutUs(props) {
   const content = props?.content || ''
 
   return (
-    <p>{content}</p>
+    <Stack className='align-items-center'>    
+      <h4>Sobre nosotros</h4>
+      <p className='text-left'>{content}</p>
+    </Stack>
   )
 }
 
