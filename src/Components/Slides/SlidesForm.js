@@ -7,7 +7,7 @@ import { Patch, Post } from '../../Services/privateApiService';
 import '../FormStyles.css';
 
 export default function Slides({object}) {
-	const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
+	const SUPPORTED_FORMATS = ['image/jpg', 'image/png'];
 	const file = useRef()
 	const formik = useFormik({
 		initialValues: {
@@ -19,7 +19,7 @@ export default function Slides({object}) {
 		onSubmit: value => {
 			
 			if (!object) {
-			Post('/Slides/create',formik.values)
+				Post('/Slides/create',formik.values)
 			} else {
 				Patch(`/Slides/:${object.id}`,formik.values)
 			}
@@ -53,9 +53,8 @@ export default function Slides({object}) {
 return (
         <div>
             <form className="form-container" onSubmit={formik.handleSubmit}>
-                <input className="input-field" type="text" name="name" value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder="Slide Title"></input>
-                
-               {formik.touched.name && formik.errors.name }
+                <input className="input-field" type="text" name="name" value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder="Slide Title"></input>                
+                {formik.touched.name && formik.errors.name }
                 <input className="input-field" type="text" name="order" value={formik.values.order} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder="Write order" ></input>
                 {formik.touched.order && formik.errors.order }
                 <input className="input-field" type="file" name="imagen"  onChange={handleChangeImage} onBlur={formik.handleBlur} ref={file} placeholder="upload imagen"></input>
@@ -65,8 +64,6 @@ return (
                     data={formik.values.description}
                     onChange={handleChangeCkeditor}
                     onBlur={handleBlurCkeditor}
-                    
-    
                 />
                 {formik.touched.description && formik.errors.description }
                 <button  className="submit-btn" type="submit">Send</button>
