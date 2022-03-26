@@ -18,7 +18,7 @@ const UserForm = ({prevTestUserData}) => {
     const [file, setFile] = useState("");
     const [userData, setUserData] = useState(
       prevTestUserData ? prevTestUserData : {
-            id: 3,
+            id: 1,
             name: '',
             email: '',
             role_id: '',
@@ -55,13 +55,14 @@ const UserForm = ({prevTestUserData}) => {
     };
 
 
-    const fileHandlerValidation = (e) => {
-      const file = e.target.value;
+    const fileHandlerValidation = async (e) => {
+      const file = e.target.files[0];
       const errorMessage = fileValidation_JPG_PNG(e);
       if(errorMessage !== ""){
         setFileError(errorMessage);
-      } else {
-        setFile(file);
+      } 
+      if(errorMessage === undefined) {
+        setFile(window.btoa(encodeURIComponent( file )));
       }
     };
 
@@ -70,7 +71,7 @@ const UserForm = ({prevTestUserData}) => {
        initialValues={ userData }
        validate= {validate}
        onSubmit={(values) => {
-        setUserData({...values, profile_image : file});
+        setUserData({...values, role_id: parseInt(values.role_id), profile_image : file});
         setMakeRequest(true);
        }}
      >

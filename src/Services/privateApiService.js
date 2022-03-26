@@ -2,34 +2,27 @@ import axios from 'axios';
 
 const config = {
     headers: {
-                        //Aqui va el ID del equipo!!
+        Group: 160
     }
 }
 
 const putUser = (userData) => {
-    axios.put("https://ongapi.alkemy.org/api/users/" + userData.id, {
-        body: JSON.stringify(userData),
-        headers : { 
-          "Content-Type": "application/json",
-          'Accept': 'application/json'
-         }
-        })
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+    axios({
+        method: "PUT",
+        url: "https://ongapi.alkemy.org/api/users/" + userData.id,
+        data: userData
+    }); 
 }
 
+
+
 const postUser = (userData) =>{
-    console.log(userData)
-    axios.post("https://ongapi.alkemy.org/api/users",{
-        body: {userData},
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-         }
-        })
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err.response));  
-    }
+     axios({
+        method: "POST",
+        url: "https://ongapi.alkemy.org/api/users",
+        data: userData
+    }); 
+}
 
 
 const Get = () => {
