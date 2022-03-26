@@ -1,103 +1,121 @@
 import React, { useState } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Formik } from "formik";
 import '../FormStyles.css';
+import axios from 'axios';
 
-const ActivitiesForm = ({actividad}) => {
-    const receptedActiviti = actividad;
-    const [alertInputValidate, setAlertInputValidate] = useState();
-    const [alertValidation, setAlertValidation] = useState();
+const ActivitiesForm = (actividad) => {
+    
+    const {id, name, description, image} = actividad;
+
     const [initialValues, setInitialValues] = useState({
-        name: '',
-        description: '',
-        image: ''
+        name: name || '',
+        description: description || '',
+        image: image || ''
     });
-
-
-    const saveImage =(e)=>{
-        if(!(/\.(jpg|png)$/i).test(e.target.files[0].name)){
-            setAlertInputValidate(<p style={{color: 'red'}}>The file must be jpg or png</p>);
+    
+    const saveActivitie =async(values)=>{
+        if(actividad){
+            try{
+                await axios.put(`/activities/:${id}`, values);
+            }catch(e){
+                console.log(e);
+            }
         }else{
-            setInitialValues({...initialValues, image:`${e.target.files[0].name}` }) ;
-            setAlertInputValidate(<p style={{color: 'green'}}>Selected file</p>);
+            try{
+                const response = await axios({
+                    url: '/activities/create',
+                    method: 'POST',
+                    data: values,
+                });
+                return response;
+            }catch(e){
+                console.log(e);
+            }
         }
-    } 
-
-    const handleChange = (e) => {
-        if(e.target.name === 'name'){
-            setInitialValues({...initialValues, name: e.target.value});
-        }
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        receptedActiviti
-        ?
-            fetch('/activities/:id', {
-                method: 'PATCH',
-                body: JSON.stringify(initialValues)
-            })
-        :
-            initialValues.name === '' & initialValues.image === ''
-            ?
-                setAlertValidation(<p style={{color: 'red'}}>Name field and image field are required</p>)
-            :
-                fetch('/activities/create',{
-                    mothod: 'POST',
-                    body: JSON.stringify(initialValues)
-                }) 
     }
     
     return (
-        <form className="form-container" onSubmit={handleSubmit}>
-            <label>Nombre:</label>
-            {
-                receptedActiviti
-                ?
-                <input className="input-field" type="text" name="name" value={receptedActiviti.name} onChange={handleChange} placeholder="Activity Title" ></input>
-                :
-                <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Activity Title"></input>
-            }
-            <label>Imagen:</label>
-            {
-                receptedActiviti
-                ?
-                <img src={receptedActiviti.image} alt={receptedActiviti.name}/>
-                :
-                <label style={{ backgroundColor: '#2e86c1', padding: 8, color: '#fff', textAlign: 'center' }}>
-                    Select image
-                    <input
-                        style={{ display: "none" }}
-                        type="file"
-                        onChange={saveImage}
-                    />
-                </label> 
-            }
-            
-            <div>
-                {alertInputValidate}
-            </div>
-            <label>Descripcion:</label>    
-            <div className="App">
-                <CKEditor
-                    editor={ ClassicEditor }
-                    data= {
-                        receptedActiviti
-                        ?
-                        receptedActiviti.description
-                        :
-                        "<p>your description</p>"
+        <div>
+            <Formik
+                initialValues={{
+                    name: initialValues.name || '',
+                    description: initialValues.description || '',
+                    image: initialValues.image || '',
+                }}
+                validate={(valores)=>{
+                    let errores={};
+
+                    if(!valores.name){
+                        errores.name = 'Por favor ingrese un nombre!';
                     }
-                    onChange={ ( event, editor ) => {
-                        setInitialValues({...initialValues, description: (editor.getData())}); 
-                    } }
-                />
-            </div>
-            <button className="submit-btn" type="submit">Send</button>
-            <div>
-                {alertValidation}
-            </div>
-        </form>
+
+                    if(!valores.image){
+                        errores.image = 'Por favor ingrese una imagen!';
+                    }else if(!/(.jpg|.JPG|.png|.PNG)/.test(`${valores.image.name}`)){
+                        errores.image = 'Solo se pueden seleccionar imagenes jpg y pdf';
+                    }
+
+                    return errores;
+                }}
+                onSubmit={(valores, {resetForm})=>{
+                    setInitialValues({
+                        name: valores.name,
+                        description: valores.description,
+                        image: valores.image
+                    });
+                    saveActivitie(initialValues);
+                    resetForm();
+                }}
+            >
+                {({values, handleSubmit, errors, handleChange, handleBlur, setFieldValue, touched} )=>(
+                    <form className="form-container" onSubmit={handleSubmit}>
+                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                            <label style={{margin: '5px 0px'}}>Nombre:</label>
+                            <input 
+                                type="text"
+                                placeholder={values.name}
+                                value={values.name}
+                                id='name'
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            />
+                            {touched.name && errors.name && <p style={{color: 'red', fontSize: '0.5rem'}}>{errors.name}</p>}
+                        </div>
+                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                            <label style={{margin: '5px 0px'}}>Descripcion:</label>
+                            <CKEditor
+                                    editor={ ClassicEditor }
+                                    data={values.description}
+                                    value={values.description}
+                                    onChange={ ( event, editor ) => {
+                                        setFieldValue("description",editor.getData()) 
+                                    }}
+                                    
+                            />  
+                        </div>
+                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                            <label style={{margin: '5px 0px'}}>Imagen:</label>
+                            <label style={{ backgroundColor: '#2e86c1', padding: 8, color: '#fff', textAlign: 'center' }}>
+                                Select image
+                                <input
+                                    style={{ display: 'none' }}
+                                    type="file"
+                                    name= 'image'
+                                    onBlur={handleBlur}
+                                    onChange={(e)=>{
+                                        setFieldValue("image", e.target.files[0]) 
+                                    }}
+                                />
+                            </label> 
+                            { touched.image && errors.image && <p style={{color: 'red', fontSize: '0.5rem'}}>{errors.image}</p>}
+                        </div> 
+                        <button style={{ backgroundColor: '#2e86c1', padding: 8, color: '#fff', textAlign: 'center', border: 'none' }} type='submit' >Enviar</button>
+                    </form>
+                )}
+            </Formik>
+        </div>
     );
 }
  
