@@ -8,13 +8,17 @@ import {
   fileValidation_JPG_PNG, 
   errors
 } from "../../Services/formValidationService";
+import {
+  postUser,
+  putUser
+} from "../../Services/privateApiService";
 
 const UserForm = ({prevTestUserData}) => {
     const [fileError, setFileError] = useState("");
     const [file, setFile] = useState("");
     const [userData, setUserData] = useState(
       prevTestUserData ? prevTestUserData : {
-            id: 1,
+            id: 3,
             name: '',
             email: '',
             role_id: '',
@@ -22,13 +26,22 @@ const UserForm = ({prevTestUserData}) => {
             password: ""
       });
     const [prevUserDataExist, setPrevUserDataExist] = useState(false);
+    const [makeRequest, setMakeRequest] = useState(false);
 
     useEffect(() => {
       if(prevTestUserData){
         setPrevUserDataExist(true);
       }
-      console.log(userData)
-    },[userData, file]);
+
+      if(makeRequest){
+        if(prevUserDataExist){
+          putUser(userData);
+        } else {
+          postUser(userData);
+        }
+      }
+
+    },[userData, makeRequest]);
 
     const validate = (values) => {
         emailValidation(values.email);
@@ -45,10 +58,9 @@ const UserForm = ({prevTestUserData}) => {
     const fileHandlerValidation = (e) => {
       const file = e.target.value;
       const errorMessage = fileValidation_JPG_PNG(e);
-      console.log(file)
       if(errorMessage !== ""){
         setFileError(errorMessage);
-      } else{
+      } else {
         setFile(file);
       }
     };
@@ -59,29 +71,7 @@ const UserForm = ({prevTestUserData}) => {
        validate= {validate}
        onSubmit={(values) => {
         setUserData({...values, profile_image : file});
-        if(prevUserDataExist){
-          fetch("https://ongapi.alkemy.org/api/users/" + userData.id, {
-            method: "PUT",
-            body: JSON.stringify(userData),
-            headers : { 
-              "Content-Type": "application/json",
-              'Accept': 'application/json'
-             }
-            })
-            .then(response => response.json())
-            .then(json => console.log(json)); 
-        } else {
-          fetch("https://ongapi.alkemy.org/api/users",{
-            method: "POST",
-            body: JSON.stringify(userData),
-            headers : { 
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-             }
-            })
-            .then(response => response.json())
-            .then(json => console.log(json));
-        }
+        setMakeRequest(true);
        }}
      >
        {({

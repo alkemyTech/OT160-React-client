@@ -13,11 +13,13 @@ const emailValidation = (email) => {
 }
 
 const nameValidationFourLength = (name) => {
-    if(name === ""){
+    if(name.length === 0){
         errors.name = "Agregue su nombre de usuario";
     } else if (name.length < 4){
         errors.name = "El nombre de usuario debe ser de al menos 4 caracteres";
-    }
+    } else {
+      delete errors.name;
+  }
 }
   
 const passwordValidationEightLength = (password) => {
