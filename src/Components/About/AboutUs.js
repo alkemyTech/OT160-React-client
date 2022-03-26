@@ -7,7 +7,7 @@ function AboutUs(props) {
   return (
     <Stack className='align-items-center'>    
       <h4>Sobre nosotros</h4>
-      <p className='text-left'>{content}</p>
+      <p className='text-left w-75'>{content}</p>
     </Stack>
   )
 }
