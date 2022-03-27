@@ -6,15 +6,9 @@
     gap: 15px;
 }
 
-<<<<<<< HEAD
-.input-field{
-    padding: 15px 30px !important;
-    border: 1px solid #c1c1c1!important;
-=======
 .input-field {
     padding: 15px 30px;
     border: 1px solid #c1c1c1;
->>>>>>> be02726d57def07c7a07de4fac0cae5b8e682275
 }
 
 .select-field {
