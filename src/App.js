@@ -9,14 +9,12 @@ import NewsForm from "./Components/News/NewsForm";
 import SlidesForm from "./Components/Slides/SlidesForm";
 import Donation from "./Components/Donations/Donation";
 import Thanks from "./Components/Donations/Thanks";
-import HomeForm from "./Components/Home/HomeForm";
 import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
 import UserForm from "./Components/Users/UsersForm";
 import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
 import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
 import MembersForm from "./Components/Members/MembersForm";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
-import Login from './Components/Login/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -29,7 +27,6 @@ function App() {
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
-          <Route path="/backoffice/organization" component={HomeForm} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route
@@ -45,7 +42,7 @@ function App() {
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
-          <Route path="/login" component={Login} />
+
         </Switch>
       </BrowserRouter>
       <div className="App">
