@@ -7,27 +7,41 @@ const config = {
 };
 
 const get = async (url) => {
+  const response = {};
+
   try {
-    const response = await axios.get(url, config);
-    return response.data;
+    const axiosRes = await axios.get(url, config);
+    response.data = axiosRes.data;
   } catch (error) {
-     console.log(error) // Error handling to be implemented
+      response.error = error;
+  } finally {
+      return response;
   };
 };
 
 const post = async (url, data) => {
+  const response = {};
+
   try {
-    await axios.post(url, data, config);
+    const axiosRes = await axios.post(url, data, config);
+    response.data = axiosRes.data;
   } catch (error) {
-      console.log(error) // Error handling to be implemented
+      response.error = error;
+  } finally {
+      return response;
   };
 };
 
 const patch = async (url, data) => {
+  const response = {};
+
   try {
-    await axios.patch(url, data, config);
+    const axiosRes = await axios.patch(url, data, config);
+    response.data = axiosRes.data;
   } catch (error) {
-      console.log(error) // Error handling to be implemented
+      response.error = error;
+  } finally {
+      return response;
   };
 };
 
