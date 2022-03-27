@@ -1,6 +1,6 @@
 import React from "react";
 import DonationCard from "./DonationCard";
-import { Row, Col, CardGroup } from "react-bootstrap";
+import {CardGroup } from "react-bootstrap";
 
 export default function Donation({ text }) {
   return (

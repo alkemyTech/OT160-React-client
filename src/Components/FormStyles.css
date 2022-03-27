@@ -1,4 +1,4 @@
-.form-container{
+.form-container {
     width: 60%;
     margin: 15px auto;
     display: flex;
@@ -6,24 +6,30 @@
     gap: 15px;
 }
 
+<<<<<<< HEAD
 .input-field{
     padding: 15px 30px !important;
     border: 1px solid #c1c1c1!important;
+=======
+.input-field {
+    padding: 15px 30px;
+    border: 1px solid #c1c1c1;
+>>>>>>> be02726d57def07c7a07de4fac0cae5b8e682275
 }
 
-.select-field{
+.select-field {
     padding: 10px;
     border: 1px solid #c1c1c1;
 }
 
-.submit-btn{
+.submit-btn {
     background-color: #2E86C1;
     padding: 10px 15px;
     border: none;
     color: #fff;
 }
 
-.submit-btn:hover{
+.submit-btn:hover {
     cursor: pointer;
     background-color: #3498DB;
 }
