@@ -32,6 +32,36 @@ const NewsForm = () => {
         fetchCategories();
     }, []);
 
+    const validateTitle = (values, errors) => {
+        if(!values.title){
+            errors.title = 'Por favor escribe un título.'
+        } else if(values.title.length <= 3){
+            errors.title = 'El título debe contener más de 3 caracteres.'
+        };
+    };          
+    
+    const validateCategory = (values, errors) => {
+        if(!values.category){
+            errors.category = 'Por favor selecciona una categoría.'
+        };
+    };  
+
+    const validateContent = (values, errors) => {
+        if(!values.content){
+            errors.content = 'Por favor escribe un contenido.'
+        };
+    };  
+
+    const validateImage = (values, errors) => {
+        if(values.image === null){
+            errors.image = 'Por favor sube una imagen.'
+        } else if(!supportedFormats.includes(values.image.type)){
+            errors.image = 'Las imagenes deben ser en formato .jpg, .jpeg o .png .'
+        } else if(values.image.size > 1000000){
+            errors.image = 'El tamaño de la imagen no puede ser mayor a 1mb.'
+        };
+    };  
+
     return (
         <>
             <Formik
@@ -44,29 +74,10 @@ const NewsForm = () => {
                 validate={(values) => {
                     const errors = {};
                     const supportedFormats = ["image/jpg", "image/jpeg", "image,png"];
-
-                    if(!values.title){
-                        errors.title = 'Por favor escribe un título.'
-                    } else if(values.title.length <= 3){
-                        errors.title = 'El título debe contener más de 3 caracteres.'
-                    };
-
-                    if(!values.category){
-                        errors.category = 'Por favor selecciona una categoría.'
-                    };
-
-                    if(!values.content){
-                        errors.content = 'Por favor escribe un contenido.'
-                    };
-
-                    if(values.image === null){
-                        errors.image = 'Por favor sube una imagen.'
-                    } else if(!supportedFormats.includes(values.image.type)){
-                        errors.image = 'Las imagenes deben ser en formato .jpg, .jpeg o .png .'
-                    } else if(values.image.size > 1000000){
-                        errors.image = 'El tamaño de la imagen no puede ser mayor a 1mb.'
-                    };
-
+                    validateTitle(values, errors);
+                    validateCategory(values, errors);
+                    validateContent(values, errors);
+                    validateImage(values, errors);
                     return errors;
                 }}
                 onSubmit={(values, { resetForm }) => {
