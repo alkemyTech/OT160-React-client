@@ -1,6 +1,6 @@
 import React from "react";
 
-const Previewimage = ({ image }) => {
+const PreviewImage = ({ image }) => {
     const [preview, setPreview] = React.useState(null);
 
     const reader = new FileReader();
@@ -15,4 +15,4 @@ const Previewimage = ({ image }) => {
     );
 };
 
-export default Previewimage;
+export default PreviewImage;

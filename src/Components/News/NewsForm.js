@@ -1,42 +1,36 @@
-import React, { useRef, useState } from 'react';
-import '../../Components/FormStyles.css';
+import React, { useEffect, useRef, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import Previewimage from './PreviewImage';
-
-let id = false;
+import '../../Components/FormStyles.css';
+import PreviewImage from './PreviewImage';
 
 const NewsForm = () => {
-    // This state is for testing the form when submitted, it will be removed later.
     const [sentForm, changeSentForm] = useState(false);
+    const [editNews, setEditNews] = useState(false);
+    const [categories, setCategories] = useState([]);
 
-    // The following code is a first approximation of how the form will act if it
-    // recieves an id (editting form), or not (creation form). To test it, set
-    // the variable id outise this component to true.
-    const IsEdit = (values) => {
-        let newsEditMock = {
-            title: 'Title example',
-            content: '<p>Content <strong>example</strong></p>',
-            category: '2',
-        };
-        if (id === true) {
-            values.title = newsEditMock.title;
-            values.content = newsEditMock.content;
-            values.category = newsEditMock.category;
-            id=false;
-        };
+    const newsEditMock = {
+        title: 'Title example',
+        content: '<p>Content <strong>example</strong></p>',
+        category: '2',
     };
 
     const fileRef = useRef(null);
 
-    // This array of objects is for testing the category map. It will be replaced
-    // with the existing categories in the endpoint/categories when existing.
     const categoriesMock = [
         {id: 1, name: 'Demo option 1'},
         {id: 2, name: 'Demo option 2'},
         {id: 3, name: 'Demo option 3'},
     ];
+
+    useEffect(() => {
+        async function fetchCategories() {
+            const response = categoriesMock
+            setCategories(response)
+        }
+        fetchCategories();
+    }, []);
 
     return (
         <>
@@ -48,35 +42,33 @@ const NewsForm = () => {
                     image: null
                 }}
                 validate={(values) => {
-                    let errors = {};
+                    const errors = {};
                     const supportedFormats = ["image/jpg", "image/jpeg", "image,png"];
 
                     if(!values.title){
-                        errors.title = 'Please write a title for your news.'
+                        errors.title = 'Por favor escribe un título.'
                     } else if(values.title.length <= 3){
-                        errors.title = 'Title must be longer than three characters.'
+                        errors.title = 'El título debe contener más de 3 caracteres.'
                     };
 
                     if(!values.category){
-                        errors.category = 'Please select a category for your news.'
+                        errors.category = 'Por favor selecciona una categoría.'
                     };
 
                     if(!values.content){
-                        errors.content = 'Please write a content for your news.'
+                        errors.content = 'Por favor escribe un contenido.'
                     };
 
                     if(values.image === null){
-                        errors.image = 'Please upload an image for your news.'
+                        errors.image = 'Por favor sube una imagen.'
                     } else if(!supportedFormats.includes(values.image.type)){
-                        errors.image = 'Images must be in .jpg, .jpeg or .png format.'
+                        errors.image = 'Las imagenes deben ser en formato .jpg, .jpeg o .png .'
                     } else if(values.image.size > 1000000){
-                        errors.image = 'Image size must be smaller than 1mb.'
+                        errors.image = 'El tamaño de la imagen no puede ser mayor a 1mb.'
                     };
 
                     return errors;
                 }}
-                // This onSubmit is for testing the form, it logs a success message 
-                // and the initialValues, yhen resets them. It'll be adapted later
                 onSubmit={(values, { resetForm }) => {
                     console.log('Form sent');
                     console.log(values);
@@ -86,26 +78,29 @@ const NewsForm = () => {
                 }}
             >
                 {({ values, errors, setFieldValue, }) => {
-                    
-                    IsEdit(values);
-
+                    if (editNews) {
+                        values.title = newsEditMock.title;
+                        values.content = newsEditMock.content;
+                        values.category = newsEditMock.category;
+                        setEditNews(false);
+                    };
                     return (
                         <Form className="form-container">
-                            <div>
-                                <label htmlFor='title'>Title</label>
+                            <div className='label-container'>
+                                <label htmlFor='title'>Título</label>
                                 <Field
                                     className="input-field"
                                     type="text"
                                     id="title"
                                     name="title"
-                                    placeholder={"Add a title"}
+                                    placeholder={"Añade un título"}
                                 />
                                 <ErrorMessage name="title" component={() => (
                                     <div className="error">{errors.title}</div>
                                 )} />
                             </div>
-                            <div>
-                                <label htmlFor='content'>Content</label>
+                            <div className='label-container'>
+                                <label htmlFor='content'>Contenido</label>
                                 <Field
                                     id="content"
                                     name="content"
@@ -115,7 +110,7 @@ const NewsForm = () => {
                                             <>
                                                 <CKEditor
                                                     editor={ ClassicEditor }
-                                                    config={{placeholder: "Write a content for your news"}} 
+                                                    config={{placeholder: "Escribe un contenido para tu noticia"}} 
                                                     data={values.content}
                                                     onChange={(e, editor) => {
                                                         values.content= editor.getData();
@@ -129,17 +124,17 @@ const NewsForm = () => {
                                     <div className="error">{errors.content}</div>
                                 )} />
                             </div>
-                            <div>
-                                <label htmlFor='category'>Category</label>
+                            <div className='label-container'>
+                                <label htmlFor='category'>Categoría</label>
                                 <Field
                                     className="select-field"
                                     id="category"
                                     name="category"
                                     as="select"
                                 >
-                                    <option value="" disabled>Select category</option>
-                                    {categoriesMock.length > 0 &&
-                                        categoriesMock.map((category) => {
+                                    <option value="" disabled>Selecciona una categoría</option>
+                                    {categories.length > 0 &&
+                                        categories.map((category) => {
                                             return(
                                                 <option value={category.id} key={category.id}>{category.name}</option>
                                             );
@@ -150,8 +145,8 @@ const NewsForm = () => {
                                     <div className="error">{errors.category}</div>
                                 )} />
                             </div>
-                            <div>
-                                <label htmlFor='image'>Image</label>
+                            <div className='label-container'>
+                                <label htmlFor='image'>Imagen</label>
                                 <input
                                     ref={fileRef}
                                     hidden
@@ -161,21 +156,22 @@ const NewsForm = () => {
                                         setFieldValue("image", e.target.files[0]);
                                     }}
                                 />
-                                {values.image && <Previewimage image={values.image}/>}
+                                {values.image && <PreviewImage image={values.image}/>}
                                 <button
                                     type="button"
+                                    className='secondary-btn'
                                     onClick={() => {
                                         fileRef.current.click();
                                     }}
                                 >
-                                    Upload image
+                                    Subir imagen
                                 </button>
                                 <ErrorMessage name="image" component={() => (
                                     <div className="error">{errors.image}</div>
                                 )} />
                             </div>
-                            <button className="submit-btn" type="submit">Send</button>
-                            {sentForm && <p className='success'>Form sent successfully!</p>}
+                            <button className="submit-btn" type="submit">Enviar</button>
+                            {sentForm && <p className='success'>Formulario enviado con éxito.</p>}
                         </Form>
                     )
                 }}
