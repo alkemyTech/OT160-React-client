@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const config = {
     headers: {
-        Group: 01                //Aqui va el ID del equipo!!
+        Group: 160                
     }
 }
 
@@ -10,6 +10,19 @@ const Get = () => {
     axios.get('https://jsonplaceholder.typicode.com/users', config)
     .then(res => console.log(res))
     .catch(err => console.log(err))
+
 }
 
-export default Get
+const Post=async(url,data)=>{
+    try {
+     
+   const response = await axios.post(`https://ongapi.alkemy.org/public/api/${url}`,data,config);
+   return response
+
+    } catch (error) {
+        return error
+    }
+}
+
+
+export {Post,Get}
