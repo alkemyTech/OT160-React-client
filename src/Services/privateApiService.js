@@ -13,9 +13,9 @@ const get = async (url) => {
     const axiosRes = await axios.get(url, config);
     response.data = axiosRes.data;
   } catch (error) {
-      response.error = error;
+    response.error = error;
   } finally {
-      return response;
+    return response;
   };
 };
 
@@ -26,9 +26,9 @@ const post = async (url, data) => {
     const axiosRes = await axios.post(url, data, config);
     response.data = axiosRes.data;
   } catch (error) {
-      response.error = error;
+    response.error = error;
   } finally {
-      return response;
+    return response;
   };
 };
 
@@ -39,9 +39,9 @@ const patch = async (url, data) => {
     const axiosRes = await axios.patch(url, data, config);
     response.data = axiosRes.data;
   } catch (error) {
-      response.error = error;
+    response.error = error;
   } finally {
-      return response;
+    return response;
   };
 };
 
