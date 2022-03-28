@@ -2,8 +2,29 @@ import axios from 'axios';
 
 const config = {
     headers: {
-        Group: 01                //Aqui va el ID del equipo!!
+        Group: 160            
     }
+}
+
+const AuthorizationTest = () => {
+    return true;
+}
+
+///wait for authorization and token branches to be merged
+
+const Post = ({url, config}) => {
+    axios.post(url, {
+        body: config,
+        headers : {
+            auth: AuthorizationTest()
+        }
+    })
+    .then(res => {
+        console.log(res);
+    })
+    .catch(err => {
+        console.log(err);
+    })
 }
 
 const Get = () => {
