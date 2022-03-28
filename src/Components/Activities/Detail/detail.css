@@ -1,12 +1,10 @@
-.detail-container
-{
+.detail-container{
     display:flex;
     justify-content:center;
     align-items:center;
 
 }
-.card
-{
+.card{
     width:50%;
     background-color: aquamarine;
     border-radius: 5px;
