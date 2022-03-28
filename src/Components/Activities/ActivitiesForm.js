@@ -3,7 +3,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Formik } from "formik";
 import '../FormStyles.css';
-import axios from 'axios';
+import { PatchActivitie, PostActivitie } from '../../Services/privateApiService';
 
 const ActivitiesForm = (actividad) => {
     
@@ -18,18 +18,13 @@ const ActivitiesForm = (actividad) => {
     const saveActivitie =async(values)=>{
         if(actividad){
             try{
-                await axios.put(`/activities/:${id}`, values);
+                PatchActivitie(id, values)
             }catch(e){
                 console.log(e);
             }
         }else{
             try{
-                const response = await axios({
-                    url: '/activities/create',
-                    method: 'POST',
-                    data: values,
-                });
-                return response;
+                PostActivitie(values);
             }catch(e){
                 console.log(e);
             }
