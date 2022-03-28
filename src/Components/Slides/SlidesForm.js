@@ -4,17 +4,17 @@ import * as yup from 'yup'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Patch, Post } from '../../Services/privateApiService';
+import {supported_formats_image} from '../../utilities/const-utility'
 import '../FormStyles.css';
 
 export default function Slides({object}) {
-	const SUPPORTED_FORMATS = ['image/jpg', 'image/png'];
-	const file = useRef()
+    const file_input_image = useRef();
 	const formik = useFormik({
 		initialValues: {
-			name: object ? object.name : '',
-			order: object ? object.order : '',
-			description: object ? object.description : '',
-			imagen: object ? object.imagen : ''
+			name: object?.name || '',
+			order: object?.order || '',
+			description: object?.description || '',
+			imagen: object?.imagen || ''
 		},
 		onSubmit: value => {
 			
@@ -24,12 +24,12 @@ export default function Slides({object}) {
 				Patch(`/Slides/:${object.id}`,formik.values)
 			}
 		},
-
+        
 		validationSchema: yup.object({
 			name: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Campo obligatorio'),
 			order: yup.string().required('Campo obligatorio'),
 			description: yup.string().required('Campo obligatorio'),
-			imagen: yup.mixed().nullable().required('A file is required').test('format', 'Formato no permitido', (value) => !value || (value && SUPPORTED_FORMATS.includes(value.type)))
+			imagen: yup.mixed().nullable().required('A file is required').test('format', 'Formato no permitido', (value) => !value || (value && supported_formats_image.includes(value.type)))
 		})
 	})
 
@@ -47,7 +47,7 @@ export default function Slides({object}) {
 	}
 
     const handleChangeImage=()=>{
-        formik.setFieldValue('imagen',file.current.files[0])
+        formik.setFieldValue('imagen',file_input_image.current.files[0])
     }
 
 return (
@@ -57,7 +57,7 @@ return (
                 {formik.touched.name && formik.errors.name }
                 <input className="input-field" type="text" name="order" value={formik.values.order} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder="Write order" ></input>
                 {formik.touched.order && formik.errors.order }
-                <input className="input-field" type="file" name="imagen"  onChange={handleChangeImage} onBlur={formik.handleBlur} ref={file} placeholder="upload imagen"></input>
+                <input className="input-field" type="file" name="imagen"  onChange={handleChangeImage} onBlur={formik.handleBlur} ref={file_input_image} placeholder="upload imagen"></input>
                 {formik.touched.imagen && formik.errors.imagen }
                 <CKEditor
                     editor={ClassicEditor}
