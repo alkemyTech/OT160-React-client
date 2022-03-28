@@ -5,8 +5,7 @@ import {
   emailValidation, 
   nameValidationFourLength, 
   passwordValidationEightLength, 
-  fileValidation_JPG_PNG, 
-  errors
+  fileValidation_JPG_PNG
 } from "../../Services/formValidationService";
 import {
   postUser,
@@ -44,14 +43,11 @@ const UserForm = ({prevTestUserData}) => {
     },[userData, makeRequest]);
 
     const validate = (values) => {
-        emailValidation(values.email);
-    
-        nameValidationFourLength(values.name);
-        
-        passwordValidationEightLength(values.password);
-
-        const validationErrors = errors;
-        return validationErrors;
+      const errors = {};
+      errors.email = emailValidation(values.email);
+      errors.name = nameValidationFourLength(values.name);
+      errors.password = passwordValidationEightLength(values.password);
+      return errors;
     };
 
 

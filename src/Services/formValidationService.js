@@ -1,41 +1,39 @@
-const errors = {};
-
 const emailValidation = (email) => {
+  let emailError;
     if (email === "") {
-        errors.email = 'Requerido';
+        emailError = 'Requerido';
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)
       ) {
-        errors.email = 'Email inválido';
-      } else {
-          delete errors.email;
-      }
+        emailError = 'Email inválido';
+      } 
+  return emailError;
 }
 
 const nameValidationFourLength = (name) => {
+  let nameError;
     if(name.length === 0){
-        errors.name = "Agregue su nombre de usuario";
+        nameError = "Agregue su nombre de usuario";
     } else if (name.length < 4){
-        errors.name = "El nombre de usuario debe ser de al menos 4 caracteres";
-    } else {
-      delete errors.name;
-  }
+        nameError = "El nombre de usuario debe ser de al menos 4 caracteres";
+    } 
+  return nameError;
 }
   
 const passwordValidationEightLength = (password) => {
+  let passwordError;
     if(password === ""){
-        errors.password = "Ingrese su contraseña";
+        passwordError = "Ingrese su contraseña";
     } else if(password.length < 8){
-        errors.password = "La contraseña debe tener un mínimo de 8 caracteres";
-    } else {
-        delete errors.password;
-    }
+        passwordError = "La contraseña debe tener un mínimo de 8 caracteres";
+    } 
+  return passwordError;
 }
   
 const fileValidation_JPG_PNG = (e) => {
-    let file = e.target.value;
-    const allowedExtensions = /(\.jpg|\.png)$/i;
-    let errorMessage;
+  let file = e.target.value;
+  const allowedExtensions = /(\.jpg|\.png)$/i;
+  let errorMessage;
     if(!file){
         errorMessage = "Escoja una foto de perfil";
     } else {
@@ -43,8 +41,7 @@ const fileValidation_JPG_PNG = (e) => {
         errorMessage = "La imagen debe ser de formato .jpg o .png";
       } 
     }
-
     return errorMessage;
   };
 
-export {emailValidation, nameValidationFourLength, passwordValidationEightLength, fileValidation_JPG_PNG, errors}
+export {emailValidation, nameValidationFourLength, passwordValidationEightLength, fileValidation_JPG_PNG}
