@@ -86,10 +86,10 @@ const NewsForm = () => {
                     };
                     return (
                         <Form className="form-container">
-                            <div className='label-container'>
+                            <div className='form-group'>
                                 <label htmlFor='title'>Título</label>
                                 <Field
-                                    className="input-field"
+                                    className="form-control"
                                     type="text"
                                     id="title"
                                     name="title"
@@ -99,11 +99,12 @@ const NewsForm = () => {
                                     <div className="error">{errors.title}</div>
                                 )} />
                             </div>
-                            <div className='label-container'>
+                            <div className='form-group'>
                                 <label htmlFor='content'>Contenido</label>
                                 <Field
                                     id="content"
                                     name="content"
+                                    className="form-control"
                                 >
                                     {() => {
                                         return (
@@ -124,10 +125,10 @@ const NewsForm = () => {
                                     <div className="error">{errors.content}</div>
                                 )} />
                             </div>
-                            <div className='label-container'>
+                            <div className='form-group'>
                                 <label htmlFor='category'>Categoría</label>
                                 <Field
-                                    className="select-field"
+                                    className="form-control"
                                     id="category"
                                     name="category"
                                     as="select"
@@ -145,12 +146,12 @@ const NewsForm = () => {
                                     <div className="error">{errors.category}</div>
                                 )} />
                             </div>
-                            <div className='label-container'>
+                            <div className='form-group'>
                                 <label htmlFor='image'>Imagen</label>
                                 <input
                                     ref={fileRef}
                                     hidden
-                                    className="select-field"
+                                    className="form-control-file"
                                     type="file"
                                     onChange={(e) => {
                                         setFieldValue("image", e.target.files[0]);
@@ -159,7 +160,7 @@ const NewsForm = () => {
                                 {values.image && <PreviewImage image={values.image}/>}
                                 <button
                                     type="button"
-                                    className='secondary-btn'
+                                    className='btn btn-outline-danger'
                                     onClick={() => {
                                         fileRef.current.click();
                                     }}
@@ -170,7 +171,7 @@ const NewsForm = () => {
                                     <div className="error">{errors.image}</div>
                                 )} />
                             </div>
-                            <button className="submit-btn" type="submit">Enviar</button>
+                            <button className="btn btn-danger" type="submit">Enviar</button>
                             {sentForm && <p className='success'>Formulario enviado con éxito.</p>}
                         </Form>
                     )
