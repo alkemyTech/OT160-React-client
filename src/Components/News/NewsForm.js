@@ -70,8 +70,6 @@ const NewsForm = () => {
                     return errors;
                 }}
                 onSubmit={(values, { resetForm }) => {
-                    console.log('Form sent');
-                    console.log(values);
                     changeSentForm(true);
                     setTimeout(() => changeSentForm(false), 5000);
                     resetForm();
