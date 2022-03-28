@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../FormStyles.css';
 import { Formik } from 'formik';
 import {
+  nameValidation,
+  lastnameValidation,
   emailValidation, 
   passwordValidationEightLength, 
   confirmedPasswordValidation, 
   errors} from "../../Services/formValidation";
-const RegisterForm = () => {
 
+const RegisterForm = () => {
     const [registerData, setRegisterData] = useState([]);
 
     const validate = values => {
+        nameValidation(values.name);
+
+        lastnameValidation(values.lastName);
+
         emailValidation(values.email);
 
         passwordValidationEightLength(values.password);
@@ -26,6 +32,8 @@ const RegisterForm = () => {
         <div>
             <Formik 
             initialValues={{
+                name: "",
+                lastName: "",
                 email: "",
                 password: "",
                 confirmedPassword: "",
@@ -43,13 +51,17 @@ const RegisterForm = () => {
                 handleSubmit,
               }) => (
                 <form className="form-container" onSubmit={handleSubmit}>
-                    <input className="input-field" type="text" name="email" value={values.name} onBlur={handleBlur} onChange={handleChange} placeholder="Enter email"></input>
+                    <input className="input-field" type="text" name="name" value={values.name} onChange={handleChange} placeholder="Nombre"></input>
+                    {errors.name && <div>{errors.name}</div>}
+                    <input className="input-field" type="text" name="lastName" value={values.lastName} onChange={handleChange} placeholder="Apellido"></input>
+                    {errors.lastName && <div>{errors.lastName}</div>}
+                    <input className="input-field" type="text" name="email" value={values.email} onBlur={handleBlur} onChange={handleChange} placeholder="Mail"></input>
                     {errors.email && <div>{errors.email}</div>}
-                    <input className="input-field" type="password" name="password" value={values.password} onBlur={handleBlur} onChange={handleChange} placeholder="Enter password"></input>
+                    <input className="input-field" type="password" name="password" value={values.password} onBlur={handleBlur} onChange={handleChange} placeholder="Contraseña"></input>
                     {errors.password && <div>{errors.password}</div>}
-                    <input className="input-field" type="password" name="confirmedPassword" value={values.confirmedPassword} onBlur={handleBlur} onChange={handleChange} placeholder="Confirm password"></input>
+                    <input className="input-field" type="password" name="confirmedPassword" value={values.confirmedPassword} onBlur={handleBlur} onChange={handleChange} placeholder="Confirmar contraseña"></input>
                     {errors.confirmedPassword && <div>{errors.confirmedPassword}</div>}
-                    <button className="submit-btn" type="submit">Log In</button>
+                    <button className="submit-btn" type="submit">Register</button>
                 </form>
               )}
             </Formik>

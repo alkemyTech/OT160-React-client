@@ -1,5 +1,21 @@
 const errors = {};
 
+const nameValidation = (name) => {
+  if(!name){
+    errors.name = "Requerido";
+  } else {
+    delete errors.name;
+  }
+}
+
+const lastnameValidation = (lastName) => {
+  if(!lastName){
+    errors.lastName = "Requerido";
+  } else {
+    delete errors.lastName;
+  }
+}
+
 const emailValidation = (email) => {
     if (!email) {
           errors.email = "Requerido";
@@ -32,6 +48,6 @@ const confirmedPasswordValidation = (password, confirmedPassword) => {
     }
 };
 
-export {emailValidation, passwordValidationEightLength, confirmedPasswordValidation, errors}
+export {emailValidation, passwordValidationEightLength, confirmedPasswordValidation, nameValidation, lastnameValidation, errors}
 
         
