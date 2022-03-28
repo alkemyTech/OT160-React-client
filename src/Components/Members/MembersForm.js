@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
+import PreviewImage from './PreviewImage';
 import '../FormStyles.css';
 
 const MembersForm = () => {
@@ -72,8 +73,8 @@ const MembersForm = () => {
                     
 
                     return (
-                        <Form>
-                            <div class="form-group">
+                        <Form class="form-container">
+                            <div class="label-container">
                                 <label htmlFor='name'>Name</label>
                                 <Field
                                     class="form-control"
@@ -86,7 +87,7 @@ const MembersForm = () => {
                                     <div className="error">{errors.name}</div>
                                 )} />
                             </div>
-                            <div class="form-group">
+                            <div class="label-container">
                                 <label htmlFor='description'>Description</label>
                                 <Field
                                     class="form-control"
@@ -112,7 +113,7 @@ const MembersForm = () => {
                                     <div className="error">{errors.description}</div>
                                 )} />
                             </div>
-                            <div class="form-group">
+                            <div class="label-container">
                                 <label htmlFor='linkedIn'>LinkedIn</label>
                                 <Field
                                     class="form-control"
@@ -125,7 +126,7 @@ const MembersForm = () => {
                                     <div className="error">{errors.linkedIn}</div>
                                 )} />
                             </div>
-                            <div class="form-group">
+                            <div class="label-container">
                                 <label htmlFor='gitHub'>GitHub</label>
                                 <Field
                                     class="form-control"
@@ -138,20 +139,21 @@ const MembersForm = () => {
                                     <div className="error">{errors.gitHub}</div>
                                 )} />
                             </div>
-                            <div class="form-group">
+                            <div class="label-container">
                                 <label htmlFor='image'>Image</label>
                                 <input
                                     ref={fileRef}
                                     hidden
-                                    class="form-control"
+                                    class="input-field"
                                     type="file"
                                     onChange={(e) => {
                                         setFieldValue("image", e.target.files[0]);
                                     }}
                                 />
-                               
+                                    {values.image && <PreviewImage image={values.image}/>}
                                 <button
                                     type="button"
+                                    class={"secondary-btn"}
                                     onClick={() => {
                                         fileRef.current.click();
                                     }}
