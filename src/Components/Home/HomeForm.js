@@ -3,7 +3,8 @@ import { Formik, Form } from "formik";
 import "../FormStyles.css";
 import SlidesForm from "../Slides/SlidesForm.js";
 import InputForm from "./InputForm.js";
-export default function HomeForm() {
+
+export default function HomeEditForm() {
   const [ValuesForm, setValuesForm] = useState({});
 
   function checkNumber(sliceId) {
@@ -13,44 +14,55 @@ export default function HomeForm() {
     }
     return isAnumber;
   }
+
+  const validate = (values) => {
+    const errors = {};
+    validateWelcomeText(values, errors);
+    validateSlideId_1(values, errors);
+    validateSlideId_2(values, errors);
+    validateSlideId_3(values, errors);
+
+    return errors;
+  };
+
+  const validateWelcomeText = (values, errors) => {
+    if (!values.welcomeText) {
+      errors.welcomeText = "you have written nothing";
+    } else if (values.welcomeText.length < 20) {
+      errors.welcomeText = "Title must be longer than 20 characters";
+    }
+  };
+
+  const validateSlideId_1 = (values, errors) => {
+    if (!checkNumber(values.slideId_1)) {
+      errors.slideId_1 = "The id can't have letters, only numbers";
+    }
+  };
+  const validateSlideId_2 = (values, errors) => {
+    if (!checkNumber(values.slideId_2)) {
+      errors.slideId_2 = "The id can't have letters, only numbers";
+    }
+  };
+  const validateSlideId_3 = (values, errors) => {
+    if (!checkNumber(values.slideId_3)) {
+      errors.slideId_3 = "The id can't have letters, only numbers";
+    }
+  };
   return (
     <div>
       <Formik
         initialValues={{
-         
           welcomeText: "",
           slideId_1: "",
           slideId_2: "",
           slideId_3: "",
         }}
         onSubmit={(values, { resetForm }) => {
-          resetForm(); 
+          resetForm();
           setValuesForm(values);
         }}
-        
-        validate={(
-          values
-        ) => {
-          let errors = {};
+        validate={validate}
 
-          if (!values.welcomeText) {
-            errors.welcomeText = "you have written nothing";
-          } else if (values.welcomeText.length < 20) {
-            errors.welcomeText = "Title must be longer than 20 characters";
-          } else {
-          }
-
-          if (!checkNumber(values.slideId_1)) {
-            errors.slideId_1 = "The id can't have letters, only numbers";
-          }
-          if (!checkNumber(values.slideId_2)) {
-            errors.slideId_2 = "The id cant have letters, only numbers";
-          }
-          if (!checkNumber(values.slideId_3)) {
-            errors.slideId_3 = "The id cant have letters, only numbers";
-          }
-          return errors;
-        }}
       >
         {(props) => (
           <div>
@@ -98,9 +110,9 @@ export default function HomeForm() {
         )}
       </Formik>
 
-      <SlidesForm object={{id:ValuesForm.sliceId_1}} />
-      <SlidesForm object={{id:ValuesForm.sliceId_2}} />
-      <SlidesForm object={{id:ValuesForm.sliceId_3}} />
+      <SlidesForm object={{ id: ValuesForm.sliceId_1 }} />
+      <SlidesForm object={{ id: ValuesForm.sliceId_2 }} />
+      <SlidesForm object={{ id: ValuesForm.sliceId_3 }} />
       <h1>{ValuesForm.welcomeText}</h1>
     </div>
   );
