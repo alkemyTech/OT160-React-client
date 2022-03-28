@@ -6,26 +6,21 @@ import {
   lastnameValidation,
   emailValidation, 
   passwordValidationEightLength, 
-  confirmedPasswordValidation, 
-  errors} from "../../Services/formValidation";
+  confirmedPasswordValidation 
+  } from "../../Services/formValidation";
 
 const RegisterForm = () => {
     const [registerData, setRegisterData] = useState([]);
 
     const validate = values => {
-        nameValidation(values.name);
-
-        lastnameValidation(values.lastName);
-
-        emailValidation(values.email);
-
-        passwordValidationEightLength(values.password);
-
-        confirmedPasswordValidation(values.password, values.confirmedPassword)
-        
-        const validationErrors = errors;
-
-        return validationErrors;
+      const errors = {};
+      errors.name = nameValidation(values.name);
+      errors.lastName = lastnameValidation(values.lastName);
+      errors.email = emailValidation(values.email);
+      errors.password = passwordValidationEightLength(values.password);
+      errors.confirmedPassword = confirmedPasswordValidation(values.password, values.confirmedPassword)
+       
+      return errors;
     };
     
     return (
@@ -66,11 +61,7 @@ const RegisterForm = () => {
               )}
             </Formik>
         </div>
-    );
-
-
-
-    
+    );  
 }
  
 export default RegisterForm;
