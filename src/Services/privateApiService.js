@@ -31,12 +31,12 @@ export const GetOrganization =async()=>{
         await axios.get('https://ongapi.alkemy.org/api/organization')
         .then(res=>{
             response = res
-        })
+        });
         
     }catch(e){
-        console.log(e)
+        console.log(e);
     }finally{
-        return response
+        return response;
     }
 }
 
