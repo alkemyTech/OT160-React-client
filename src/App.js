@@ -8,7 +8,7 @@ import Detail from './Components/Activities/Detail/Detail';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
 import SlidesForm from './Components/Slides/SlidesForm';
-import HomeEditForm from './Components/Home/HomeForm';
+import HomeEditForm from './Components/Home/HomeEditForm';
 import TestimonialForm from './Components/Testimonials/TestimonialsForm';
 import UserForm from './Components/Users/UsersForm';
 import SchoolCampaign from './Campaigns/School/SchoolCampaign';
