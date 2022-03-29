@@ -1,0 +1,25 @@
+.Form-container {
+    background:#f5f6f8;
+    margin: auto;
+    margin-top: 180px;
+    box-shadow:0 10px 20px rgb(37, 36, 36);
+    padding: 20px 30px;
+    border-radius: 10px;
+}
+
+.Form-container p {
+    height: 40px;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+.button-form-confirmed{
+    width: 50%;
+    height: 40px;
+    background: #9AC9FB;
+    border: none;
+    color: white;
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
