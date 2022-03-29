@@ -25,4 +25,19 @@ export const PatchActivitie =(id, activitie)=>{
     axios.patch(`https://jsonplaceholder.typicode.com/activities/:${id}`, activitie)
 }
 
+export const GetOrganization =async()=>{
+    let response = {};
+    try{
+        await axios.get('https://ongapi.alkemy.org/api/organization')
+        .then(res=>{
+            response = res
+        })
+        
+    }catch(e){
+        console.log(e)
+    }finally{
+        return response
+    }
+}
+
 export default Get

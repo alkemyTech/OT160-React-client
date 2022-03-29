@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const config = {
     headers: {
-        Group: 01                //Aqui va el ID del equipo!!
+        Group: 160                //Aqui va el ID del equipo!!
     }
 }
 
@@ -11,5 +11,7 @@ const Get = () => {
     .then(res => console.log(res))
     .catch(err => console.log(err))
 }
+
+
 
 export default Get
