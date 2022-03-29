@@ -1,21 +1,20 @@
-import React from "react";
-import logo from "./logo.svg";
-import { Counter } from "./features/counter/Counter";
-import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ActivitiesForm from "./Components/Activities/ActivitiesForm";
-import CategoriesForm from "./Components/Categories/CategoriesForm";
-import NewsForm from "./Components/News/NewsForm";
-import SlidesForm from "./Components/Slides/SlidesForm";
-import Donation from "./Components/Donations/Donation";
-import Thanks from "./Components/Donations/Thanks";
-import HomeForm from "./Components/Home/HomeForm";
-import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
-import UserForm from "./Components/Users/UsersForm";
-import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
-import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
-import MembersForm from "./Components/Members/MembersForm";
-import ProjectsForm from "./Components/Projects/ProjectsForm";
+import React from 'react';
+import logo from './logo.svg';
+import { Counter } from './features/counter/Counter';
+import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ActivitiesForm from './Components/Activities/ActivitiesForm';
+import CategoriesForm from './Components/Categories/CategoriesForm';
+import NewsForm from './Components/News/NewsForm';
+import SlidesForm from './Components/Slides/SlidesForm';
+import Donation from './Components/Donations/Donation';
+import Thanks from './Components/Donations/Thanks';
+import TestimonialForm from './Components/Testimonials/TestimonialsForm';
+import UserForm from './Components/Users/UsersForm';
+import SchoolCampaign from './Campaigns/School/SchoolCampaign';
+import ToysCampaign from './Campaigns/Toys/ToysCampaign';
+import MembersForm from './Components/Members/MembersForm';
+import ProjectsForm from './Components/Projects/ProjectsForm';
 import Login from './Components/Login/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -24,18 +23,17 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-          {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
+          {/* <Route path='/' exact component={} />           Esta ruta debe ser para el Home */}
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
-          <Route path="/backoffice/organization" component={HomeForm} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route
             path="/donate"
             component={(text) => {
-              text = "Welcome to the Donate section, click the MercadoPago button to make your donation to our ONG";
+              text = "Bienvenido a la seccion de donacines.";
               return <Donation text={text} />;
             }}
           />

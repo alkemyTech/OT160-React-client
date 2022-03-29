@@ -1,6 +1,6 @@
-import React from "react";
-import DonationCard from "./DonationCard";
-import {CardGroup } from "react-bootstrap";
+import React from 'react';
+import {CardGroup } from 'react-bootstrap';
+import DonationCard from './DonationCard';
 
 export default function Donation({ text }) {
   return (

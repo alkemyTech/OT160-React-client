@@ -1,7 +1,7 @@
-import React from "react";
-import { Button, Card } from "react-bootstrap";
-import logo from "../../assets/logo.png";
-import "./donation.css";
+import React from 'react';
+import { Button, Card } from 'react-bootstrap';
+import logo from '../../assets/logo.png';
+import './donation.css';
 export default function DonationCard({
   title,
   donationAmount,
@@ -18,7 +18,7 @@ export default function DonationCard({
         <Card.Img variant="top" src={logo} alt="logo" className="image" />
         <Card.Body bg="primary">
           <Card.Title>{title}</Card.Title>
-          <Card.Text>Touch the button and make your donation :).</Card.Text>
+          <Card.Text>Toca el boton para hacer la donacion :).</Card.Text>
         </Card.Body>
         <Button
           variant="success"

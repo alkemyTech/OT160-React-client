@@ -5,8 +5,8 @@ export default function Thanks()
 {
     return(
         <div style={{textAlign:"center"}}>
-            <h1>Thanks</h1>
-            <h2>Thanks for make a donation to our ONG :)</h2>
+            <h1>Gracias</h1>
+            <h2>Gracias por hacer la donacion a nuestra ONG :)</h2>
         </div>
     );
 }
