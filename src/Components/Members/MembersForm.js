@@ -8,8 +8,52 @@ import '../FormStyles.css';
 const MembersForm = () => {
 
   const [sentForm, changeSentForm] = useState(false);
+  const [editMember, setEditMember] = useState(false);
+
+  const memberEditMock = {
+    name: 'Fer Leiva',
+    description: '<p>Description <strong>example</strong></p>',
+    linkedIn: 'https://www.linkedin.com/in/effeleiva/',
+    gitHub: 'https://github.com/FerLeiva/',
+};
 
   const fileRef = useRef(null);
+
+  const validateName = (values, errors) => {
+    if(!values.name){
+        errors.name = 'Por favor escribe un nombre.'
+    } else if(values.name.length <= 3){
+        errors.name = 'El nombre debe contener mas de tres caracteres.'
+    };
+  };
+  const validateDescription = (values, errors) => {
+    if(!values.description){
+        errors.description = 'Por favor escribe una descripcion.'
+    };
+  };
+  const validateImage = (values, errors, supportedFormats) => {
+        if(values.image === null){
+            errors.image = 'Por favor sube una imagen.'
+        } else if(!supportedFormats.includes(values.image.type)){
+            errors.image = 'Las imagenes deben ser en formato .jpg, .jpeg o .png .'
+        } else if(values.image.size > 1000000){
+            errors.image = 'El tamaño de la imagen no puede ser mayor a 1mb.'
+        };
+    };  
+  const validateLinkedIn = (values, errors) => {
+    if(!values.linkedIn){
+        errors.linkedIn = 'Por favor proporciona una cuenta de LinkedIn.'
+    } else if(!values.linkedIn.match(/(https?:\/\/(www.)|(www.))?linkedin.com\/(mwlite\/|m\/)?in\/[a-zA-Z0-9_.-]+\/?/)){
+        errors.linkedIn = 'Por favor proporciona una cuenta de LinkedIn valida.'
+    };
+  };
+  const validateGitHub = (values, errors) => {
+    if(!values.gitHub){
+        errors.gitHub = 'Por favor proporciona una cuenta de GitHub.'
+    } else if(!values.gitHub.match(/(https?:\/\/(www.)|(www.))?github.com\/[a-zA-Z0-9_.-]+\/?/)){
+        errors.gitHub = 'Por favor proporciona una cuenta de GitHub valida.'
+    };
+  };
 
   return (
 
@@ -23,46 +67,16 @@ const MembersForm = () => {
                     gitHub: '',
                 }}
                 validate={(values) => {
-                    let errors = {};
-                    const supportedFormats = ["image/jpg", "image/jpeg", "image,png"];
-
-                    if(!values.name){
-                        errors.name = 'Please write a name for your news.'
-                    } else if(values.name.length <= 3){
-                        errors.name = 'Title must be longer than three characters.'
-                    };
-
-                    if(!values.linkedIn){
-                        errors.linkedIn = 'Please provide your LinkedIn account.'
-                    } else if(!values.linkedIn.match(/(https?:\/\/(www.)|(www.))?linkedin.com\/(mwlite\/|m\/)?in\/[a-zA-Z0-9_.-]+\/?/)){
-                        errors.linkedIn = 'Please provide a valid LinkedIn account.'
-                    };
-                    
-                    if(!values.gitHub){
-                        errors.gitHub = 'Please provide your GitHub account.'
-                    } else if(!values.gitHub.match(/(https?:\/\/(www.)|(www.))?github.com\/[a-zA-Z0-9_.-]+\/?/)){
-                        errors.gitHub = 'Please provide a valid GitHub account.'
-                    };
-
-                    if(!values.description){
-                        errors.description = 'Please write a description for your news.'
-                    };
-
-                    if(values.image === null){
-                        errors.image = 'Please upload an image for your news.'
-                    } else if(!supportedFormats.includes(values.image.type)){
-                        errors.image = 'Images must be in .jpg, .jpeg or .png format.'
-                    } else if(values.image.size > 1000000){
-                        errors.image = 'Image size must be smaller than 1mb.'
-                    };
-
-                    console.log(errors)
+                    const errors = {};
+                    const supportedFormats = ["image/jpg", "image/jpeg", "image/png"];
+                    validateName(values, errors);
+                    validateDescription(values, errors);
+                    validateImage(values, errors, supportedFormats);
+                    validateLinkedIn(values, errors);
+                    validateGitHub(values, errors);
                     return errors;
                 }}
-                // This onSubmit is for testing the form, it logs a success message 
-                // and the initialValues, yhen resets them. It'll be adapted later
                 onSubmit={(values, { resetForm }) => {
-                    console.log('Form sent');
                     console.log(values);
                     changeSentForm(true);
                     setTimeout(() => changeSentForm(false), 5000);
@@ -70,27 +84,31 @@ const MembersForm = () => {
                 }}
             >
                 {({ values, errors, setFieldValue, }) => {
-                    
-
+                    if (editMember) {
+                        values.name = memberEditMock.name;
+                        values.description = memberEditMock.description;
+                        values.linkedIn = memberEditMock.linkedIn;
+                        values.gitHub = memberEditMock.gitHub;
+                    };
                     return (
-                        <Form class="form-container">
-                            <div class="label-container">
+                        <Form className="form-container">
+                            <div className="form-group">
                                 <label htmlFor='name'>Name</label>
                                 <Field
-                                    class="form-control"
+                                    className="form-control"
                                     type="text"
                                     id="name"
                                     name="name"
-                                    placeholder={"Add a name"}
+                                    placeholder={"Escribe un nombre"}
                                 />
                                 <ErrorMessage name="name" component={() => (
                                     <div className="error">{errors.name}</div>
                                 )} />
                             </div>
-                            <div class="label-container">
+                            <div className="form-group">
                                 <label htmlFor='description'>Description</label>
                                 <Field
-                                    class="form-control"
+                                    className="form-control"
                                     id="description"
                                     name="description"
                                 >
@@ -99,7 +117,7 @@ const MembersForm = () => {
                                             <>
                                                 <CKEditor
                                                     editor={ ClassicEditor }
-                                                    config={{placeholder: "Write a description for your news"}} 
+                                                    config={{placeholder: "Escribe una descripcion"}} 
                                                     data={values.description}
                                                     onChange={(e, editor) => {
                                                         values.description= editor.getData();
@@ -113,10 +131,10 @@ const MembersForm = () => {
                                     <div className="error">{errors.description}</div>
                                 )} />
                             </div>
-                            <div class="label-container">
+                            <div className="form-group">
                                 <label htmlFor='linkedIn'>LinkedIn</label>
                                 <Field
-                                    class="form-control"
+                                    className="form-control"
                                     type="text"
                                     id="linkedIn"
                                     name="linkedIn"
@@ -126,10 +144,10 @@ const MembersForm = () => {
                                     <div className="error">{errors.linkedIn}</div>
                                 )} />
                             </div>
-                            <div class="label-container">
+                            <div className="form-group">
                                 <label htmlFor='gitHub'>GitHub</label>
                                 <Field
-                                    class="form-control"
+                                    className="form-control"
                                     type="text"
                                     id="gitHub"
                                     name="gitHub"
@@ -139,12 +157,11 @@ const MembersForm = () => {
                                     <div className="error">{errors.gitHub}</div>
                                 )} />
                             </div>
-                            <div class="label-container">
-                                <label htmlFor='image'>Image</label>
+                            <div className="label-container">
                                 <input
                                     ref={fileRef}
                                     hidden
-                                    class="input-field"
+                                    className="form-control-file"
                                     type="file"
                                     onChange={(e) => {
                                         setFieldValue("image", e.target.files[0]);
@@ -153,19 +170,19 @@ const MembersForm = () => {
                                     {values.image && <PreviewImage image={values.image}/>}
                                 <button
                                     type="button"
-                                    class={"secondary-btn"}
+                                    className='btn btn-outline-danger'
                                     onClick={() => {
                                         fileRef.current.click();
                                     }}
                                 >
-                                    Upload image
+                                    Sube una imagen
                                 </button>
                                 <ErrorMessage name="image" component={() => (
                                     <div className="error">{errors.image}</div>
                                 )} />
                             </div>
-                            <button className="submit-btn" type="submit">Send</button>
-                            {sentForm && <p className='success'>Form sent successfully!</p>}
+                            <button className="btn btn-danger" type="submit">Enviar</button>
+                            {sentForm && <p className='success'>Formulario enviado correctamente</p>}
                         </Form>
                     )
                 }}
