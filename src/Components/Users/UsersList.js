@@ -47,7 +47,7 @@ function UsersList() {
     );
   };
   
-  function displayAllUsers(users) {
+  function displayRowsForAllUsers(users) {
     return (
       users?.map(user => {
         return tableRow(user)
@@ -70,7 +70,7 @@ function UsersList() {
       </Link>      
       <Table striped bordered hover size='md' responsive>
         <tbody>
-          {displayAllUsers(users)}
+          {displayRowsForAllUsers(users)}
         </tbody>
       </Table>
     </Stack>
