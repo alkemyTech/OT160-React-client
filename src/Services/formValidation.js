@@ -1,50 +1,45 @@
-const nameValidation = (name) => {
-  let nameError;
+const nameValidation = (name, errors) => {
   if(!name){
-    nameError = "Requerido";
+    errors.name = "Requerido";
   } 
-  return nameError;
+  return errors;
 }
 
-const lastnameValidation = (lastName) => {
-  let lastNameError;
+const lastnameValidation = (lastName, errors) => {
   if(!lastName){
-    lastNameError = "Requerido";
+    errors.lastName = "Requerido";
   } 
-  return lastNameError;
+  return errors;
 }
 
-const emailValidation = (email) => {
-  let emailError;
+const emailValidation = (email, errors) => {
     if (!email) {
-        emailError = "Requerido";
+      errors.email = "Requerido";
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      emailError = "Email inválido";
+      errors.email = "Email inválido";
     }
-  return emailError;
+  return errors;
 };
         
-const passwordValidationEightLength = (password) => {
-  let passwordError;
+const passwordValidationEightLength = (password, errors) => {
     if (!password) {
-        passwordError = "Requerido";
+      errors.password = "Requerido";
       } else if (password.length < 7){
-        passwordError = "La contraseña debe tener un mínimo de 6 characteres";
+        errors.password = "La contraseña debe tener un mínimo de 6 characteres";
       }else if (!/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i.test(password)) {
-        passwordError = "La contraseña debe tener al menos una letra, un número y un caracter especial";
+        errors.password = "La contraseña debe tener al menos una letra, un número y un caracter especial";
       }
 
-  return passwordError;
+  return errors;
 };
 
-const confirmedPasswordValidation = (password, confirmedPassword) => {
-  let confirmedPasswordError;
+const confirmedPasswordValidation = (password, confirmedPassword, errors) => {
     if (!confirmedPassword) {
-        confirmedPasswordError = "Confirme su contraseña";
+      errors.confirmedPassword = "Confirme su contraseña";
       } else if (confirmedPassword !== password){
-        confirmedPasswordError = "La contraseña no coincide, por favor inténtelo de nuevo";
+        errors.confirmedPassword = "La contraseña no coincide, por favor inténtelo de nuevo";
       } 
-  return confirmedPasswordError;
+  return errors;
 };
 
 export {emailValidation, passwordValidationEightLength, confirmedPasswordValidation, nameValidation, lastnameValidation}      

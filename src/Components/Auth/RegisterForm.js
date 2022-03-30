@@ -14,12 +14,11 @@ const RegisterForm = () => {
 
     const validate = values => {
       const errors = {};
-      errors.name = nameValidation(values.name);
-      errors.lastName = lastnameValidation(values.lastName);
-      errors.email = emailValidation(values.email);
-      errors.password = passwordValidationEightLength(values.password);
-      errors.confirmedPassword = confirmedPasswordValidation(values.password, values.confirmedPassword)
-       
+      nameValidation(values.name, errors);
+      lastnameValidation(values.lastName, errors);
+      emailValidation(values.email, errors);
+      passwordValidationEightLength(values.password, errors);
+      confirmedPasswordValidation(values.password, values.confirmedPassword, errors)
       return errors;
     };
     
