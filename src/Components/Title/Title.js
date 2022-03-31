@@ -1,10 +1,15 @@
 import React from 'react'
+import '../Title/title.css'
+import { imagen_title_default } from '../../utility/constUtility'
 
-const  img = process.env.PUBLIC_URL + '/images/title.png';
 
-export default function Title({title,image=img}) {
+export default function Title({title,image=imagen_title_default}) {
 
   return (
-    <div style={{backgroundImage:`url(${image})` }}>hola</div>
+    <div style={{backgroundImage:`url(${image})` }}>
+
+      <h1 className="title">{title}</h1>
+      
+    </div>
   )
 }
