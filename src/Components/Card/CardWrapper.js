@@ -1,10 +1,15 @@
 import Card from "./Card";
 import "../Card/card.scss";
 
+const CardWrapper = ({cardsList}) => {
+    const defaultImg = "/images/placeholder/empty-image.png";
 
-const CardWrapper = ({cardsObject}) => {
-    const cards = cardsObject.map((item) => {
-        return <Card title={item.title} img={item.img === "" ? "/images/placeholder/empty-image.png" : item.img} description={item.description}/>
+    const cards = cardsList.map((item) => {
+        return <Card 
+                    title={item.title} 
+                    img={item.img || defaultImg} 
+                    description={item.description}
+                />
     });
 
     return (
