@@ -30,18 +30,21 @@ const passwordValidationEightLength = (password) => {
   return passwordError;
 }
   
-const fileValidation_JPG_PNG = (e) => {
+const fileValidationExtensions = (e) => {
   let file = e.target.value;
   const allowedExtensions = /(\.jpg|\.png)$/i;
   let errorMessage;
     if(!file){
         errorMessage = "Escoja una foto de perfil";
-    } else {
-      if (!allowedExtensions.exec(file)) {
+    } else if (!allowedExtensions.exec(file)) {
         errorMessage = "La imagen debe ser de formato .jpg o .png";
       } 
-    }
     return errorMessage;
   };
 
-export {emailValidation, nameValidationFourLength, passwordValidationEightLength, fileValidation_JPG_PNG}
+export {
+  emailValidation, 
+  nameValidationFourLength, 
+  passwordValidationEightLength, 
+  fileValidationExtensions
+}

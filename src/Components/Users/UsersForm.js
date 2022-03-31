@@ -5,18 +5,18 @@ import {
   emailValidation, 
   nameValidationFourLength, 
   passwordValidationEightLength, 
-  fileValidation_JPG_PNG
+  fileValidationExtensions
 } from "../../Services/formValidationService";
 import {
   postUser,
   putUser
-} from "../../Services/privateApiService";
+} from "../../Services/userApiService";
 
-const UserForm = ({prevTestUserData}) => {
+const UserForm = ({prevUserData}) => {
     const [fileError, setFileError] = useState("");
     const [file, setFile] = useState("");
     const [userData, setUserData] = useState(
-      prevTestUserData ? prevTestUserData : {
+      prevUserData ? prevUserData : {
             id: 1,
             name: '',
             email: '',
@@ -25,22 +25,12 @@ const UserForm = ({prevTestUserData}) => {
             password: ""
       });
     const [prevUserDataExist, setPrevUserDataExist] = useState(false);
-    const [makeRequest, setMakeRequest] = useState(false);
 
     useEffect(() => {
-      if(prevTestUserData){
+      if(prevUserData){
         setPrevUserDataExist(true);
       }
-
-      if(makeRequest){
-        if(prevUserDataExist){
-          putUser(userData);
-        } else {
-          postUser(userData);
-        }
-      }
-
-    },[userData, makeRequest]);
+    },[prevUserData]);
 
     const validate = (values) => {
       const errors = {};
@@ -50,10 +40,9 @@ const UserForm = ({prevTestUserData}) => {
       return errors;
     };
 
-
     const fileHandlerValidation = async (e) => {
       const file = e.target.files[0];
-      const errorMessage = fileValidation_JPG_PNG(e);
+      const errorMessage = fileValidationExtensions(e);
       if(errorMessage !== ""){
         setFileError(errorMessage);
       } 
@@ -68,7 +57,11 @@ const UserForm = ({prevTestUserData}) => {
        validate= {validate}
        onSubmit={(values) => {
         setUserData({...values, role_id: parseInt(values.role_id), profile_image : file});
-        setMakeRequest(true);
+        if(prevUserDataExist){
+          putUser(userData);
+        } else {
+          postUser(userData);
+        }
        }}
      >
        {({
