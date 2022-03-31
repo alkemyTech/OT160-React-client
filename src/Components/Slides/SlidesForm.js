@@ -25,7 +25,7 @@ export default function Slides({slide}) {
 			}
 		},
         
-		validationSchema: yup.slide({
+		validationSchema: yup.object({
 			name: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Campo obligatorio'),
 			order: yup.string().required('Campo obligatorio'),
 			description: yup.string().required('Campo obligatorio'),
@@ -47,7 +47,7 @@ export default function Slides({slide}) {
 	}
 
     const handleChangeImage=()=>{
-        formik.setFieldValue('imagen',file_input_image.current.files[0]);
+        formik.setFieldValue('imagen',fileInputImage.current.files[0]);
     }
 
 return (
