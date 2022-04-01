@@ -7,18 +7,7 @@ const config = {
 };
 
 
-const getToken=()=>
-{
-	return JSON.parse(localStorage.getItem("token"));
-}
-export const HeaderAuthorization = () => {
-  const token = getToken();
-  const headerAuthorization = {Bearer: ""};
-  if (token !== null) {
-    headerAuthorization.Bearer="Bearer: "+ token;
-  }
-  return headerAuthorization;
-};
+
 
 const Get = () => {
   axios
