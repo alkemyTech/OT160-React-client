@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
 const config = {
-    headers: {
-        Group: 160
-    }
+  headers: {
+    Group: 160,
+  },
 };
 
 const get = async (url) => {
@@ -16,7 +16,7 @@ const get = async (url) => {
     response.error = error;
   } finally {
     return response;
-  };
+  }
 };
 
 const post = async (url, data) => {
@@ -29,7 +29,7 @@ const post = async (url, data) => {
     response.error = error;
   } finally {
     return response;
-  };
+  }
 };
 
 const patch = async (url, data) => {
@@ -42,7 +42,7 @@ const patch = async (url, data) => {
     response.error = error;
   } finally {
     return response;
-  };
+  }
 };
 
 export { get, post, patch };
