@@ -3,64 +3,67 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Formik } from "formik";
 import '../FormStyles.css';
-import { PatchActivitie, PostActivitie } from '../../Services/privateApiService';
+import { Patch, Post } from '../../Services/privateApiService';
 
-const ActivitiesForm = (actividad) => {
+const ActivitiesForm = (props) => {
     
-    const {id, name, description, image} = actividad;
+    const {id, name, description, image} = props;
 
-    const [initialValues, setInitialValues] = useState({
+    const [valuesProps, setValuesProps] = useState({
         name: name || '',
         description: description || '',
         image: image || ''
     });
     
     const saveActivitie =async(values)=>{
-        if(actividad){
+        if(props){
             try{
-                PatchActivitie(id, values)
+                Patch(`https://ongapi.alkemy.org/api/docs#/activities/${id}`, values)
             }catch(e){
                 console.log(e);
             }
         }else{
             try{
-                PostActivitie(values);
+                Post('https://ongapi.alkemy.org/api/docs#/activities/create', values);
             }catch(e){
                 console.log(e);
             }
         }
     }
+
+    const validate =(values)=>{
+        let errores={};
+        if(!values.name){
+            errores.name = 'Por favor ingrese un nombre!';
+        }
+
+        if(!values.image){
+            errores.image = 'Por favor ingrese una imagen!';
+        }else if(!/(.jpg|.JPG|.png|.PNG)/.test(`${values.image.name}`)){
+            errores.image = 'Solo se pueden seleccionar imagenes jpg y pdf';
+        }
+        return errores;
+    }
+    
     
     return (
         <div>
             <Formik
                 initialValues={{
-                    name: initialValues.name || '',
-                    description: initialValues.description || '',
-                    image: initialValues.image || '',
+                    name: valuesProps.name || '',
+                    description: valuesProps.description || '',
+                    image: valuesProps.image || '',
                 }}
-                validate={(valores)=>{
-                    let errores={};
 
-                    if(!valores.name){
-                        errores.name = 'Por favor ingrese un nombre!';
-                    }
-
-                    if(!valores.image){
-                        errores.image = 'Por favor ingrese una imagen!';
-                    }else if(!/(.jpg|.JPG|.png|.PNG)/.test(`${valores.image.name}`)){
-                        errores.image = 'Solo se pueden seleccionar imagenes jpg y pdf';
-                    }
-
-                    return errores;
-                }}
+                validate = {validate}
+                
                 onSubmit={(valores, {resetForm})=>{
-                    setInitialValues({
+                    setValuesProps({
                         name: valores.name,
                         description: valores.description,
                         image: valores.image
                     });
-                    saveActivitie(initialValues);
+                    saveActivitie(valuesProps);
                     resetForm();
                 }}
             >

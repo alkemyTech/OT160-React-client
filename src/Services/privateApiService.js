@@ -12,17 +12,17 @@ const Get = () => {
     .catch(err => console.log(err))
 }
 
-export const PostActivitie =(activitie)=>{
-    const respuesta ='';
-    axios.post('https://jsonplaceholder.typicode.com/activities/create', activitie)
+export const Post =(url, activitie)=>{
+    let respuesta ={};
+    axios.post(url, activitie)
     .then(res => respuesta = res)
     .catch(err => console.log(err))
 
     return respuesta;
 }
 
-export const PatchActivitie =(id, activitie)=>{
-    axios.patch(`https://jsonplaceholder.typicode.com/activities/:${id}`, activitie)
+export const Patch =(url, activitie)=>{
+    axios.patch(url, activitie)
 }
 
 export default Get
