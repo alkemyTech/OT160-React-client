@@ -19,4 +19,4 @@ const emailValidator = {
   error: 'Ingrese un email válido por favor.'
 };
 
-export { imageValidator, emailValidator }
+export { imageValidator, emailValidator };

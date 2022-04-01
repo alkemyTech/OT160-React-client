@@ -45,4 +45,4 @@ const patch = async (url, data) => {
   };
 };
 
-export { get, post, patch }
+export { get, post, patch };
