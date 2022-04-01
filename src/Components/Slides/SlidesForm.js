@@ -4,7 +4,7 @@ import * as yup from 'yup'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Patch, Post } from '../../Services/privateApiService';
-import {supported_formats_image} from '../../utilities/constUtility';
+import {SUPPORTED_FORMATS_IMAGE} from '../../utilities/constUtility';
 import '../FormStyles.css';
 
 export default function Slides({slide}) {
@@ -29,7 +29,7 @@ export default function Slides({slide}) {
 			name: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Campo obligatorio'),
 			order: yup.string().required('Campo obligatorio'),
 			description: yup.string().required('Campo obligatorio'),
-			imagen: yup.mixed().nullable().required('A file is required').test('format', 'Formato no permitido', (value) => !value || (value && supported_formats_image.includes(value.type)))
+			imagen: yup.mixed().nullable().required('A file is required').test('format', 'Formato no permitido', (value) => !value || (value && SUPPORTED_FORMATS_IMAGE.includes(value.type)))
 		})
 	});
 
@@ -41,7 +41,8 @@ export default function Slides({slide}) {
 	}
     
 	const handleBlurCkeditor = () => {
-		formik.setTouched({...formik.touched,
+		formik.setTouched({
+			...formik.touched,
 			description: true
 		});
 	}

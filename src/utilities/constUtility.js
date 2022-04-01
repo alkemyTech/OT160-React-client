@@ -1,1 +1,1 @@
-export const supported_formats_image = ['image/jpg', 'image/png'];
+export const SUPPORTED_FORMATS_IMAGE = ['image/jpg', 'image/png'];
