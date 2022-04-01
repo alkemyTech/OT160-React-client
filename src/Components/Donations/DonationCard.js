@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import logo from '../../assets/logo.png';
 import './donation.css';
+
 export default function DonationCard({
   title,
   donationAmount,
