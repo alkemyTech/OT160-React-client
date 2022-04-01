@@ -1,7 +1,12 @@
-.image{
+.logo{
     width:80% !important;
     height:80%;
     object-fit: cover;
     margin:auto;
 
+}
+
+.card{
+
+    width:20rem;
 }

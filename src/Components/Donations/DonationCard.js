@@ -10,12 +10,11 @@ export default function DonationCard({
   return (
     <div>
       <Card
-        style={{ width: "20rem" }}
         bg="primary"
         text="white"
-        className="m-2"
+        className="m-2 card"
       >
-        <Card.Img variant="top" src={logo} alt="logo" className="image" />
+        <Card.Img variant="top" src={logo} alt="logo" className="logo" />
         <Card.Body bg="primary">
           <Card.Title>{title}</Card.Title>
           <Card.Text>Toca el boton para hacer la donacion :).</Card.Text>
