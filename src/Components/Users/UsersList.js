@@ -3,31 +3,35 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table, Stack, Button } from 'react-bootstrap/';
 
-const usersMock = 
-                  [
-                    {
-                      name: 'username1',
-                      email: 'username1@username.com'
-                    },
-                    {
-                      name: 'username2',
-                      email: 'username2@username.com'
-                    },
-                    {
-                      name: 'username3',
-                      email: 'username3@username.com'
-                    },
-                    {
-                      name: 'username4',
-                      email: 'username4@username.com'
-                    }
-                  ];
+const usersMock =[
+  {
+    name: 'username1',
+    email: 'username1@username.com'
+  },
+  {
+    name: 'username2',
+    email: 'username2@username.com'
+  },
+  {
+    name: 'username3',
+    email: 'username3@username.com'
+  },
+  {
+    name: 'username4',
+    email: 'username4@username.com'
+  }
+];
                   
 function UsersList() {
   const [users, setUsers] = useState([]);
-  
+
+  async function getUsersList() {
+    const users = await usersMock;
+    setUsers(users);
+  }
+
   useEffect(() => {
-    setUsers(usersMock);
+    getUsersList();
   }, []);
 
   function tableRow(userDetails) {
@@ -45,7 +49,7 @@ function UsersList() {
         </td>
       </tr>
     );
-  };
+  }
   
   function displayRowsForAllUsers(users) {
     return (
@@ -53,15 +57,15 @@ function UsersList() {
         return tableRow(user)
       })
     );
-  };
+  }
   
   function deleteUser(user) {
     // to be implemented
-  };
+  }
   
   function editUser(user) {
     // to be implemented
-  };
+  }
   
   return (
     <Stack gap={3} className='align-items-center mt-5'>
