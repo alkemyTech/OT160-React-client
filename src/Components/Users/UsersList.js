@@ -26,8 +26,12 @@ function UsersList() {
   const [users, setUsers] = useState([]);
 
   async function getUsersList() {
-    const users = await usersMock;
-    setUsers(users);
+    try {
+      const users = await usersMock;
+      setUsers(users || []);
+    } catch (e) {
+      console.log(e); // error handling to be implemented
+    };
   }
 
   useEffect(() => {
