@@ -25,6 +25,10 @@ const usersMock =[
 function UsersList() {
   const [users, setUsers] = useState([]);
 
+  useEffect(() => {
+    getUsersList();
+  }, []);
+  
   async function getUsersList() {
     try {
       const users = await usersMock;
@@ -33,10 +37,6 @@ function UsersList() {
       console.log(e); // error handling to be implemented
     };
   }
-
-  useEffect(() => {
-    getUsersList();
-  }, []);
 
   function tableRow(userDetails) {
     const { name, email } = userDetails;
