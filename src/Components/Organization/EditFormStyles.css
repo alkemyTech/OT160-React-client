@@ -1,4 +1,4 @@
-.Form-container {
+.form-container {
     background:#f5f6f8;
     margin: auto;
     margin-top: 180px;
@@ -7,7 +7,7 @@
     border-radius: 10px;
 }
 
-.Form-container p {
+.form-container p {
     height: 40px;
     text-align: center;
     border-bottom: 1px solid;

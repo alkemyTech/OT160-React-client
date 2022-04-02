@@ -17,8 +17,6 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 function EditOrganization() {
   const [valuesForm, setValuesForm] = useState({});
 
-  console.log(valuesForm)
-
   const validate = (values) => {
     const errores = {};
     validateNameOrganization(values, errores);
@@ -53,9 +51,9 @@ function EditOrganization() {
   function validateLogoOrganization(values, errores) {
     if (!values.logoOrganization) {
       errores.logoOrganization = "Debes subir una imagen";
-
-    }else if (!/(.jpg|.JPG|.png|.PNG)/.test(values.logoOrganization)){
-        errores.logoOrganization = ' El logo deberá tener un formato .png o .jpg';
+    } 
+    else if (!/(.jpg|.JPG|.png|.PNG)/.test(values.logoOrganization)) {
+      errores.logoOrganization = " El logo deberá tener un formato .png o .jpg";
     }
   }
 
@@ -74,8 +72,9 @@ function EditOrganization() {
   function validateLinks(values, errores) {
     if (!values.links) {
       errores.links = "Debes ingresar un link de una red social";
-    } else if (!/^(ftp|http|https):\/\/[^ "]+$/.test(values.links)){
-        errores.links = "Debes ingresar un link valido";
+    }
+    else if (!/^(ftp|http|https):\/\/[^ "]+$/.test(values.links)) {
+      errores.links = "Debes ingresar un link valido";
     }
   }
 
@@ -88,10 +87,11 @@ function EditOrganization() {
 
   function handleFormSubmit(values) {
     setValuesForm(values);
+    //aqui debe hacerse las tareas posteriores
   }
 
   return (
-    <div className="my-3 Form-container w-75">
+    <div className="my-3 form-container w-75">
       <div className="text-center mt-2 fs-3">
         <p>Edite los datos de su organizacion</p>
       </div>
@@ -133,7 +133,7 @@ function EditOrganization() {
                     value={formik.values.logoOrganization}
                     onChange={formik.handleChange}
                   />
-                   <FormText className="badge bg-danger">
+                  <FormText className="badge bg-danger">
                     {formik.errors.logoOrganization}
                   </FormText>
                 </FormGroup>
