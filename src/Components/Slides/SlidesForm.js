@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Patch, Post } from '../../Services/privateApiService';
+import { patch, post } from '../../Services/privateApiService';
 import {SUPPORTED_FORMATS_IMAGE} from '../../utilities/constUtility';
 import '../FormStyles.css';
 
@@ -19,9 +19,9 @@ export default function Slides({slide}) {
 		onSubmit: value => {
 			
 			if (!slide) {
-				Post('/Slides/create',formik.values);
+				post('/Slides/create',formik.values);
 			} else {
-				Patch(`/Slides/:${slide.id}`,formik.values);
+				patch(`/Slides/:${slide.id}`,formik.values);
 			}
 		},
         
