@@ -6,17 +6,11 @@ const config = {
     }
 }
 
-const AuthorizationTest = () => {
-    return true;
-}
-
-///wait for authorization and token branches to be merged
-
-const Post = ({url, config}) => {
+const Post = (url, config) => {
     axios.post(url, {
         body: config,
         headers : {
-            auth: AuthorizationTest()
+            /* auth: AuthorizationTest() */
         }
     })
     .then(res => {
@@ -24,7 +18,7 @@ const Post = ({url, config}) => {
     })
     .catch(err => {
         console.log(err);
-    })
+    }) 
 }
 
 const Get = () => {
@@ -33,4 +27,4 @@ const Get = () => {
     .catch(err => console.log(err))
 }
 
-export default Get
+export {Get, Post}
