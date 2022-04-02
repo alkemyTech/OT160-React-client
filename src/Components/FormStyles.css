@@ -1,29 +1,49 @@
 .form-container {
-    width: 60%;
-    margin: 15px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  width: 60%;
+  margin: 15px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-field {
-    padding: 15px 30px;
-    border: 1px solid #c1c1c1;
+  padding: 15px 30px;
+  border: 1px solid #c1c1c1;
+}
+
+.file-input-div {
+  display: flex;
+  align-items: center;
+  column-gap: 1.2%;
+}
+
+.form-input-div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.error-message {
+  color: red;
+  font-family: monospace;
+  height: 1em;
 }
 
 .select-field {
-    padding: 10px;
-    border: 1px solid #c1c1c1;
+  padding: 10px;
+  border: 1px solid #c1c1c1;
 }
 
 .submit-btn {
-    background-color: #2E86C1;
-    padding: 10px 15px;
-    border: none;
-    color: #fff;
+  background-color: #2e86c1;
+  padding: 10px 15px;
+  border: none;
+  color: #fff;
 }
 
 .submit-btn:hover {
-    cursor: pointer;
-    background-color: #3498DB;
+  cursor: pointer;
+  background-color: #3498db;
 }
