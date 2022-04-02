@@ -7,12 +7,16 @@ import { Patch, Post } from '../../Services/privateApiService';
 
 const ActivitiesForm = (props) => {
     
-    const {id, name, description, image} = props;
+    let { id, name, description, images } = props;
+    id= 123;
+    name = 'lisandro';
+    description = 'dasd';
+    images= {name: 'img.png'} ;
 
     const [valuesProps, setValuesProps] = useState({
         name: name || '',
         description: description || '',
-        image: image || ''
+        image: images || ''
     });
     
     const saveActivitie =async(values)=>{

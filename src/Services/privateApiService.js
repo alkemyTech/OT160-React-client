@@ -15,7 +15,7 @@ const Get = () => {
 export const Post =(url, activitie)=>{
     let respuesta ={};
     axios.post(url, activitie)
-    .then(res => respuesta = res)
+    .then(res => respuesta.data = res)
     .catch(err => console.log(err))
 
     return respuesta;
