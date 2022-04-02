@@ -13,7 +13,6 @@ import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import Backoffice from "./Components/Backoffice/backoffice";
 import Login from './Components/Login/Login';
-import ActivitiesContent from './Components/Activities/ActivitiesContent';
 
 function App() {
   return (
