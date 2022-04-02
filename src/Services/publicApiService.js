@@ -13,12 +13,12 @@ const Get = () => {
 
 }
 
-const Post = async (url, contents) => {
+const post = async(url,body) => {
 
     const response = {};
 
     try {
-        const { data } = axios.post(`https://ongapi.alkemy.org/public/api/${url}`, contents, config);
+        const { data } = axios.post(`https://ongapi.alkemy.org/public/api/${url}`,body,config);
         response.data = data;
     } catch (err) {
         response.error = err;
@@ -27,4 +27,4 @@ const Post = async (url, contents) => {
     return response;
 }
 
-export { Post, Get }
+export { post, Get }
