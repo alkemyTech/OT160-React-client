@@ -38,7 +38,7 @@ function UsersList() {
     }
   }
 
-  function tableRow(userDetails) {
+  function tableRowForUser(userDetails) {
     const { name, email } = userDetails;
 
     return (
@@ -61,7 +61,7 @@ function UsersList() {
 
   function displayRowsForAllUsers(users) {
     return users?.map((user) => {
-      return tableRow(user);
+      return tableRowForUser(user);
     });
   }
 
