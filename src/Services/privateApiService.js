@@ -45,19 +45,6 @@ const patch = async (url, data) => {
   }
 };
 
-export const GetOrganization =async()=>{
-  let response = {};
-  try{
-      await axios.get('https://ongapi.alkemy.org/api/organization')
-      .then(res=>{
-          response = res
-      });
-      
-  }catch(e){
-      console.log(e);
-  }finally{
-      return response;
-  }
-}
+
 
 export { get, post, patch };
