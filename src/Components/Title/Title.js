@@ -1,6 +1,6 @@
 import React from 'react'
-import { DEFAULT_IMAGE_FOR_TITLE } from '../../utility/constUtility'
-import '../Title/title.sass'
+import { DEFAULT_IMAGE_FOR_TITLE } from '../../utility/imagesUtility'
+import '../Title/title.scss'
 
 export default function Title({ title, image = DEFAULT_IMAGE_FOR_TITLE }) {
 
