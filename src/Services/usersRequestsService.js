@@ -1,27 +1,27 @@
-/// import functions from privateApi
-const Get = () => {}
-const Post = () => {}
-const GetId = () => {}
-const Put = () => {}
-const Delete = () => {}
+import {
+    get, 
+    post, 
+    patch
+
+} from "./privateApiService";
 
 const getUsers = (config) => {
-    Get("https://ongapi.alkemy.org/api/users", {config});
+    get("https://ongapi.alkemy.org/api/users", {config});
 };
 
 const postUsers = (config) => {
-    Post("https://ongapi.alkemy.org/api/users", {config});
+    post("https://ongapi.alkemy.org/api/users", {config});
 };
 
-const getByUserId = (id, config) => {
-    GetId("https://ongapi.alkemy.org/api/users" + id, {config});
+const getUserById = (id, config) => {
+    get("https://ongapi.alkemy.org/api/users" + id, {config});
 };
 
 const putUser = (id, config) => {
-    Put("https://ongapi.alkemy.org/api/users" + id, {config});
+    patch("https://ongapi.alkemy.org/api/users" + id, {config});
 };
 
 const deleteUser = (id, config) => {
-    Delete("https://ongapi.alkemy.org/api/users" + id, {config});
+    //Delete("https://ongapi.alkemy.org/api/users" + id, {config});
 };
 
