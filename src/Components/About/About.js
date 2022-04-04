@@ -1,29 +1,41 @@
-import React, { useState, useEffect } from 'react'
-import 'bootstrap/dist/css/bootstrap.css'
-import Stack from 'react-bootstrap/Stack'
-import Container from 'react-bootstrap/Container'
+import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+import Stack from 'react-bootstrap/Stack';
+import Title from '../Title/Title';
+
+const contentMock = {
+  data: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  Morbi nunc tellus, condimentum pellentesque nunc in, volutpat
+  laoreet dui. Aliquam metus ipsum, iaculis in imperdiet eu,
+  consequat ac purus. Nam sed placerat nibh.`,
+  error: '',
+};
 
 function About() {
-  const [aboutUs, setAboutUs] = useState('')
+  const [aboutUsContent, setAboutUsContent] = useState('');
 
   useEffect(() => {
-    setAboutUs(`Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Morbi nunc tellus, condimentum pellentesque nunc in, volutpat
-                laoreet dui. Aliquam metus ipsum, iaculis in imperdiet eu,
-                consequat ac purus. Nam sed placerat nibh.`)
-  },[])
-  
+    getAboutUsContent();
+  }, []);
+
+  async function getAboutUsContent() {
+    const { data, error } = contentMock; // @todo: implement service to request content
+    if (error) {
+      console.log(error); // @todo: error handling
+    } else {
+      setAboutUsContent(data);
+    }
+  }
+
   return (
-    <Container as='section' className='mt-3'>
-      <Stack className='align-items-center' gap='4'>
-        <h1>Nosotros</h1> {/** This title is gonna be a component made in another ticket**/}
-        <Stack className='align-items-center'>    
-          <h4>Sobre nosotros</h4>
-          <p className='text-left w-75'>{aboutUs}</p>
-        </Stack>
+    <Stack as="section" className="align-items-center mt-4" gap="4">
+      <Title title="Nosotros" />
+      <Stack className="align-items-center">
+        <h4>Sobre nosotros</h4>
+        <p className="text-left w-50">{aboutUsContent}</p>
       </Stack>
-    </Container>
-  )
+    </Stack>
+  );
 }
 
-export default About
+export default About;
