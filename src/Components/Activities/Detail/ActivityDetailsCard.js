@@ -1,11 +1,11 @@
 import React from "react";
 import Title from "../../Title/Title";
-import "./detail.css";
+import "./activitydetails.scss";
 
-export default function DetailCard({title,description}) {
+export default function ActivityDetailsCard({title,description}) {
   return (
     <div className="detail-container">
-      <div className="card">
+      <div className="detail-card">
         <Title title={title} img="" />
         <p>
           {description}
