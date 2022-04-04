@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const config = {
-  headers: {
-    Group: 160,
-  },
-};
+    headers: {
+        Group: 160, //Aqui va el ID del equipo!!
+    }
+}
 
 const get = async (url) => {
   const response = {};
@@ -46,3 +46,7 @@ const patch = async (url, data) => {
 };
 
 export { get, post, patch };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7e1fe856723653553932142c10217ba24778199e
