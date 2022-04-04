@@ -1,13 +1,14 @@
 import React from 'react'
-import { DEFAULT_IMAGE_FOR_TITLE } from '../../utility/imagesUtility'
-import '../Title/title.scss'
+import '../Title/title.css'
+import { imagen_title_default } from '../../utility/constUtility'
 
-export default function Title({ title, image = DEFAULT_IMAGE_FOR_TITLE }) {
+
+export default function Title({title,image=imagen_title_default}) {
 
   return (
-    <div style = {{ backgroundImage:`url(${image})` }}>
+    <div style={{backgroundImage:`url(${image})` }}>
 
-      <h1 className="align-text-center"> {title} </h1>
+      <h1 className="title">{title}</h1>
       
     </div>
   )
