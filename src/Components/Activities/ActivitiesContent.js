@@ -1,12 +1,10 @@
 import React from 'react'
 
-export default function ActivitiesContent({ activityContent  }) {
+export default function ActivitiesContent({ activityContent }) {
 
     return (
         <>
-
-            <div dangerouslySetInnerHTML={{ __html: activityContent  }} />
-
+            <div dangerouslySetInnerHTML={{ __html: activityContent }} />
         </>
     )
 }
