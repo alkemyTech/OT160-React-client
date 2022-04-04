@@ -8,7 +8,9 @@ import { SUPPORTED_FORMATS_IMAGE } from '../../utilities/imagesUtility';
 import '../FormStyles.css';
 
 export default function Slides({slide}) {
+
     const fileInputImage = useRef();
+
 	const formik = useFormik({
 		initialValues: {
 			name: slide?.name || '',
@@ -24,7 +26,6 @@ export default function Slides({slide}) {
 				patch(`/Slides/:${slide.id}`,formik.values);
 			}
 		},
-        
 		validationSchema: yup.object({
 			name: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Campo obligatorio'),
 			order: yup.string().required('Campo obligatorio'),
@@ -47,7 +48,7 @@ export default function Slides({slide}) {
 		});
 	}
 
-    const handleChangeImage=()=>{
+    const handleChangeImage= () =>{
         formik.setFieldValue('imagen',fileInputImage.current.files[0]);
     }
 
