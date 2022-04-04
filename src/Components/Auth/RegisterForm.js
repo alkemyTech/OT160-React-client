@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Post } from '../../Services/privateApiService';
 import '../FormStyles.css';
 
 const RegisterForm = () => {
@@ -20,9 +19,6 @@ const RegisterForm = () => {
         e.preventDefault();
         console.log(initialValues);
         localStorage.setItem('token', 'tokenValueExample')
-
-         ///DELETE
-         Post("https://ongapi.alkemy.org/users", initialValues);
     }
 
     return (

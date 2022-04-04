@@ -3,7 +3,7 @@ import axios from "axios";
 const config = {
     headers: {
         Group: 160
-        /* auth: AuthorizationTest() */            
+        /* authorization: AuthorizationTest() */            
     }
 }
 
