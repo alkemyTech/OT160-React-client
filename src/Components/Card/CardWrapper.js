@@ -2,12 +2,12 @@ import Card from "./Card";
 import "../Card/card.scss";
 
 const CardWrapper = ({cardsList}) => {
-    const defaultImg = "/images/placeholder/empty-image.png";
+    const DEFAULT_IMAGE = "/images/placeholder/empty-image.png";
 
     const cards = cardsList.map((item) => {
         return <Card 
                     title={item.title} 
-                    img={item.img || defaultImg} 
+                    img={item.img || DEFAULT_IMAGE} 
                     description={item.description}
                 />
     });
