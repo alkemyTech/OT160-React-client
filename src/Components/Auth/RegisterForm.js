@@ -7,7 +7,7 @@ import {
   emailValidation, 
   passwordValidationEightLength, 
   confirmedPasswordValidation 
-  } from "../../Services/formValidation";
+  } from "../../Services/formValidationsService";
 
 const RegisterForm = () => {
     const [registerData, setRegisterData] = useState([]);
