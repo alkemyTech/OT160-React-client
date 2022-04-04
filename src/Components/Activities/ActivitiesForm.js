@@ -3,15 +3,11 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Formik } from "formik";
 import '../FormStyles.css';
-import { Patch, Post } from '../../Services/privateApiService';
+import { patchActivitie, postActivitie } from '../../Services/getActivitie';
 
 const ActivitiesForm = (props) => {
     
     let { id, name, description, images } = props;
-    id= 123;
-    name = 'lisandro';
-    description = 'dasd';
-    images= {name: 'img.png'} ;
 
     const [valuesProps, setValuesProps] = useState({
         name: name || '',
@@ -22,13 +18,13 @@ const ActivitiesForm = (props) => {
     const saveActivitie =async(values)=>{
         if(props){
             try{
-                Patch(`https://ongapi.alkemy.org/api/docs#/activities/${id}`, values)
+                patchActivitie(id, values)
             }catch(e){
                 console.log(e);
             }
         }else{
             try{
-                Post('https://ongapi.alkemy.org/api/docs#/activities/create', values);
+                postActivitie(values)
             }catch(e){
                 console.log(e);
             }

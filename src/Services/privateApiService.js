@@ -1,28 +1,48 @@
-import axios from 'axios';
+import axios from "axios";
 
 const config = {
-    headers: {
-        Group: 160                //Aqui va el ID del equipo!!
-    }
-}
+  headers: {
+    Group: 160,
+  },
+};
 
-const Get = () => {
-    axios.get('https://jsonplaceholder.typicode.com/users', config)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-}
+const get = async (url) => {
+  const response = {};
 
-export const Post =(url, activitie)=>{
-    let respuesta ={};
-    axios.post(url, activitie)
-    .then(res => respuesta.data = res)
-    .catch(err => console.log(err))
+  try {
+    const axiosRes = await axios.get(url, config);
+    response.data = axiosRes.data;
+  } catch (error) {
+    response.error = error;
+  } finally {
+    return response;
+  }
+};
 
-    return respuesta;
-}
+const post = async (url, data) => {
+  const response = {};
 
-export const Patch =(url, activitie)=>{
-    axios.patch(url, activitie)
-}
+  try {
+    const axiosRes = await axios.post(url, data, config);
+    response.data = axiosRes.data;
+  } catch (error) {
+    response.error = error;
+  } finally {
+    return response;
+  }
+};
 
-export default Get
+const patch = async (url, data) => {
+  const response = {};
+
+  try {
+    const axiosRes = await axios.patch(url, data, config);
+    response.data = axiosRes.data;
+  } catch (error) {
+    response.error = error;
+  } finally {
+    return response;
+  }
+};
+
+export { get, post, patch };
