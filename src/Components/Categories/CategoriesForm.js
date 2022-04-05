@@ -6,8 +6,6 @@ import { patch, post } from "../../Services/privateApiService";
 import { fileValidationExtensions } from "../../Services/formValidationsService";
 import "../FormStyles.css";
 
-import ContactForm from "../Contact/ContactForm";
-
 const CategoriesForm = (props) => {
   const { category } = props;
 

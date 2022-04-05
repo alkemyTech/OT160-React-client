@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
-import { emailValidation, nameValidation, emailValidator } from "../../Services/formValidationsService";
+import { emailValidation, nameValidation } from "../../Services/formValidationsService";
 import "../FormStyles.css";
 
 const ContactForm = () => {
