@@ -2,14 +2,12 @@ const nameValidation = (name, errors) => {
   if(!name){
     errors.name = "Requerido";
   } 
-  return errors;
 }
 
 const lastnameValidation = (lastName, errors) => {
   if(!lastName){
     errors.lastName = "Requerido";
   } 
-  return errors;
 }
 
 const emailValidator = {
@@ -25,7 +23,6 @@ const emailValidation = (email, errors) => {
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
     errors.email = "Email inválido";
   }
-  return errors;
 };
       
 const passwordValidationEightLength = (password, errors) => {
@@ -36,7 +33,6 @@ const passwordValidationEightLength = (password, errors) => {
   }else if (!/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i.test(password)) {
     errors.password = "La contraseña debe tener al menos una letra, un número y un caracter especial";
   }
-  return errors;
 };
 
 const confirmedPasswordValidation = (password, confirmedPassword, errors) => {
@@ -45,7 +41,18 @@ const confirmedPasswordValidation = (password, confirmedPassword, errors) => {
   } else if (confirmedPassword !== password){
     errors.confirmedPassword = "La contraseña no coincide, por favor inténtelo de nuevo";
   } 
-  return errors;
+};
+
+const fileValidationExtensions = (image) => {
+  const allowedExtensions = ["jpg", "png"];
+  const extension = image.split(".").pop();
+  let errorMessage;
+  if(!image){
+    errorMessage = "Escoja una foto de perfil";
+  } else if (!allowedExtensions.includes(extension)) {
+    errorMessage = "La imagen debe ser de formato .jpg o .png";
+  } 
+  return errorMessage; 
 };
 
 const VALID_IMAGE_FORMATS = ["jpg", "png"];
@@ -67,6 +74,7 @@ const imageValidator = {
 export { 
   imageValidator, 
   emailValidator,
+  fileValidationExtensions,
   emailValidation,
   nameValidation,
   lastnameValidation,

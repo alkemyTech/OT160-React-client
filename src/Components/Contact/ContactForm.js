@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
-import { emailValidator } from "../../Services/formValidationsService";
+import { emailValidation, nameValidation, emailValidator } from "../../Services/formValidationsService";
 import "../FormStyles.css";
 
 const ContactForm = () => {
@@ -20,8 +20,8 @@ const ContactForm = () => {
   function validate(values) {
     const errors = {};
 
-    validateName(values.name, errors);
-    validateEmail(values.email, errors);
+    nameValidation(values.name, errors);
+    emailValidation(values.email, errors);
     validatePhone(values.phone, errors);
     validateMessage(values.message, errors);
 
@@ -30,20 +30,6 @@ const ContactForm = () => {
 
   function handleFormSubmit(values) {
     console.log(values); // Service to be implemented
-  }
-
-  function validateName(name, errors) {
-    if (!name) {
-      errors.name = "Debes ingresar un nombre";
-    }
-  }
-
-  function validateEmail(email, errors) {
-    if (!email) {
-      errors.email = "Debes ingresar una dirección de email";
-    } else if (!emailValidator.isValid(email)) {
-      errors.email = emailValidator.error;
-    }
   }
 
   function validatePhone(phone, errors) {
