@@ -1,18 +1,10 @@
-import axios from 'axios'; 
-
-const putUser = (userData) => { 
-    axios({ 
-        method: "PUT", 
-        url: "https://ongapi.alkemy.org/api/users/" + userData.id, 
-        data: userData 
-    }); 
+import {patch, post} from "./privateApiService";
+const updateUserData = (userData) => { 
+    patch("https://ongapi.alkemy.org/api/users/" + userData.id, userData);
 } 
 
-const postUser = (userData) =>{ 
-    axios({ method: "POST", 
-    url: "https://ongapi.alkemy.org/api/users", 
-    data: userData 
-    }); 
+const createUser = (userData) =>{ 
+    post("https://ongapi.alkemy.org/api/users", userData);
 } 
 
-export {putUser, postUser}
+export {updateUserData, createUser}
