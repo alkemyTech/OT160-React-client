@@ -14,6 +14,7 @@ import ProjectsForm from './Components/Projects/ProjectsForm';
 import Backoffice from "./Components/Backoffice/backoffice";
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
+import Error from './Components/Activities/Error';
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
-          <Route path="/backoffice" component={Backoffice} />
+          <Route path="/backoffice" component={Error} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route exact path="/backoffice/users" component={UsersList}/>
           <Route path="/create-testimonials" component={TestimonialForm} />
