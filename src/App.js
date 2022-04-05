@@ -13,6 +13,7 @@ import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import Backoffice from "./Components/Backoffice/backoffice";
 import Login from './Components/Login/Login';
+import UsersList from './Components/Users/UsersList';
 import index from './Components/Home/Index';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice" component={Backoffice} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route exact path="/backoffice/users" component={UsersList}/>
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />
