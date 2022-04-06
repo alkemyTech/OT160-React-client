@@ -91,11 +91,11 @@ function EditOrganization() {
   }
 
   return (
-    <div className="my-3 form-container w-75">
+    <div className="my-3 form-container">
       <div className="text-center mt-2 fs-3">
         <p>Edite los datos de su organizacion</p>
       </div>
-      <Container>
+      
         <form onSubmit={formik.handleSubmit} className="">
           <Col>
             <div className="">
@@ -200,7 +200,7 @@ function EditOrganization() {
             </div>
           </Col>
         </form>
-      </Container>
+  
     </div>
   );
 }

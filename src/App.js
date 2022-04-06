@@ -25,10 +25,10 @@ function App() {
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
-          <Route path="/backoffice" component={Backoffice} />
+          <Route exact path="/backoffice" component={Backoffice} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
-          <Route exact path="/backoffice/organization/edit" component={EditOrganization} />
-          <Route path="/create-testimonials" component={TestimonialForm} />
+          <Route path="/backoffice/organization/edit" component={EditOrganization} />
+          <Route path="/create-testimonials" compnent={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />
           <Route path="/create-project" component={ProjectsForm} />
