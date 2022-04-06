@@ -1,28 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {
+  get
+} from "../../Services/privateApiService";
 
-export const counterSlice = createSlice({
-  name: 'counter',
-  initialState: {
-    value: 0,
-  },
+const usersState = get("https://ongapi.alkemy.org/users");
+
+export const usersSlice = createSlice({
+  name: 'user',
+  initialState: usersState,
   reducers: {
-    increment: state => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
+    login: (state, action) => {
+      return {
+        ...state,
+        profile : action.payload.user,
+        auth: true
+      }
     },
-    decrement: state => {
-      state.value -= 1;
+    register: (state, action) => {
+      return {
+        ...state,
+        profile : action.payload.user,
+        auth: true
+      }
     },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+    delete: (state, action) => {
+      
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { increment, decrement, incrementByAmount } = usersSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -39,4 +46,4 @@ export const incrementAsync = amount => dispatch => {
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
 export const selectCount = state => state.counter.value;
 
-export default counterSlice.reducer;
+export default usersSlice.reducer;
