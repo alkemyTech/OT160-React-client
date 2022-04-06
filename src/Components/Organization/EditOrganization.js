@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import "./EditFormStyles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
-  Container,
   Row,
   Col,
   Button,
@@ -95,7 +94,6 @@ function EditOrganization() {
       <div className="text-center mt-2 fs-3">
         <p>Edite los datos de su organizacion</p>
       </div>
-      
         <form onSubmit={formik.handleSubmit} className="">
           <Col>
             <div className="">
@@ -200,7 +198,6 @@ function EditOrganization() {
             </div>
           </Col>
         </form>
-  
     </div>
   );
 }
