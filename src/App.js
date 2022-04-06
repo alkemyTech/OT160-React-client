@@ -14,6 +14,7 @@ import ProjectsForm from './Components/Projects/ProjectsForm';
 import EditOrganization from './Components/Organization/EditOrganization';
 import Backoffice from "./Components/Backoffice/backoffice";
 import Login from './Components/Login/Login';
+import UsersList from './Components/Users/UsersList';
 
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
           <Route exact path="/backoffice" component={Backoffice} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/backoffice/organization/edit" component={EditOrganization} />
-          <Route path="/create-testimonials" compnent={TestimonialForm} />
+          <Route exact path="/backoffice/users" component={UsersList}/>
+          <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />
           <Route path="/create-project" component={ProjectsForm} />
