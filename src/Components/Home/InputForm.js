@@ -1,5 +1,5 @@
-import { Field, ErrorMessage } from "formik";
-import "../FormStyles.css";
+import { Field, ErrorMessage } from 'formik';
+import '../FormStyles.css';
 export default function InputForm({
   type,
   id,

@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { Formik, Form } from "formik";
-import "../FormStyles.css";
-import SlidesForm from "../Slides/SlidesForm.js";
-import InputForm from "./InputForm.js";
+import React, { useState } from 'react';
+import { Formik, Form } from 'formik';
+import '../FormStyles.css';
+import SlidesForm from '../Slides/SlidesForm.js';
+import InputForm from './InputForm.js';
 
 export default function HomeEditForm() {
-  const [ValuesForm, setValuesForm] = useState({});
+  const [valuesForm, setValuesForm] = useState({});
 
   function checkNumber(sliceId) {
-    let isAnumber = true;
+    
     if (!/^[0-9]+$/.test(sliceId)) {
-      isAnumber = false;
+     return true;
     }
-    return isAnumber;
+    return false;
   }
 
   const validate = (values) => {
@@ -110,10 +110,10 @@ export default function HomeEditForm() {
         )}
       </Formik>
 
-      <SlidesForm object={{ id: ValuesForm.sliceId_1 }} />
-      <SlidesForm object={{ id: ValuesForm.sliceId_2 }} />
-      <SlidesForm object={{ id: ValuesForm.sliceId_3 }} />
-      <h1>{ValuesForm.welcomeText}</h1>
+      <SlidesForm object={{ id: valuesForm.sliceId_1 }} />
+      <SlidesForm object={{ id: valuesForm.sliceId_2 }} />
+      <SlidesForm object={{ id: valuesForm.sliceId_3 }} />
+      <h1>{valuesForm.welcomeText}</h1>
     </div>
   );
 }
