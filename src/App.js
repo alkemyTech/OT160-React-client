@@ -25,7 +25,7 @@ function App() {
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice" component={Backoffice} />
-          <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route path="/backoffice/Slides" component={SlidesForm} />
           <Route exact path="/backoffice/users" component={UsersList}/>
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
