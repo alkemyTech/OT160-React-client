@@ -1,10 +1,13 @@
 import {patch, post} from "./privateApiService";
+
 const updateUserData = (userData) => { 
-    patch("https://ongapi.alkemy.org/api/users/" + userData.id, userData);
+    const res = patch("https://ongapi.alkemy.org/api/users/" + userData.id, userData);
+    return res;
 } 
 
 const createUser = (userData) =>{ 
-    post("https://ongapi.alkemy.org/api/users", userData);
+    const res = post("https://ongapi.alkemy.org/api/users", userData);
+    return res;
 } 
 
 export {updateUserData, createUser}
