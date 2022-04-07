@@ -18,10 +18,10 @@ function errorAlert(errorTitle, errorDescription) {
   });
 }
 
-async function confirmAlert(confirmQuestion, commentary = '', actionOnConfirm) {
+async function confirmAlert(confirmQuestion, comment, actionOnConfirm) {
   const { isConfirmed } = await Swal.fire({
     title: confirmQuestion,
-    text: commentary,
+    text: comment,
     icon: 'warning',
     showCancelButton: true,
     confirmButtonText: 'Aceptar',

@@ -28,3 +28,21 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `Alerts service usage`
+
+It provides three functions:
+
+- <b>infoAlert</b>(infoTitle, infoToDisplay)<br/>
+- <b>errorAlert</b>(errorTitle, errorDescription)<br/>
+- <b>confirmAlert</b>(confirmQuestion, comment, actionOnConfirm)
+
+<b>infoAlert</b> is invoked passing to it a title and a content to display,
+and user can dismiss it by clicking the displayed button.
+
+<b>errorAlert</b> is invoked passing to it a title and a description for the
+error, and user can smiss it by clicking the displayed button.
+
+<b>confirmAlert</b> is invoked passing to it a question to ask, a comment related
+to the consequences around the question, and a callback function to be executed
+if the user clicks the confirm button; otherwise it will take no action.
