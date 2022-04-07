@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import Slides from '../Slides/SlidesForm'
 import NewsList from "../News/NewsList";
 
-function index() {
+function Home() {
   return (
     <div className="mt-3 container-xxl">
       <Col>
@@ -34,4 +34,4 @@ function index() {
   );
 }
 
-export default index;
+export default Home;
