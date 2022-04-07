@@ -11,8 +11,9 @@ import SchoolCampaign from './Campaigns/School/SchoolCampaign';
 import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
-import EditOrganization from './Components/Organization/EditOrganization';
+import About from './Components/About/About'
 import Backoffice from "./Components/Backoffice/backoffice";
+import EditOrganization from './Components/Organization/EditOrganization';
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
 
@@ -23,11 +24,12 @@ function App() {
       <BrowserRouter>
         <Switch>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
+          <Route path="/about" component={About}/>
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route exact path="/backoffice" component={Backoffice} />
-          <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route path="/backoffice/Slides" component={SlidesForm} />
           <Route path="/backoffice/organization/edit" component={EditOrganization} />
           <Route exact path="/backoffice/users" component={UsersList}/>
           <Route path="/create-testimonials" component={TestimonialForm} />
