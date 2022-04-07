@@ -3,7 +3,7 @@ import '../FormStyles.css';
 import { Formik } from 'formik';
 import {
   nameValidation,
-  lastnameValidation,
+  lastNameValidation,
   emailValidation, 
   passwordValidationEightLength, 
   confirmedPasswordValidation 
@@ -15,7 +15,7 @@ const RegisterForm = () => {
     const validate = values => {
       const errors = {};
       nameValidation(values.name, errors);
-      lastnameValidation(values.lastName, errors);
+      lastNameValidation(values.lastName, errors);
       emailValidation(values.email, errors);
       passwordValidationEightLength(values.password, errors);
       confirmedPasswordValidation(values.password, values.confirmedPassword, errors)

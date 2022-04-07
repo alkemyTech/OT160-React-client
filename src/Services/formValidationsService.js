@@ -4,7 +4,7 @@ const nameValidation = (name, errors) => {
   } 
 }
 
-const lastnameValidation = (lastName, errors) => {
+const lastNameValidation = (lastName, errors) => {
   if(!lastName){
     errors.lastName = "Requerido";
   } 
@@ -36,23 +36,21 @@ const confirmedPasswordValidation = (password, confirmedPassword, errors) => {
   } 
 };
 
-const fileValidationExtensions = (image) => {
+const fileValidationExtensions = (image, errors) => {
   const allowedExtensions = ["jpg", "png"];
   const extension = image.split(".").pop();
-  let errorMessage;
   if(!image){
-    errorMessage = "Escoja una foto de perfil";
+    errors.image = "Escoja una foto de perfil";
   } else if (!allowedExtensions.includes(extension)) {
-    errorMessage = "La imagen debe ser de formato .jpg o .png";
+    errors.image = "La imagen debe ser de formato .jpg o .png";
   } 
-  return errorMessage; 
 };
 
 export { 
   fileValidationExtensions,
   emailValidation,
   nameValidation,
-  lastnameValidation,
+  lastNameValidation,
   passwordValidationEightLength,
   confirmedPasswordValidation
 };

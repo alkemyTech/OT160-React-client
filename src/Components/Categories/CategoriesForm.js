@@ -49,20 +49,14 @@ const CategoriesForm = (props) => {
       errors.description = "Debes ingresar una descripción";
     }
   }
-
-  function validateImage(image, errors) {
-    errors.image = fileValidationExtensions(image);
-  }
-
+  
   function validate(values) {
     const errors = {};
 
     validateName(values.name, errors);
     validateDescription(values.description, errors);
-    validateImage(values.image, errors);
-    if(!errors.image){
-      delete errors.image;
-    }
+    fileValidationExtensions(values.image, errors);
+  
     return errors;
   }
 

@@ -25,7 +25,7 @@ const LoginForm = () => {
         <form className="form-container" onSubmit={handleSubmit}>
             <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Enter name"></input>
             <input className="input-field" type="text" name="lastName" value={initialValues.lastName} onChange={handleChange} placeholder="Enter last name"></input>
-            <button className="submit-btn" type="submit">Register</button>
+            <button className="submit-btn" type="submit">Log in</button>
         </form>
     );
 }
