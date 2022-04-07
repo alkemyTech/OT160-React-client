@@ -33,15 +33,15 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 It provides three functions:
 
-- <b>infoAlert</b>(infoTitle, infoToDisplay)<br/>
-- <b>errorAlert</b>(errorTitle, errorDescription)<br/>
-- <b>confirmAlert</b>(confirmQuestion, comment, actionOnConfirm)
+- <b>infoAlert</b>(infoTitle: string, infoToDisplay: string)<br/>
+- <b>errorAlert</b>(errorTitle: string, errorDescription: string)<br/>
+- <b>confirmAlert</b>(confirmQuestion: string, comment: string, actionOnConfirm: function)
 
 <b>infoAlert</b> is invoked passing to it a title and a content to display,
-and user can dismiss it by clicking the displayed button.
+and the user can dismiss it by clicking the displayed button.
 
 <b>errorAlert</b> is invoked passing to it a title and a description for the
-error, and user can smiss it by clicking the displayed button.
+error, and the user can dimiss it by clicking the displayed button.
 
 <b>confirmAlert</b> is invoked passing to it a question to ask, a comment related
 to the consequences around the question, and a callback function to be executed
