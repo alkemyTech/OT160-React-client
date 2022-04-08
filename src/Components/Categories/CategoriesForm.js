@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { patch, post } from "../../Services/privateApiService";
-import { imageValidator } from "../../Services/formValidationsService";
+import { fileValidationExtensions } from "../../Services/formValidationsService";
 import "../FormStyles.css";
 
 const CategoriesForm = (props) => {
@@ -49,23 +49,14 @@ const CategoriesForm = (props) => {
       errors.description = "Debes ingresar una descripción";
     }
   }
-
-  function validateImage(image, errors) {
-    const imageFormat = imageValidator.getFormat(image);
-    if (!image) {
-      errors.image = "Debes subir una imagen";
-    } else if (!imageValidator.isValid(imageFormat)) {
-      errors.image = imageValidator.formatError;
-    }
-  }
-
+  
   function validate(values) {
     const errors = {};
 
     validateName(values.name, errors);
     validateDescription(values.description, errors);
-    validateImage(values.image, errors);
-
+    fileValidationExtensions(values.image, errors);
+  
     return errors;
   }
 

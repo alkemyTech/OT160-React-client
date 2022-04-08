@@ -33,9 +33,9 @@ const UserForm = ({prevUserData}) => {
 
   const validate = (values) => {
     const errors = {};
-    errors.email = emailValidation(values.email);
-    errors.name = nameValidationFourLength(values.name);
-    errors.password = passwordValidationEightLength(values.password);
+    emailValidation(values.email, errors);
+    nameValidationFourLength(values.name, errors);
+    passwordValidationEightLength(values.password, errors);
     
     return errors;
   };

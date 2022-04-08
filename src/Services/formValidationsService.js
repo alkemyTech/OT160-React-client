@@ -1,4 +1,4 @@
-const emailValidation = (email) => {
+/* const emailValidation = (email) => {
   let emailError;
   if (!email) {
     emailError = 'Requerido';
@@ -8,29 +8,65 @@ const emailValidation = (email) => {
     emailError = 'Email inválido';
   } 
   return emailError;
+}; */
+
+const emailValidation = (email, errors) => {
+  if (!email) {
+    errors.email = "Requerido";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+    errors.email = "Email inválido";
+  }
 };
 
-const nameValidationFourLength = (name) => {
-  let nameError;
+const nameValidation = (name, errors) => {
+  if(!name){
+    errors.name = "Requerido";
+  } 
+}
+
+const nameValidationFourLength = (name, errors) => {
   if(name.length === 0){
-    nameError = "Agregue su nombre de usuario";
+    errors.name = "Agregue su nombre de usuario";
   } else if (name.length < 4){
-    nameError = "El nombre de usuario debe ser de al menos 4 caracteres";
+    errors.name = "El nombre de usuario debe ser de al menos 4 caracteres";
   } 
-  return nameError;
 };
+
+const lastNameValidation = (lastName, errors) => {
+  if(!lastName){
+    errors.lastName = "Requerido";
+  } 
+}
   
-const passwordValidationEightLength = (password) => {
-  let passwordError;
+const passwordValidationEightLength = (password, errors) => {
   if(password === ""){
-    passwordError = "Ingrese su contraseña";
-  } else if(password.length < 8){
-    passwordError = "La contraseña debe tener un mínimo de 8 caracteres";
+    errors.password = "Ingrese su contraseña";
+  } else if(password.length < 7){
+    errors.password = "La contraseña debe tener un mínimo de 8 caracteres";
   } 
-  return passwordError;
 };
   
-const fileValidationExtensions = (e) => {
+/* 
+const passwordValidationEightLength = (password, errors) => {
+  if (!password) {
+    errors.password = "Requerido";
+  } else if (password.length < 7){
+    errors.password = "La contraseña debe tener un mínimo de 7 characteres";
+  }else if (!/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i.test(password)) {
+    errors.password = "La contraseña debe tener al menos una letra, un número y un caracter especial";
+  }
+};
+ */
+const confirmedPasswordValidation = (password, confirmedPassword, errors) => {
+  if (!confirmedPassword) {
+    errors.confirmedPassword = "Confirme su contraseña";
+  } else if (confirmedPassword !== password){
+    errors.confirmedPassword = "La contraseña no coincide, por favor inténtelo de nuevo";
+  } 
+};
+
+
+/* const fileValidationExtensions = (e) => {
   let file = e.target.value;
   const allowedExtensions = /(\.jpg|\.png)$/i;
   let errorMessage;
@@ -41,35 +77,24 @@ const fileValidationExtensions = (e) => {
   } 
   return errorMessage;
 };
-
-const VALID_IMAGE_FORMATS = ["jpg", "png"];
-
-const imageValidator = {
-  getFormat: (image) => {
-    const splitFilePath = image.split(".");
-    const extension = splitFilePath[splitFilePath.length - 1];
-    return extension?.toLowerCase();
-  },
-  isValid: (imageFormat) => {
-    return VALID_IMAGE_FORMATS.includes(imageFormat);
-  },
-  formatError: `El formato del archivo debe ser uno de los siguientes:  ${VALID_IMAGE_FORMATS.join(
-    ", "
-  )}.`,
+ */
+const fileValidationExtensions = (image, errors) => {
+  const VALID_IMAGE_FORMATS = ["jpg", "png"];
+  const extension = image.split(".").pop();
+  if(!image){
+    errors.image = "Escoja una foto de perfil";
+  } else if (!VALID_IMAGE_FORMATS.includes(extension)) {
+    errors.image = "La imagen debe ser de formato .jpg o .png";
+  } 
 };
 
-const emailValidator = {
-  isValid: (email) => {
-    return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
-  },
-  error: "Ingrese un email válido por favor.",
-};
 
 export { 
-  emailValidation, 
   nameValidationFourLength, 
   passwordValidationEightLength, 
   fileValidationExtensions,
-  imageValidator, 
-  emailValidator 
+  emailValidation,
+  nameValidation,
+  lastNameValidation,
+  confirmedPasswordValidation
 };
