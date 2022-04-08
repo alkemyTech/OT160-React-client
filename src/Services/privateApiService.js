@@ -10,11 +10,11 @@ const getToken=()=>
 {
 	return JSON.parse(localStorage.getItem("token"));
 }
-const HeaderAuthorization = () => {
+const headerAuthorization = () => {
   const token = getToken();
-  const headerAuthorization = {Bearer: ""};
-  if (token !== null) {
-    headerAuthorization.Bearer="Bearer: "+ token;
+  const headerAuthorization = {authorization: ""};
+  if (!token) {
+    headerAuthorization.authorization="Bearer: "+ token;
   }
   return headerAuthorization;
 };
@@ -25,4 +25,4 @@ const Get = () => {
     .catch(err => console.log(err))
 }
 
-export {Get, HeaderAuthorization}
+export {Get}
