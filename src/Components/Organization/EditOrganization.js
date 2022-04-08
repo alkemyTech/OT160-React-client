@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
-import "./EditFormStyles.css";
+import "./EditFormStyles.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Row,
@@ -12,25 +12,25 @@ import {
 } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import {nameValidation, fileValidationExtensions} from '../../Services/formValidationsService';
 
 function EditOrganization() {
-  const [valuesForm, setValuesForm] = useState({});
 
   const validate = (values) => {
-    const errores = {};
-    validateNameOrganization(values, errores);
-    validateLogoOrganization(values, errores);
-    validateLongDescription(values, errores);
-    validateShortDescription(values, errores);
-    validateLinks(values, errores);
+    const errors = {};
+    nameValidation(values.name, errors);
+    fileValidationExtensions(values.image, errors);
+    validateLongDescription(values, errors);
+    validateShortDescription(values, errors);
+    validateLinks(values, errors);
 
-    return errores;
+    return errors;
   };
 
   const formik = useFormik({
     initialValues: {
-      nameOrganization: "",
-      logoOrganization: "",
+      name: "",
+      image: "",
       shortDescription: "",
       longDescription: "",
       links: "",
@@ -41,32 +41,17 @@ function EditOrganization() {
     onSubmit: handleFormSubmit,
   });
 
-  function validateNameOrganization(values, errores) {
-    if (!values.nameOrganization) {
-      errores.nameOrganization = "Debes ingresar un nombre";
-    }
-  }
-
-  function validateLogoOrganization(values, errores) {
-    if (!values.logoOrganization) {
-      errores.logoOrganization = "Debes subir una imagen";
-    } 
-    else if (!/(.jpg|.JPG|.png|.PNG)/.test(values.logoOrganization)) {
-      errores.logoOrganization = " El logo deberá tener un formato .png o .jpg";
-    }
-  }
-
   function validateShortDescription(values, errores) {
     if (!values.shortDescription) {
       errores.shortDescription = "Debes ingresar una descripcion corta";
     }
-  }
+  };
 
   function validateLongDescription(values, errores) {
     if (!values.longDescription) {
       errores.longDescription = "Debes ingresar una descripción larga";
     }
-  }
+  };
 
   function validateLinks(values, errores) {
     if (!values.links) {
@@ -75,19 +60,18 @@ function EditOrganization() {
     else if (!/^(ftp|http|https):\/\/[^ "]+$/.test(values.links)) {
       errores.links = "Debes ingresar un link valido";
     }
-  }
+  };
 
   function handleShortDescriptionChange(event, editor) {
     formik.setValues((previous) => {
       previous.shortDescription = editor.getData();
       return previous;
     });
-  }
+  };
 
   function handleFormSubmit(values) {
-    setValuesForm(values);
-    //aqui debe hacerse las tareas posteriores
-  }
+    //Implementar submit
+  };
 
   return (
     <div className="my-3 form-container">
@@ -107,12 +91,12 @@ function EditOrganization() {
                     id="inputNombre"
                     placeholder="Ingrese el nombre de la organizacion"
                     className="form-control"
-                    name="nameOrganization"
-                    value={formik.values.nameOrganization}
+                    name="name"
+                    value={formik.values.name}
                     onChange={formik.handleChange}
                   />
                   <FormText className="badge bg-danger">
-                    {formik.errors.nameOrganization}
+                    {formik.errors.name}
                   </FormText>
                 </FormGroup>
               </Row>
@@ -126,13 +110,13 @@ function EditOrganization() {
                   <input
                     type="file"
                     id="inputLogo"
-                    name="logoOrganization"
+                    name="image"
                     className="form-control"
-                    value={formik.values.logoOrganization}
+                    value={formik.values.image}
                     onChange={formik.handleChange}
                   />
                   <FormText className="badge bg-danger">
-                    {formik.errors.logoOrganization}
+                    {formik.errors.image}
                   </FormText>
                 </FormGroup>
               </Row>
