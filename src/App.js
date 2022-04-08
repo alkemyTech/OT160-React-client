@@ -18,7 +18,6 @@ import ProjectsForm from "./Components/Projects/ProjectsForm";
 import Login from "./Components/Login/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 function App() {
   const welcomeText = "Bienvenido a la seccion de donacines.";
   return (
@@ -26,6 +25,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
+          <Route path="/register" component={Register} />
           <Route path="/about" component={About}/>
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
