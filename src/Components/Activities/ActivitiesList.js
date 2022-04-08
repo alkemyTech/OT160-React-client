@@ -10,7 +10,7 @@ const ActivitiesList = () => {
 
     return (
         <div>
-            <h1>Listado Actividades</h1>
+            <h1 className='text-center'>Listado Actividades</h1>
             <ul className="list-container">
                 {activitiesMock.length > 0 ?
                     activitiesMock.map((activity) => {
