@@ -15,7 +15,8 @@ import About from './Components/About/About'
 import Backoffice from "./Components/Backoffice/backoffice";
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
-import Layout from './Components/layout/Layout';
+import Layout from './Layout/Layout';
+
 
 function App() {
   return (
