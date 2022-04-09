@@ -6,12 +6,12 @@
     box-shadow:0 10px 20px rgb(37, 36, 36);
     padding: 20px 30px;
     border-radius: 10px;
-}
 
-.form-container p {
-    height: 40px;
-    text-align: center;
-    border-bottom: 1px solid;
+    &p {
+        height: 40px;
+        text-align: center;
+        border-bottom: 1px solid;
+    }
 }
 
 .button-form-confirmed{
