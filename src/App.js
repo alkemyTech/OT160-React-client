@@ -16,7 +16,7 @@ import About from './Components/About/About'
 import Backoffice from "./Components/Backoffice/backoffice";
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
-import Home from './Components/Home/Home';
+import Home from './Components/Home/Index';
 
 function App() {
   return (
