@@ -16,11 +16,14 @@ import About from './Components/About/About'
 import Backoffice from "./Components/Backoffice/backoffice";
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
+import Layout from './Layout/Layout';
+
 
 function App() {
   return (
     <>
       <BrowserRouter>
+      <Layout>
         <Switch>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
           <Route path="/register" component={Register} />
@@ -39,6 +42,7 @@ function App() {
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={Login} />
         </Switch>
+        </Layout>
       </BrowserRouter>
     
     </>
