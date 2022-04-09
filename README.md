@@ -35,6 +35,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### -Spinner
 The Spinner component accepts four optional parameters.
 
+<Spinner type="string" color={hex} height={number} width={number}/>
+
 - type : The default value is "TailSpin" which returns a circle spinner. You can set it to "Triangle" to get a triangle spinner.
 
 - color : The default value is "#DB5752" (light red), but can be setted as needed.
