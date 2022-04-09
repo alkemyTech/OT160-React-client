@@ -28,3 +28,27 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Alerts service usage
+
+#### It provides three functions:
+
+- <b>infoAlert</b>(infoTitle: string, infoToDisplay: string)<br/>
+- <b>errorAlert</b>(errorTitle: string, errorDescription: string)<br/>
+- <b>confirmAlert</b>(confirmQuestion: string, comment: string, actionOnConfirm: function)
+
+#### Usage example:
+
+```
+function handleClick() {
+  infoAlert('Chapter 1', 'In this chapter you will learn about the fundamentals')
+}
+
+function onError() {
+  errorAlert('Something went wrong', 'This may be due to uncertain causes, please call your administrator')
+}
+
+function handleForm(data, onSubmit) {
+  confirmAlert('Are you sure you want to submit this form?', 'Once you send this data, you can't retract', () => onSubmit(data))
+}
+```
