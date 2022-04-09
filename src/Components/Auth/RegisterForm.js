@@ -6,6 +6,7 @@ import {
   lastNameValidation,
   emailValidation, 
   passwordValidationEightLength, 
+  passwordValidationSpecialCharacters,
   confirmedPasswordValidation 
   } from "../../Services/formValidationsService";
 
@@ -17,7 +18,7 @@ const RegisterForm = () => {
       nameValidation(values.name, errors);
       lastNameValidation(values.lastName, errors);
       emailValidation(values.email, errors);
-      passwordValidationEightLength(values.password, errors);
+      !values.password ? passwordValidationEightLength(values.password, errors) : passwordValidationSpecialCharacters(values.password, errors);
       confirmedPasswordValidation(values.password, values.confirmedPassword, errors)
       return errors;
     };

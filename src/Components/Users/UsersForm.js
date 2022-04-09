@@ -3,6 +3,7 @@ import '../FormStyles.css';
 import { Formik, Field } from "formik";
 import {
   emailValidation, 
+  nameValidation,
   nameValidationFourLength, 
   passwordValidationEightLength, 
   fileValidationExtensions
@@ -13,8 +14,6 @@ import {
 } from "../../Services/userApiService";
 
 const UserForm = ({prevUserData}) => {
-  const [fileError, setFileError] = useState("");
-  const [file, setFile] = useState("");
   const initialUserData =  {
     id: 1,
     name: '',
@@ -34,27 +33,17 @@ const UserForm = ({prevUserData}) => {
   const validate = (values) => {
     const errors = {};
     emailValidation(values.email, errors);
-    nameValidationFourLength(values.name, errors);
+    !values.name ? nameValidation(values.name, errors) : nameValidationFourLength(values.name, errors);
     passwordValidationEightLength(values.password, errors);
-    
-    return errors;
-  };
+    fileValidationExtensions(values.profile_image, errors);
 
-  const fileHandlerValidation = async (e) => {
-    const file = e.target.files[0];
-    const errorMessage = fileValidationExtensions(e);
-    if(!errorMessage){
-      setFile(window.btoa(encodeURIComponent( file )));
-    } else {
-      setFileError(errorMessage);
-    }
+    return errors;
   };
 
   const onSubmitHandler = (values) => {
     const newUserData = {
       ...values, 
-      role_id: parseInt(values.role_id), 
-      profile_image : file
+      role_id: parseInt(values.role_id)
     };
     if(prevUserDataExist){
       updateUserData(newUserData);
@@ -94,12 +83,13 @@ const UserForm = ({prevUserData}) => {
         {errors.email && errors.email}
         <input 
           required
-          name="file"
+          name="profile_image"
           type="file"
           className="input-field"
-          onChange={fileHandlerValidation}
+          value={values.profile_image}
+          onChange={handleChange}
         />
-        {fileError && <p>{fileError}</p>}
+        {errors.image && errors.image}
         <Field 
           required
           name="role_id"
