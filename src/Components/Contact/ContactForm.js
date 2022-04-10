@@ -1,15 +1,19 @@
-import React from "react";
-import { useFormik } from "formik";
-import { emailValidation, nameValidation } from "../../Services/formValidationsService";
-import "../FormStyles.css";
+import React from 'react';
+import { useFormik } from 'formik';
+import {
+  emailValidation,
+  nameValidation,
+} from '../../Services/formValidationsService';
+import { errorAlert } from '../../Services/alertsService';
+import '../FormStyles.css';
 
 const ContactForm = () => {
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
     },
     validate,
     validateOnBlur: false,
@@ -29,22 +33,25 @@ const ContactForm = () => {
   }
 
   function handleFormSubmit(values) {
-    console.log(values); // Service to be implemented
+    const { error } = null; // waiting for service
+    if (error) {
+      errorAlert('Error', 'No se ha podido enviar el formulario.');
+    }
   }
 
   function validatePhone(phone, errors) {
     if (!phone) {
-      errors.phone = "Debes ingresar un nro de teléfono";
+      errors.phone = 'Debes ingresar un nro de teléfono';
     } else if (/[^0123456789]/.test(phone)) {
-      errors.phone = "Sólo puedes ingresar números";
+      errors.phone = 'Sólo puedes ingresar números';
     } else if (phone.length < 8) {
-      errors.phone = "El número debe tener al menos 8 dígitos";
+      errors.phone = 'El número debe tener al menos 8 dígitos';
     }
   }
 
   function validateMessage(message, errors) {
     if (!message) {
-      errors.message = "Debes escribir algún mensaje para enviar";
+      errors.message = 'Debes escribir algún mensaje para enviar';
     }
   }
 
