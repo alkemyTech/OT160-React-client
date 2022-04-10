@@ -23,8 +23,6 @@ const passwordValidationEightLength = (password, errors) => {
     errors.password = "Requerido";
   } else if (password.length < 7){
     errors.password = "La contraseña debe tener un mínimo de 6 characteres";
-  }else if (!/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i.test(password)) {
-    errors.password = "La contraseña debe tener al menos una letra, un número y un caracter especial";
   }
 };
 
@@ -46,11 +44,18 @@ const fileValidationExtensions = (image, errors) => {
   } 
 };
 
+const terminos = (name,errors) => {
+  if(Object.keys(errors).length == 0 && name) {
+    errors.terminos = "Debe aceptar los terminos y condiciones"
+  }
+};
+
 export { 
   fileValidationExtensions,
   emailValidation,
   nameValidation,
   lastNameValidation,
   passwordValidationEightLength,
-  confirmedPasswordValidation
+  confirmedPasswordValidation,
+  terminos
 };

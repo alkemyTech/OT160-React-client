@@ -6,11 +6,14 @@ import {
   lastNameValidation,
   emailValidation, 
   passwordValidationEightLength, 
-  confirmedPasswordValidation 
+  confirmedPasswordValidation,
+  terminos 
   } from "../../Services/formValidationsService";
+import { Terminos } from './Terminos';
 
 const RegisterForm = () => {
     const [registerData, setRegisterData] = useState([]);
+    const [showErrortermins, setShowErrortermins] = useState(true)
 
     const validate = values => {
       const errors = {};
@@ -19,6 +22,7 @@ const RegisterForm = () => {
       emailValidation(values.email, errors);
       passwordValidationEightLength(values.password, errors);
       confirmedPasswordValidation(values.password, values.confirmedPassword, errors)
+      terminos(values.name, errors)
       return errors;
     };
     
@@ -55,6 +59,8 @@ const RegisterForm = () => {
                     {errors.password && <div>{errors.password}</div>}
                     <input className="input-field" type="password" name="confirmedPassword" value={values.confirmedPassword} onBlur={handleBlur} onChange={handleChange} placeholder="Confirmar contraseña"></input>
                     {errors.confirmedPassword && <div>{errors.confirmedPassword}</div>}
+                    {errors.terminos && <Terminos showErrorTermins={setShowErrortermins}/>}
+                    {(errors.terminos && showErrortermins) && <div>{errors.terminos}</div> }  
                     <button className="submit-btn" type="submit">Register</button>
                 </form>
               )}
