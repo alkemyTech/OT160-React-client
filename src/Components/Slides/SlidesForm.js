@@ -3,51 +3,53 @@ import { useFormik } from 'formik';
 import * as yup from 'yup'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Patch, Post } from '../../Services/privateApiService';
+import { patch, post } from '../../Services/privateApiService';
+import { SUPPORTED_FORMATS_IMAGE } from '../../utilities/imagesUtility';
 import '../FormStyles.css';
 
-export default function Slides({object}) {
-	const SUPPORTED_FORMATS = ['image/jpg', 'image/png'];
-	const file = useRef()
+export default function Slides({slide}) {
+
+    const fileInputImage = useRef();
+
 	const formik = useFormik({
 		initialValues: {
-			name: object ? object.name : '',
-			order: object ? object.order : '',
-			description: object ? object.description : '',
-			imagen: object ? object.imagen : ''
+			name: slide?.name || '',
+			order: slide?.order || '',
+			description: slide?.description || '',
+			imagen: slide?.imagen || ''
 		},
 		onSubmit: value => {
 			
-			if (!object) {
-				Post('/Slides/create',formik.values)
+			if (!slide) {
+				post('/Slides/create',formik.values);
 			} else {
-				Patch(`/Slides/:${object.id}`,formik.values)
+				patch(`/Slides/:${slide.id}`,formik.values);
 			}
 		},
-
 		validationSchema: yup.object({
 			name: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Campo obligatorio'),
 			order: yup.string().required('Campo obligatorio'),
 			description: yup.string().required('Campo obligatorio'),
-			imagen: yup.mixed().nullable().required('A file is required').test('format', 'Formato no permitido', (value) => !value || (value && SUPPORTED_FORMATS.includes(value.type)))
+			imagen: yup.mixed().nullable().required('A file is required').test('format', 'Formato no permitido', (value) => !value || (value && SUPPORTED_FORMATS_IMAGE.includes(value.type)))
 		})
-	})
+	});
 
 	const handleChangeCkeditor = (e, editor) => {
 		formik.setValues(previous => {
-			previous.description = editor.getData()
-			return previous
-		})
+			previous.description = editor.getData();
+			return previous;
+		});
 	}
     
 	const handleBlurCkeditor = () => {
-		formik.setTouched({...formik.touched,
+		formik.setTouched({
+			...formik.touched,
 			description: true
 		});
 	}
 
-    const handleChangeImage=()=>{
-        formik.setFieldValue('imagen',file.current.files[0])
+    const handleChangeImage= () =>{
+        formik.setFieldValue('imagen',fileInputImage.current.files[0]);
     }
 
 return (
@@ -57,7 +59,7 @@ return (
                 {formik.touched.name && formik.errors.name }
                 <input className="input-field" type="text" name="order" value={formik.values.order} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder="Write order" ></input>
                 {formik.touched.order && formik.errors.order }
-                <input className="input-field" type="file" name="imagen"  onChange={handleChangeImage} onBlur={formik.handleBlur} ref={file} placeholder="upload imagen"></input>
+                <input className="input-field" type="file" name="imagen"  onChange={handleChangeImage} onBlur={formik.handleBlur} ref={fileInputImage} placeholder="upload imagen"></input>
                 {formik.touched.imagen && formik.errors.imagen }
                 <CKEditor
                     editor={ClassicEditor}
