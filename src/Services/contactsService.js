@@ -11,8 +11,8 @@ async function getContact(id) {
   return await get(`${BASE_URL}${BASE_ENDPOINT}/:${id}`);
 }
 
-async function createContact(data) {
-  return await post(`${BASE_URL}${BASE_ENDPOINT}`, data);
+async function createContact(contactDetails) {
+  return await post(`${BASE_URL}${BASE_ENDPOINT}`, contactDetails);
 }
 
 export { getContacts, getContact, createContact };

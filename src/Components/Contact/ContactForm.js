@@ -32,8 +32,8 @@ const ContactForm = () => {
     return errors;
   }
 
-  function handleFormSubmit(values) {
-    createContact(values);
+  function handleFormSubmit(data) {
+    createContact(data);
   }
 
   function validatePhone(phone, errors) {
