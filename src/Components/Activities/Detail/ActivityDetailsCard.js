@@ -1,6 +1,6 @@
-import React from "react";
-import Title from "../../Title/Title";
-import "./activitydetails.scss";
+import React from 'react';
+import Title from '../../Title/Title';
+import './activitydetails.scss';
 
 export default function ActivityDetailsCard({title,description}) {
   return (
