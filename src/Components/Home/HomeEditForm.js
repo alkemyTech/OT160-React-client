@@ -1,27 +1,22 @@
-import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
-import '../FormStyles.css';
-import SlidesForm from '../Slides/SlidesForm.js';
-import InputForm from './InputForm.js';
+import React, { useState } from "react";
+import { Formik, Form } from "formik";
+import "../FormStyles.css";
+import SlidesForm from "../Slides/SlidesForm.js";
+import InputForm from "./InputForm.js";
 
 export default function HomeEditForm() {
   const [valuesForm, setValuesForm] = useState({});
 
   function checkNumber(sliceId) {
-    
-    if (!/^[0-9]+$/.test(sliceId)) {
-     return true;
-    }
-    return false;
+    return !/^[0-9]+$/.test(sliceId);
   }
 
   const validate = (values) => {
     const errors = {};
     validateWelcomeText(values, errors);
-    validateSlideId_1(values, errors);
-    validateSlideId_2(values, errors);
-    validateSlideId_3(values, errors);
-
+    validateSlideId(values, errors , 1);
+    validateSlideId(values, errors , 2);
+    validateSlideId(values, errors , 3);
     return errors;
   };
 
@@ -33,21 +28,29 @@ export default function HomeEditForm() {
     }
   };
 
-  const validateSlideId_1 = (values, errors) => {
-    if (!checkNumber(values.slideId_1)) {
-      errors.slideId_1 = "The id can't have letters, only numbers";
-    }
+
+
+    const validateSlideId = (values, errors, id) => {
+    
+      if(id===1)
+      {
+        if (checkNumber(values.slideId_1)) {
+          errors.slideId_1 = "The id can't have letters, only numbers";
+        }
+      }else if(id===2)
+      {
+        if (checkNumber(values.slideId_2)) {
+          errors.slideId_2 = "The id can't have letters, only numbers";
+        }
+      }else
+      {
+        if (checkNumber(values.slideId_3)) {
+          errors.slideId_3 = "The id can't have letters, only numbers";
+        }
+      }
+
   };
-  const validateSlideId_2 = (values, errors) => {
-    if (!checkNumber(values.slideId_2)) {
-      errors.slideId_2 = "The id can't have letters, only numbers";
-    }
-  };
-  const validateSlideId_3 = (values, errors) => {
-    if (!checkNumber(values.slideId_3)) {
-      errors.slideId_3 = "The id can't have letters, only numbers";
-    }
-  };
+
   return (
     <div>
       <Formik
@@ -62,7 +65,6 @@ export default function HomeEditForm() {
           setValuesForm(values);
         }}
         validate={validate}
-
       >
         {(props) => (
           <div>
