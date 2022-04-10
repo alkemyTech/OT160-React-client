@@ -4,7 +4,7 @@ import {
   emailValidation,
   nameValidation,
 } from '../../Services/formValidationsService';
-import { submitContactForm } from '../../Services/contactsService';
+import { createContact } from '../../Services/contactsService';
 import '../FormStyles.css';
 
 const ContactForm = () => {
@@ -33,7 +33,7 @@ const ContactForm = () => {
   }
 
   function handleFormSubmit(values) {
-    submitContactForm(values);
+    createContact(values);
   }
 
   function validatePhone(phone, errors) {

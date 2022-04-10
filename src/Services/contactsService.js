@@ -1,11 +1,20 @@
-import { post } from './privateApiService';
+import { post, get } from './privateApiService';
 
-const BASE_URL = `${process.env.REACT_APP_BASE_URL_API}`;
+const BASE_URL = 'https://ongapi.alkemy.org/docs';
 
-async function submitContactForm(data) {
-  const endpoint = `${process.env.REACT_APP_SEND_CONTACT_FORM_API}`;
-  const postResult = await post(`${BASE_URL}${endpoint}`, data);
-  return postResult;
+async function getContacts() {
+  const response = await get(`${BASE_URL}/contacts`);
+  return response;
 }
 
-export { submitContactForm };
+async function getContact(id) {
+  const response = await get(`${BASE_URL}/contacts/:${id}`);
+  return response;
+}
+
+async function createContact(data) {
+  const response = await post(`${BASE_URL}/contacts`, data);
+  return response;
+}
+
+export { createContact, getContacts, getContact };
