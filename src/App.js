@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
+import Register from './Components/Auth/RegisterForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
 import SlidesForm from './Components/Slides/SlidesForm';
@@ -11,6 +12,7 @@ import SchoolCampaign from './Campaigns/School/SchoolCampaign';
 import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
+import About from './Components/About/About'
 import Backoffice from "./Components/Backoffice/backoffice";
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
@@ -22,11 +24,13 @@ function App() {
       <BrowserRouter>
         <Switch>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
+          <Route path="/register" component={Register} />
+          <Route path="/about" component={About}/>
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
-          <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/backoffice/activities" component={ActivitiesList} />
+          <Route path="/backoffice/Slides" component={SlidesForm} />
           <Route exact path="/backoffice/users" component={UsersList}/>
           <Route exact path="/backoffice" component={Backoffice} />
           <Route path="/create-testimonials" component={TestimonialForm} />
