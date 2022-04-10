@@ -6,20 +6,16 @@ const config = {
     }
 }
 
-const getObject=(key)=>
+const getToken= () =>
 {
-  return JSON.parse(localStorage.getItem(key));
+	return JSON.parse(localStorage.getItem("token"));
 }
-const getToken=()=>
-{
-	return getObject("token");
-}
+
 const headerAuthorization = () => {
   const token = getToken();
   const headerAuthorization = {authorization: ""};
   if (!token) {
-    headerAuthorization.authorization="Bearer: "+ token;
-  }
+    headerAuthorization.authorization = `Bearer: ${token}`;  }
   return headerAuthorization;
 };
 
