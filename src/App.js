@@ -19,25 +19,22 @@ import Login from './Components/Login/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const welcomeText = "Bienvenido a la seccion de donacines.";
   return (
     <>
       <BrowserRouter>
         <Switch>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
-          <Route path="/register" component={Register} />
-          <Route path="/about" component={About}/>
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
-          <Route path="/backoffice" component={Backoffice} />
           <Route path="/backoffice/Slides" component={SlidesForm} />
-          <Route exact path="/backoffice/users" component={UsersList}/>
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route
             path="/donate"
             component={() => {
+                const welcomeText = "Bienvenido a la seccion de donacines.";
+
               return <Donation text={welcomeText} />;
             }}
           />
