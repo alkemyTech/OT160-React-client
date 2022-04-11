@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
+import ActivityDetails from './Components/Activities/ActivityDetails/ActivityDetails';
 import Register from './Components/Auth/RegisterForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
@@ -28,6 +29,7 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/about" component={About}/>
           <Route path="/create-activity" component={ActivitiesForm} />
+          <Route path="/activities/:id" component={ActivityDetails} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route exact path="/backoffice" component={Backoffice} />
@@ -43,7 +45,6 @@ function App() {
           <Route path="/login" component={Login} />
         </Switch>
       </BrowserRouter>
-    
     </>
   );
 }
