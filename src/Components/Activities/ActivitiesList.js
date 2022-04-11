@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import {
   Table,
   Button,
-  Modal,
-  ModalBody,
-  ModalHeader,
-  ModalFooter,
-  FormGroup,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
