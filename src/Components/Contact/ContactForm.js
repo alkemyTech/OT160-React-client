@@ -36,7 +36,10 @@ const ContactForm = () => {
   async function handleFormSubmit(values) {
     const { error } = await createContact(values);
     if (error) {
-      errorAlert('Error', 'No se ha podido enviar el formulario.');
+      errorAlert(
+        'Error',
+        'No se ha podido enviar el formulario. Inténtelo nuevamente o revise su conexión.'
+      );
     }
   }
 
