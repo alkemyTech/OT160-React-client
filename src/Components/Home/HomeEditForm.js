@@ -14,9 +14,9 @@ export default function HomeEditForm() {
   const validate = (values) => {
     const errors = {};
     validateWelcomeText(values, errors);
-    validateSlideId(values, errors , 1);
-    validateSlideId(values, errors , 2);
-    validateSlideId(values, errors , 3);
+    validateSlideId(values, errors, 1);
+    validateSlideId(values, errors, 2);
+    validateSlideId(values, errors, 3);
     return errors;
   };
 
@@ -28,27 +28,12 @@ export default function HomeEditForm() {
     }
   };
 
+  const validateSlideId = (values, errors, id) => {
+    const salideId = `slideId_${id}`;
 
-
-    const validateSlideId = (values, errors, id) => {
-    
-      if(id===1)
-      {
-        if (checkNumber(values.slideId_1)) {
-          errors.slideId_1 = "The id can't have letters, only numbers";
-        }
-      }else if(id===2)
-      {
-        if (checkNumber(values.slideId_2)) {
-          errors.slideId_2 = "The id can't have letters, only numbers";
-        }
-      }else
-      {
-        if (checkNumber(values.slideId_3)) {
-          errors.slideId_3 = "The id can't have letters, only numbers";
-        }
-      }
-
+    if (checkNumber(values[salideId])) {
+      errors[salideId] = "The id can't have letters, only numbers";
+    }
   };
 
   return (
