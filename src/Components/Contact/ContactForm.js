@@ -5,6 +5,7 @@ import {
   nameValidation,
 } from '../../Services/formValidationsService';
 import { errorAlert } from '../../Services/alertsService';
+import { createContact } from '../../Services/contactsService';
 import '../FormStyles.css';
 
 const ContactForm = () => {
@@ -32,8 +33,8 @@ const ContactForm = () => {
     return errors;
   }
 
-  function handleFormSubmit(values) {
-    const { error } = null; // waiting for service
+  async function handleFormSubmit(values) {
+    const { error } = await createContact(values);
     if (error) {
       errorAlert('Error', 'No se ha podido enviar el formulario.');
     }
