@@ -29,6 +29,25 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+
+### Reusable Components
+
+## -Spinner
+The Spinner component accepts four optional parameters.
+
+- type : The default value is "TailSpin" which returns a circle spinner. You can set it to "Triangle" to get a triangle spinner.
+
+- color : The default value is "#DB5752" (light red), but can be setted as needed.
+
+- width : Sets the spinner's width, the default value is 30.
+
+- height : Sets the spinner's height, the default value is 30.
+
+#### Usage example:
+```
+<Spinner type="Triangle" color={#JJJH45} height={20} width={20}/>
+```
+
 ## Alerts service usage
 
 #### It provides three functions:
