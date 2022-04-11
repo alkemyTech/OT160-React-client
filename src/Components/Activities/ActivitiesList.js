@@ -9,6 +9,7 @@ import {
   FormGroup,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
 
 const ActivitiesList = () => {
   const activitiesMock = [
@@ -38,7 +39,9 @@ const ActivitiesList = () => {
     <div className="mt-2 container-xxl">
       <h1 className="text-center">Listado Actividades</h1>
       <div className="container-xl mt-4">
-        <Button className="btn-success">Nueva Actividad</Button>
+        <Link to="/backoffice/activities/create">
+          <Button className="btn-success mb-1">Nueva Actividad</Button>
+        </Link>
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
@@ -65,35 +68,6 @@ const ActivitiesList = () => {
             ))}
           </tbody>
         </Table>
-        <Modal>
-            <ModalHeader>
-                <div>
-                    <h3>Editar Actividad</h3>
-                </div>
-            </ModalHeader>
-            <ModalBody>
-               <FormGroup>
-                   <label>Id:</label>
-                   <input className="form-control" readOnly type="text"/>
-               </FormGroup>
-               <FormGroup>
-                   <label>Name</label>
-                   <input className="form-control" readOnly type="text"/>
-               </FormGroup>
-               <FormGroup>
-                   <label>Image</label>
-                   <input className="form-control" readOnly type="text"/>
-               </FormGroup>
-               <FormGroup>
-                   <label>CreatedAt</label>
-                   <input className="form-control" readOnly type="text"/>
-               </FormGroup>
-            </ModalBody>
-            <ModalFooter>
-                <Button color="primary">Confirmar</Button>
-                <Button color="danger">Cancelar</Button>
-            </ModalFooter>
-        </Modal>
       </div>
     </div>
   );
