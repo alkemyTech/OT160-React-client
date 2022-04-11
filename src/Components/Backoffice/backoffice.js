@@ -13,7 +13,7 @@ import membersImg from "../../icons/backoffice/008-teamwork.png";
 const Backoffice = () => {
 
     return (
-        <Fragment>
+        <div className='main-container'>
             <BackofficeNavBar />
             <div className='center-wrapper'>
                 <div className='container'>
@@ -66,7 +66,7 @@ const Backoffice = () => {
                     </div>
                 </div>
             </div>
-        </Fragment>
+        </div>
     );
 }
  

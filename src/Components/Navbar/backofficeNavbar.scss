@@ -1,0 +1,23 @@
+.container__open{
+    width: 13rem;
+    
+}
+
+.list{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    transition: 1s;
+    top: 0;
+    left: -100%;
+
+    &__close{
+        display: none;
+    }
+
+    &__open{
+        left: 0;
+        transition: 1s;
+    }
+}

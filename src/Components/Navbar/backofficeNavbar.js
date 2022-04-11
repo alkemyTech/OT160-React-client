@@ -1,21 +1,29 @@
+import React, {useState} from "react";
+import { Link } from "react-router-dom";
+import "./backofficeNavbar.scss";
 
-const BackofficeNavBar = () => {
-    
+const BackofficeNavBar = () => {   
+  const [sidebar, setSidebar] = useState(false);
+  
+  const showSidebar = () => setSidebar(!sidebar);
     return(
-            <nav class="navbar navbar-light bg-light">
-              <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-              </div>
-              <div class="collapse" id="navbarToggleExternalContent">
-              <div class="bg-light p-4">
-                <h5 class="text-white h4">Collapsed content</h5>
-                <span class="text-muted">Toggleable via the navbar brand.</span>
+        <nav class="navbar-light bg-light d-flex justify-content-around align-items-start">
+          <div className={sidebar ? "container__open" : ""}>
+            <div class="container-fluid">
+              <button class="navbar-toggler shadow-none mt-2 " type="button" onClick={showSidebar}>
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+            <div className={sidebar ? "list list__open" : "list list__close"}>
+              <div class="items">
+                <Link to="/backoffice" onClick={showSidebar} class="brand">
+                Some item
+                </Link>
               </div>
             </div>
-            </nav>
+          </div>
+        </nav>
     )
-}
+};
 
 export default BackofficeNavBar;
