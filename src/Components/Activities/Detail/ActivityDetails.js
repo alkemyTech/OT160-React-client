@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import ActivityDetailsCard from "./ActivityDetailsCard";
-import "./activitydetails.scss";
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import ActivityDetailsCard from './ActivityDetailsCard';
+import './activitydetails.scss';
 
 export default function ActivityDetails() {
   const { id } = useParams();
