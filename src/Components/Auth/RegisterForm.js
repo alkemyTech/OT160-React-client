@@ -18,7 +18,8 @@ const RegisterForm = () => {
       nameValidation(values.name, errors);
       lastNameValidation(values.lastName, errors);
       emailValidation(values.email, errors);
-      !values.password ? passwordValidationEightLength(values.password, errors) : passwordValidationSpecialCharacters(values.password, errors);
+      passwordValidationSpecialCharacters(values.password, errors);
+      passwordValidationEightLength(values.password, errors);
       confirmedPasswordValidation(values.password, values.confirmedPassword, errors)
       return errors;
     };

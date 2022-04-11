@@ -33,7 +33,8 @@ const UserForm = ({prevUserData}) => {
   const validate = (values) => {
     const errors = {};
     emailValidation(values.email, errors);
-    !values.name ? nameValidation(values.name, errors) : nameValidationFourLength(values.name, errors);
+    nameValidationFourLength(values.name, errors);
+    nameValidation(values.name, errors);
     passwordValidationEightLength(values.password, errors);
     fileValidationExtensions(values.profile_image, errors);
 
