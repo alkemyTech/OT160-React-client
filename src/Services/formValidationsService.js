@@ -17,12 +17,14 @@ const emailValidation = (email, errors) => {
     errors.email = "Email inválido";
   }
 };
-      
+
 const passwordValidationEightLength = (password, errors) => {
   if (!password) {
     errors.password = "Requerido";
   } else if (password.length < 7){
     errors.password = "La contraseña debe tener un mínimo de 6 characteres";
+  }else if (!/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i.test(password)) {
+    errors.password = "La contraseña debe tener al menos una letra, un número y un caracter especial";
   }
 };
 
