@@ -13,7 +13,7 @@ const getToken = () => {
 const headerAuthorization = () => {
   const token = getToken();
   const headerAuthorization = { authorization: "" };
-  if (!token) {
+  if (token) {
     headerAuthorization.authorization = `Bearer: ${token}`;
   }
   return headerAuthorization;
