@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
 import Register from './Components/Auth/RegisterForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
@@ -16,31 +16,33 @@ import About from './Components/About/About'
 import Backoffice from "./Components/Backoffice/backoffice";
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
-
+import { Provider } from 'react-redux';
+import store from './app/store';
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Switch>
-          {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
-          <Route path="/register" component={Register} />
-          <Route path="/about" component={About}/>
-          <Route path="/create-activity" component={ActivitiesForm} />
-          <Route path="/create-category" component={CategoriesForm} />
-          <Route path="/create-news" component={NewsForm} />
-          <Route path="/backoffice" component={Backoffice} />
-          <Route path="/backoffice/Slides" component={SlidesForm} />
-          <Route exact path="/backoffice/users" component={UsersList}/>
-          <Route path="/create-testimonials" component={TestimonialForm} />
-          <Route path="/create-user" component={UserForm} />
-          <Route path="/create-member" component={MembersForm} />
-          <Route path="/create-project" component={ProjectsForm} />
-          <Route path="/school-campaign" component={SchoolCampaign} />
-          <Route path="/toys-campaign" component={ToysCampaign} />
-          <Route path="/login" component={Login} />
-        </Switch>
-      </BrowserRouter>
-    
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
+            <Route path="/register" component={Register} />
+            <Route path="/about" component={About} />
+            <Route path="/create-activity" component={ActivitiesForm} />
+            <Route path="/create-category" component={CategoriesForm} />
+            <Route path="/create-news" component={NewsForm} />
+            <Route path="/backoffice" component={Backoffice} />
+            <Route path="/backoffice/Slides" component={SlidesForm} />
+            <Route exact path="/backoffice/users" component={UsersList} />
+            <Route path="/create-testimonials" component={TestimonialForm} />
+            <Route path="/create-user" component={UserForm} />
+            <Route path="/create-member" component={MembersForm} />
+            <Route path="/create-project" component={ProjectsForm} />
+            <Route path="/school-campaign" component={SchoolCampaign} />
+            <Route path="/toys-campaign" component={ToysCampaign} />
+            <Route path="/login" component={Login} />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
     </>
   );
 }
