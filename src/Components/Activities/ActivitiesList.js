@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import {
-  Table,
-  Button,
-} from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
@@ -30,6 +27,13 @@ const ActivitiesList = () => {
 
   const [dataTable, setDataTable] = useState(activitiesMock);
 
+  function handleEditTable() {
+    //colocar aqui la posterior implementacion del boton editar
+  }
+  function handleDeteleTable() {
+    //colocar aqui la posterior implementacion del boton eliminar
+  }
+
   return (
     <div className="mt-2 container-xxl">
       <h1 className="text-center">Listado Actividades</h1>
@@ -55,9 +59,19 @@ const ActivitiesList = () => {
                 <td>{element.image}</td>
                 <td>{element.createdAt}</td>
                 <td>
-                  <button className="btn btn-secondary">Editar</button>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={handleEditTable}
+                  >
+                    Editar
+                  </button>
                   {"  "}
-                  <button className="btn btn-danger">Eliminar</button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={handleDeteleTable}
+                  >
+                    Eliminar
+                  </button>
                 </td>
               </tr>
             ))}
