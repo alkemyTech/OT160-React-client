@@ -1,10 +1,17 @@
 import axios from 'axios';
 
 const config = {
+<<<<<<< HEAD
     headers: {
         Group: 160, //Aqui va el ID del equipo!!
     }
 }
+=======
+  headers: {
+    Group: 160,
+  },
+};
+>>>>>>> 65b1f75ed9dab256bf79cabd8e0dfb034b25d090
 
 const get = async (url) => {
   const response = {};
