@@ -1,20 +1,20 @@
-import axios from "axios";
+import axios from 'axios';
 
 const config = {
   headers: {
-    Group: 160, //Aqui va el ID del equipo!!
+    Group: 160,
   },
 };
 
 const getToken = () => {
-  return JSON.parse(localStorage.getItem("token"));
+  return JSON.parse(localStorage.getItem('token'));
 };
 
 const headerAuthorization = () => {
   const token = getToken();
-  const headerAuthorization = { authorization: "" };
+  const headerAuthorization = { Authorization: '' };
   if (token) {
-    headerAuthorization.authorization = `Bearer: ${token}`;
+    headerAuthorization.Authorization = `Bearer: ${token}`;
   }
   return headerAuthorization;
 };
@@ -58,4 +58,19 @@ const patch = async (url, data) => {
   }
 };
 
-export { get, post, patch };
+const Delete = async (url, id) => {
+  const response = {};
+  const userAuth = headerAuthorization();
+  const headersConfig = { ...userAuth, ...config.headers };
+
+  try {
+    const axiosRes = await axios.delete(`${url}/${id}`, headersConfig);
+    response.data = axiosRes;
+  } catch (error) {
+    response.error = error;
+  } finally {
+    return response;
+  }
+};
+
+export { get, post, patch, Delete };
