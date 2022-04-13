@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import '../FormStyles.css';
 import '../Login/LoginStyles.css'
 import { Formik, Form, Field, ErrorMessage } from "formik";
-
+import {login} from "../../features/users/authReducer";
+import { useSelector, useDispatch } from "react-redux";
 
 function Login() {
-
+  const dispatch = useDispatch();
     const [valuesForm , setValuesForm] = useState({});
 
     const validate = values => {
@@ -46,6 +47,7 @@ function Login() {
         initialValues={{
           email: "",
           password: "",
+          token: "token"
         }}
 
         validate={validate}
@@ -53,6 +55,7 @@ function Login() {
         onSubmit={(values, { resetForm }) => {
           resetForm();
           setValuesForm(values)
+          dispatch(login(values))
         }}
       >
         {({ errors }) => (
