@@ -1,11 +1,24 @@
 import axios from "axios";
+//JSON.parse
+const getToken = () => {
+  return (localStorage.getItem("token"));
+};
+
+const headerAuthorization = () => {
+  const token = getToken();
+  const headerAuthorization = { authorization: "" };
+  if (token) {
+    headerAuthorization.authorization = `Bearer: ${token}`;
+  }
+  return headerAuthorization;
+};
 
 const config = {
-    headers: {
-        Group: 160
-        /* authorization: AuthorizationTest() */            
-    }
-}
+  headers: {
+    Group: 160,
+    Authorization: headerAuthorization().authorization
+  },
+};
 
 const get = async (url) => {
   const response = {};

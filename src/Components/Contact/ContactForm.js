@@ -1,15 +1,20 @@
-import React from "react";
-import { useFormik } from "formik";
-import { emailValidator } from "../../Services/formValidationsService";
-import "../FormStyles.css";
+import React from 'react';
+import { useFormik } from 'formik';
+import {
+  emailValidation,
+  nameValidation,
+} from '../../Services/formValidationsService';
+import { errorAlert } from '../../Services/alertsService';
+import { createContact } from '../../Services/contactsService';
+import '../FormStyles.css';
 
 const ContactForm = () => {
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
     },
     validate,
     validateOnBlur: false,
@@ -20,45 +25,37 @@ const ContactForm = () => {
   function validate(values) {
     const errors = {};
 
-    validateName(values.name, errors);
-    validateEmail(values.email, errors);
+    nameValidation(values.name, errors);
+    emailValidation(values.email, errors);
     validatePhone(values.phone, errors);
     validateMessage(values.message, errors);
 
     return errors;
   }
 
-  function handleFormSubmit(values) {
-    console.log(values); // Service to be implemented
-  }
-
-  function validateName(name, errors) {
-    if (!name) {
-      errors.name = "Debes ingresar un nombre";
-    }
-  }
-
-  function validateEmail(email, errors) {
-    if (!email) {
-      errors.email = "Debes ingresar una dirección de email";
-    } else if (!emailValidator.isValid(email)) {
-      errors.email = emailValidator.error;
+  async function handleFormSubmit(values) {
+    const { error } = await createContact(values);
+    if (error) {
+      errorAlert(
+        'Error',
+        'No se ha podido enviar el formulario. Inténtelo nuevamente o revise su conexión.'
+      );
     }
   }
 
   function validatePhone(phone, errors) {
     if (!phone) {
-      errors.phone = "Debes ingresar un nro de teléfono";
+      errors.phone = 'Debes ingresar un nro de teléfono';
     } else if (/[^0123456789]/.test(phone)) {
-      errors.phone = "Sólo puedes ingresar números";
+      errors.phone = 'Sólo puedes ingresar números';
     } else if (phone.length < 8) {
-      errors.phone = "El número debe tener al menos 8 dígitos";
+      errors.phone = 'El número debe tener al menos 8 dígitos';
     }
   }
 
   function validateMessage(message, errors) {
     if (!message) {
-      errors.message = "Debes escribir algún mensaje para enviar";
+      errors.message = 'Debes escribir algún mensaje para enviar';
     }
   }
 
