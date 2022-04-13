@@ -59,10 +59,11 @@ const patch = async (url, data) => {
 };
 
 const remove = async (url, id) => {
-  const response = {};
   const { authorization } = headerAuthorization();
   const requestConfig = { ...config };
   requestConfig.headers.Authorization = authorization;
+
+  const response = {};
 
   try {
     const axiosRes = await axios.delete(`${url}/${id}`, requestConfig);
