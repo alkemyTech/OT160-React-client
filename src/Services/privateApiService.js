@@ -12,11 +12,18 @@ const getToken = () => {
 
 const headerAuthorization = () => {
   const token = getToken();
-  const headerAuthorization = { authorization: '' };
+  const headerAuthorization = { Authorization: '' };
   if (token) {
-    headerAuthorization.authorization = `Bearer: ${token}`;
+    headerAuthorization.Authorization = `Bearer: ${token}`;
   }
   return headerAuthorization;
+};
+
+const headersBuilder = (headerToAdd, baseConfig) => {
+  const requestConfig = { ...baseConfig };
+  requestConfig.headers = { ...requestConfig.headers, ...headerToAdd };
+
+  return requestConfig;
 };
 
 const get = async (url) => {
@@ -59,9 +66,8 @@ const patch = async (url, data) => {
 };
 
 const remove = async (url, id) => {
-  const { authorization } = headerAuthorization();
-  const requestConfig = { ...config };
-  requestConfig.headers.Authorization = authorization;
+  const auth = headerAuthorization();
+  const requestConfig = headersBuilder(auth, config);
 
   const response = {};
 
