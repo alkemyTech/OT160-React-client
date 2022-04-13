@@ -7,6 +7,20 @@ const config = {
     }
 }
 
+
+const getToken = () => {
+  return JSON.parse(localStorage.getItem("token"));
+};
+
+const headerAuthorization = () => {
+  const token = getToken();
+  const headerAuthorization = { authorization: "" };
+  if (token) {
+    headerAuthorization.authorization = `Bearer: ${token}`;
+  }
+  return headerAuthorization;
+};
+
 const get = async (url) => {
   const response = {};
 
