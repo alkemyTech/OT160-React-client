@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
@@ -25,7 +25,16 @@ const ActivitiesList = () => {
     },
   ];
 
-  const [dataTable, setDataTable] = useState(activitiesMock);
+  const [dataTable, setDataTable] = useState([]);
+
+  useEffect(()=>{
+    getDataActivities();
+  },[])
+
+  function getDataActivities() {
+    //aqui deberia llamarse al endpoind de listado de actividades
+    setDataTable(activitiesMock);
+  };
 
   function handleEditTable() {
     //colocar aqui la posterior implementacion del boton editar
