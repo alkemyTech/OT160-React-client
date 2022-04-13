@@ -12,9 +12,9 @@ const getToken = () => {
 
 const headerAuthorization = () => {
   const token = getToken();
-  const headerAuthorization = { Authorization: '' };
+  const headerAuthorization = { authorization: '' };
   if (token) {
-    headerAuthorization.Authorization = `Bearer: ${token}`;
+    headerAuthorization.authorization = `Bearer: ${token}`;
   }
   return headerAuthorization;
 };
@@ -60,8 +60,9 @@ const patch = async (url, data) => {
 
 const remove = async (url, id) => {
   const response = {};
-  const userAuth = headerAuthorization();
-  const requestConfig = { headers: { ...userAuth, ...config.headers } };
+  const { authorization } = headerAuthorization();
+  const requestConfig = { ...config };
+  requestConfig.headers.Authorization = authorization;
 
   try {
     const axiosRes = await axios.delete(`${url}/${id}`, requestConfig);
