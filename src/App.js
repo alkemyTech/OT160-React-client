@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
+import ActivityDetails from './Components/Activities/ActivityDetails/ActivityDetails';
 import Register from './Components/Auth/RegisterForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
@@ -14,8 +15,10 @@ import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import About from './Components/About/About'
 import Backoffice from "./Components/Backoffice/backoffice";
+import EditOrganization from './Components/Organization/EditOrganization';
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
+
 
 function App() {
   return (
@@ -26,10 +29,12 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/about" component={About}/>
           <Route path="/create-activity" component={ActivitiesForm} />
+          <Route path="/activities/:id" component={ActivityDetails} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
-          <Route path="/backoffice" component={Backoffice} />
+          <Route exact path="/backoffice" component={Backoffice} />
           <Route path="/backoffice/Slides" component={SlidesForm} />
+          <Route path="/backoffice/organization/edit" component={EditOrganization} />
           <Route exact path="/backoffice/users" component={UsersList}/>
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
@@ -40,7 +45,6 @@ function App() {
           <Route path="/login" component={Login} />
         </Switch>
       </BrowserRouter>
-    
     </>
   );
 }
