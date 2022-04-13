@@ -61,10 +61,10 @@ const patch = async (url, data) => {
 const Delete = async (url, id) => {
   const response = {};
   const userAuth = headerAuthorization();
-  const headersConfig = { ...userAuth, ...config.headers };
+  const requestConfig = { headers: { ...userAuth, ...config.headers } };
 
   try {
-    const axiosRes = await axios.delete(`${url}/${id}`, headersConfig);
+    const axiosRes = await axios.delete(`${url}/${id}`, requestConfig);
     response.data = axiosRes;
   } catch (error) {
     response.error = error;
