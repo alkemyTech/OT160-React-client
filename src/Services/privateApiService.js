@@ -58,7 +58,7 @@ const patch = async (url, data) => {
   }
 };
 
-const Delete = async (url, id) => {
+const remove = async (url, id) => {
   const response = {};
   const userAuth = headerAuthorization();
   const requestConfig = { headers: { ...userAuth, ...config.headers } };
@@ -73,4 +73,4 @@ const Delete = async (url, id) => {
   }
 };
 
-export { get, post, patch, Delete };
+export { get, post, patch, remove };
