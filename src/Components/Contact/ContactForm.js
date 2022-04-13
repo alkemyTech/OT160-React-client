@@ -4,6 +4,7 @@ import {
   emailValidation,
   nameValidation,
 } from '../../Services/formValidationsService';
+import { errorAlert } from '../../Services/alertsService';
 import { createContact } from '../../Services/contactsService';
 import '../FormStyles.css';
 
@@ -32,8 +33,14 @@ const ContactForm = () => {
     return errors;
   }
 
-  function handleFormSubmit(data) {
-    createContact(data);
+  async function handleFormSubmit(values) {
+    const { error } = await createContact(values);
+    if (error) {
+      errorAlert(
+        'Error',
+        'No se ha podido enviar el formulario. Inténtelo nuevamente o revise su conexión.'
+      );
+    }
   }
 
   function validatePhone(phone, errors) {
