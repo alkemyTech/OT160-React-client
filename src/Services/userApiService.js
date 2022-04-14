@@ -1,11 +1,13 @@
 import {get, patch, post} from "./privateApiService";
 
+const USERS_URL = "https://ongapi.alkemy.org/api/users/";
+
 const getUsers = async () => {
-    return await get("https://ongapi.alkemy.org/api/users");
+    return await get(USERS_URL);
 };
 
 const getUserById = async (userData) => {
-    return await get("https://ongapi.alkemy.org/api/users" + userData.id, {userData});
+    return await get(USERS_URL + userData.id, {userData});
 };
 
 const deleteUser = async (userData) => {
@@ -13,13 +15,11 @@ const deleteUser = async (userData) => {
 };
 
 const updateUserData = (userData) => { 
-    const res = patch("https://ongapi.alkemy.org/api/users/" + userData.id, userData);
-    return res;
+    return patch(USERS_URL + userData.id, userData);
 } 
 
 const createUser = (userData) =>{ 
-    const res = post("https://ongapi.alkemy.org/api/users", userData);
-    return res;
+    return post(USERS_URL, userData);
 } 
 
 export {
