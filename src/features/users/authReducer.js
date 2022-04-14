@@ -4,23 +4,23 @@ const usersSlice = createSlice({
   name: 'user',
   initialState: { auth: false },
   reducers: {
-    login: (action) => {
-      console.log(action.payload)
-      //localStorage.setItem("token", action.payload.token);
+    login: (state, action) => {
+      console.log(action)
+      localStorage.setItem("token", action.payload.token);
       return {
         userData : action.payload,
         auth: true
       }
     },
-    register: (action) => {
-      //localStorage.setItem("token", action.payload.token);
+    register: (state, action) => {
+      localStorage.setItem("token", action.payload.token);
       return {
         userData : action.payload,
         auth: true
       }
     },
     logout: () => {
-      //localStorage.removeItem("token");
+      localStorage.removeItem("token");
       return { auth : false }
     },
   },
