@@ -1,17 +1,25 @@
 import axios from 'axios';
 
 const config = {
-<<<<<<< HEAD
+    
     headers: {
         Group: 160, //Aqui va el ID del equipo!!
     }
 }
-=======
-  headers: {
-    Group: 160,
-  },
+
+
+const getToken = () => {
+  return JSON.parse(localStorage.getItem("token"));
 };
->>>>>>> 65b1f75ed9dab256bf79cabd8e0dfb034b25d090
+
+const headerAuthorization = () => {
+  const token = getToken();
+  const headerAuthorization = { authorization: "" };
+  if (token) {
+    headerAuthorization.authorization = `Bearer: ${token}`;
+  }
+  return headerAuthorization;
+};
 
 const get = async (url) => {
   const response = {};
