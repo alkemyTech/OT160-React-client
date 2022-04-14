@@ -24,7 +24,6 @@ export default function Pdfcontainer() {
         changePage(+1)
     }
 
-
     return (
         <>
             <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
@@ -40,10 +39,8 @@ export default function Pdfcontainer() {
                 {
                     pageNumber < numPages &&
                     <button onClick={changePageNext}>Next Page</button>
-
                 }
             </div>
         </>
-
     )
 }
