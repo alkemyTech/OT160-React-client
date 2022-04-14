@@ -3,6 +3,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import UserRoute from './routes/UserRoute'; 
 import PrivateRoute from './routes/PrivateRoute';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
+import ActivityDetails from './Components/Activities/Detail/ActivityDetails';
 import Register from './Components/Auth/RegisterForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
@@ -15,8 +16,10 @@ import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import About from './Components/About/About'
 import Backoffice from "./Components/Backoffice/backoffice";
+import EditOrganization from './Components/Organization/EditOrganization';
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
+
 
 function App() {
   const isAdminAuthenticated = false;
@@ -33,11 +36,15 @@ function App() {
             <Route path="/create-user" component={UserForm} />
             <Route path="/school-campaign" component={SchoolCampaign} />
             <Route path="/toys-campaign" component={ToysCampaign} />
+            <Route path="/activity-details" component={ActivityDetails} />            
             <PrivateRoute path="/create-activity" isAuthenticated={isAdminAuthenticated}>
               <ActivitiesForm />
             </PrivateRoute>
             <PrivateRoute path="/create-category" isAuthenticated={isAdminAuthenticated}>
               <CategoriesForm />
+            </PrivateRoute>
+            <PrivateRoute path="/edit-organization" isAuthenticated={isAdminAuthenticated}>
+              <EditOrganization />
             </PrivateRoute>
             <PrivateRoute path="/create-news" isAuthenticated={isAdminAuthenticated}>
               <NewsForm />
@@ -67,10 +74,12 @@ function App() {
           {/* <Route path="/register" component={Register} />
           <Route path="/about" component={About}/>
           <Route path="/create-activity" component={ActivitiesForm} />
+          <Route path="/activities/:id" component={ActivityDetails} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
-          <Route path="/backoffice" component={Backoffice} />
+          <Route exact path="/backoffice" component={Backoffice} />
           <Route path="/backoffice/Slides" component={SlidesForm} />
+          <Route path="/backoffice/organization/edit" component={EditOrganization} />
           <Route exact path="/backoffice/users" component={UsersList}/>
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
@@ -82,7 +91,6 @@ function App() {
           </Switch>
         </Suspense>
       </BrowserRouter>
-    
     </>
   );
 }
