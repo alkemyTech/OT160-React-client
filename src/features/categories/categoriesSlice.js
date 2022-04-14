@@ -12,8 +12,8 @@ export const categoriesSlice = createSlice({
     categories: [],
   },
   reducers: {
-    getAll: (state) => {
-      const { data, error } = getAllCategories();
+    getAll: async (state) => {
+      const { data, error } = await getAllCategories();
       if (error) {
         errorAlert(
           'Error',
