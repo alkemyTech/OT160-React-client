@@ -19,9 +19,10 @@ const headerAuthorization = () => {
   return headerAuthorization;
 };
 
-const headersBuilder = (headerToAdd, baseConfig) => {
-  const requestConfig = { ...baseConfig };
-  requestConfig.headers = { ...requestConfig.headers, ...headerToAdd };
+const headersBuilder = () => {
+  const requestConfig = { ...config };
+  const auth = headerAuthorization();
+  requestConfig.headers = { ...requestConfig.headers, ...auth };
 
   return requestConfig;
 };
@@ -66,9 +67,7 @@ const patch = async (url, data) => {
 };
 
 const remove = async (url, id) => {
-  const auth = headerAuthorization();
-  const requestConfig = headersBuilder(auth, config);
-
+  const requestConfig = headersBuilder();
   const response = {};
 
   try {
