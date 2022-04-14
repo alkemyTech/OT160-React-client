@@ -1,6 +1,6 @@
 import React,{ Suspense } from 'react';
-import {BrowserRouter, Switch} from 'react-router-dom';
-import PublicRoute from './routes/PublicRoute'; 
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import UserRoute from './routes/UserRoute'; 
 import PrivateRoute from './routes/PrivateRoute';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
 import Register from './Components/Auth/RegisterForm';
@@ -19,53 +19,48 @@ import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
 
 function App() {
-  const isAuthenticated = false;
+  const isAdminAuthenticated = false;
+  const isUsertAuthenticated = false;
 
   return (
     <>
       <BrowserRouter>
         <Suspense fallback={<div>Loading</div>}>
           <Switch>
-            <PublicRoute path="/register" isAuthenticated={isAuthenticated}>
-              <Register />
-            </PublicRoute>
-            <PublicRoute path="/about" isAuthenticated={isAuthenticated}>
-              <About />
-            </PublicRoute>
-            <PublicRoute path="/create-activity" isAuthenticated={isAuthenticated}>
+            <Route path="/register" component={Register} />
+            <Route path="/about" component={About}/>
+            <Route path="/login" component={Login} />
+            <Route path="/create-user" component={UserForm} />
+            <Route path="/school-campaign" component={SchoolCampaign} />
+            <Route path="/toys-campaign" component={ToysCampaign} />
+            <PrivateRoute path="/create-activity" isAuthenticated={isAdminAuthenticated}>
               <ActivitiesForm />
-            </PublicRoute>
-            <PublicRoute path="/create-category" isAuthenticated={isAuthenticated}>
+            </PrivateRoute>
+            <PrivateRoute path="/create-category" isAuthenticated={isAdminAuthenticated}>
               <CategoriesForm />
-            </PublicRoute>
-            <PublicRoute path="/create-news" isAuthenticated={isAuthenticated}>
+            </PrivateRoute>
+            <PrivateRoute path="/create-news" isAuthenticated={isAdminAuthenticated}>
               <NewsForm />
-            </PublicRoute>
-            <PublicRoute path="/create-testimonials" isAuthenticated={isAuthenticated}>
+            </PrivateRoute>
+            <PrivateRoute path="/create-testimonials" isAuthenticated={isAdminAuthenticated}>
               <TestimonialForm />
-            </PublicRoute>
-            <PublicRoute path="/create-user" isAuthenticated={isAuthenticated}>
-              <UserForm />
-            </PublicRoute>
-            <PublicRoute path="/create-member" isAuthenticated={isAuthenticated}>
+            </PrivateRoute>
+            <PrivateRoute path="/create-member" isAuthenticated={isAdminAuthenticated}>
               <MembersForm />
-            </PublicRoute>
-            <PublicRoute path="/school-campaign" isAuthenticated={isAuthenticated}>
-              <SchoolCampaign />
-            </PublicRoute>
-            <PublicRoute path="/toys-campaign" isAuthenticated={isAuthenticated}>
-              <ToysCampaign />
-            </PublicRoute>
-            <PublicRoute path="/login" isAuthenticated={isAuthenticated}>
-              <Login />
-            </PublicRoute>
-            <PrivateRoute path="/backoffice" isAuthenticated={isAuthenticated}>
+            </PrivateRoute>
+            {/* <UserRoute path="/profile" isAuthenticated={isUsertAuthenticated}>
+              <Profile />
+            </UserRoute> */}
+            <PrivateRoute path="/create-project" isAuthenticated={isAdminAuthenticated}>
+              <ProjectsForm />
+            </PrivateRoute>
+            <PrivateRoute path="/backoffice" isAuthenticated={isAdminAuthenticated}>
               <Backoffice />
             </PrivateRoute>
-            <PrivateRoute path="/backoffice/slides" isAuthenticated={isAuthenticated}>
+            <PrivateRoute path="/backoffice/slides" isAuthenticated={isAdminAuthenticated}>
               <SlidesForm />
             </PrivateRoute>
-            <PrivateRoute path="/backoffice/users" isAuthenticated={isAuthenticated}>
+            <PrivateRoute path="/backoffice/users" isAuthenticated={isAdminAuthenticated}>
               <UsersList />
             </PrivateRoute>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
