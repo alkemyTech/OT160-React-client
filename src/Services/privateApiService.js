@@ -19,12 +19,10 @@ const headerAuthorization = () => {
   return headerAuthorization;
 };
 
-const headersBuilder = () => {
-  const requestConfig = { ...config };
-  const auth = headerAuthorization();
-  requestConfig.headers = { ...requestConfig.headers, ...auth };
+const buildHeaders = (requestConfig) => {
+  const authHeader = headerAuthorization();
 
-  return requestConfig;
+  Object.assign(requestConfig.headers, authHeader);
 };
 
 const get = async (url) => {
@@ -67,8 +65,10 @@ const patch = async (url, data) => {
 };
 
 const remove = async (url, id) => {
-  const requestConfig = headersBuilder();
   const response = {};
+  const requestConfig = { ...config };
+
+  buildHeaders(requestConfig);
 
   try {
     const axiosRes = await axios.delete(`${url}/${id}`, requestConfig);
