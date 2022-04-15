@@ -72,7 +72,7 @@ const remove = async (url, id) => {
 
   try {
     const axiosRes = await axios.delete(`${url}/${id}`, requestConfig);
-    response.data = axiosRes;
+    response.data = axiosRes.data;
   } catch (error) {
     response.error = error;
   } finally {
