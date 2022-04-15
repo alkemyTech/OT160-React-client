@@ -77,7 +77,7 @@ function handleForm(data, onSubmit) {
 ### Usage example
 
 ```
-import {login} from "../../features/users/authReducer";
+import {login} from "../../features/users/authReducer.js";
 /// import action directly from reducer
 import { useDispatch } from "react-redux";
 

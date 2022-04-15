@@ -5,7 +5,6 @@ const usersSlice = createSlice({
   initialState: { auth: false },
   reducers: {
     login: (state, action) => {
-      console.log(action)
       localStorage.setItem("token", action.payload.token);
       return {
         userData : action.payload,
