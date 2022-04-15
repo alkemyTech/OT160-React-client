@@ -1,0 +1,11 @@
+$breakpoints: (
+  'phone':  250px
+) !default;
+
+@mixin breakpoint($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+      @media (max-width: map-get($breakpoints, $breakpoint)) {
+        @content;
+      } 
+    }
+}

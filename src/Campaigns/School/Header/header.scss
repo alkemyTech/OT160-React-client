@@ -1,0 +1,15 @@
+@import "./mixins.scss";
+
+.header{
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__logo{
+        @include breakpoint(phone){
+            height: 4rem;
+            width: 5rem;
+        }
+    }
+}
