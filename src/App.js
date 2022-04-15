@@ -1,5 +1,6 @@
-import React,{ Suspense } from 'react';
+import React,{ Suspense, useState, useEffect } from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {get} from "./Services/privateApiService";
 import UserRoute from './routes/UserRoute'; 
 import PrivateRoute from './routes/PrivateRoute';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
@@ -22,8 +23,13 @@ import UsersList from './Components/Users/UsersList';
 
 
 function App() {
-  const isAdminAuthenticated = false;
-  const isUsertAuthenticated = false;
+
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+  const [isUsertAuthenticated, setIsUsertAuthenticated] = useState(false);
+
+  useEffect(() => {
+    
+  });
 
   return (
     <>
@@ -55,9 +61,6 @@ function App() {
             <PrivateRoute path="/create-member" isAuthenticated={isAdminAuthenticated}>
               <MembersForm />
             </PrivateRoute>
-            {/* <UserRoute path="/profile" isAuthenticated={isUsertAuthenticated}>
-              <Profile />
-            </UserRoute> */}
             <PrivateRoute path="/create-project" isAuthenticated={isAdminAuthenticated}>
               <ProjectsForm />
             </PrivateRoute>
@@ -70,24 +73,6 @@ function App() {
             <PrivateRoute path="/backoffice/users" isAuthenticated={isAdminAuthenticated}>
               <UsersList />
             </PrivateRoute>
-          {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
-          {/* <Route path="/register" component={Register} />
-          <Route path="/about" component={About}/>
-          <Route path="/create-activity" component={ActivitiesForm} />
-          <Route path="/activities/:id" component={ActivityDetails} />
-          <Route path="/create-category" component={CategoriesForm} />
-          <Route path="/create-news" component={NewsForm} />
-          <Route exact path="/backoffice" component={Backoffice} />
-          <Route path="/backoffice/Slides" component={SlidesForm} />
-          <Route path="/backoffice/organization/edit" component={EditOrganization} />
-          <Route exact path="/backoffice/users" component={UsersList}/>
-          <Route path="/create-testimonials" component={TestimonialForm} />
-          <Route path="/create-user" component={UserForm} />
-          <Route path="/create-member" component={MembersForm} />
-          <Route path="/create-project" component={ProjectsForm} />
-          <Route path="/school-campaign" component={SchoolCampaign} />
-          <Route path="/toys-campaign" component={ToysCampaign} />
-          <Route path="/login" component={Login} /> */}
           </Switch>
         </Suspense>
       </BrowserRouter>

@@ -1,6 +1,6 @@
 import {Route, Redirect} from 'react-router-dom';
   
-const PublicRoute = ({ children, isAuthenticated, ...rest }) => {
+const UserRoute = ({ children, isAuthenticated, ...rest }) => {
   return (
     <Route
       {...rest}
@@ -23,4 +23,4 @@ const PublicRoute = ({ children, isAuthenticated, ...rest }) => {
   );
 }
 
-export default PublicRoute;
+export default UserRoute;
