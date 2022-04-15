@@ -1,7 +1,7 @@
 import React  from "react";
 import { Link } from "react-router-dom";
 
-const BackofficeNavBar = () => {   
+const Header = () => {   
     return(
         <nav class="navbar-light bg-light d-flex justify-content-around align-items-start">
           <div>
@@ -22,4 +22,4 @@ const BackofficeNavBar = () => {
     )
 };
 
-export default BackofficeNavBar;
+export default Header;
