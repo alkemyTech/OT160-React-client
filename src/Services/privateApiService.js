@@ -58,4 +58,17 @@ const patch = async (url, data) => {
   }
 };
 
+const getAuthorization = async (url, id=null) => {
+  const response = {};
+
+  try {
+    const axiosRes = await axios.get(`${url}${id}`, headerAuthorization());
+    response.data = axiosRes.data;
+  } catch (error) {
+    response.error = error;
+  } finally {
+    return response;
+  }
+};
+
 export { get, post, patch };
