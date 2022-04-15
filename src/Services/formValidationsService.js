@@ -23,19 +23,7 @@ const lastNameValidation = (lastName, errors) => {
     errors.lastName = "Requerido";
   } 
 }
-<<<<<<< HEAD
-
-const emailValidation = (email, errors) => {
-  if (!email) {
-    errors.email = "Requerido";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-    errors.email = "Email inválido";
-  }
-};
-
-=======
   
->>>>>>> 07957b927d221b1366543191cd63a0cb2e27575d
 const passwordValidationEightLength = (password, errors) => {
   if(password === ""){
     errors.password = "Ingrese su contraseña";
@@ -68,14 +56,11 @@ const fileValidationExtensions = (image, errors) => {
   } 
 };
 
-<<<<<<< HEAD
 const terminos = (name,errors) => {
   if(Object.keys(errors).length == 0 && name) {
     errors.terminos = "Debe aceptar los terminos y condiciones"
   }
 };
-=======
->>>>>>> 07957b927d221b1366543191cd63a0cb2e27575d
 
 export { 
   nameValidationFourLength, 
@@ -85,11 +70,6 @@ export {
   emailValidation,
   nameValidation,
   lastNameValidation,
-<<<<<<< HEAD
-  passwordValidationEightLength,
   confirmedPasswordValidation,
   terminos
-=======
-  confirmedPasswordValidation
->>>>>>> 07957b927d221b1366543191cd63a0cb2e27575d
 };
