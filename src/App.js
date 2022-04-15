@@ -18,7 +18,7 @@ import Backoffice from "./Components/Backoffice/backoffice";
 import EditOrganization from './Components/Organization/EditOrganization';
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
-import Home from './Components/Home';
+import Home from './Components/Home/';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 
 function App() {
