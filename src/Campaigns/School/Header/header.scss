@@ -1,15 +1,69 @@
 @import "./mixins.scss";
 
 .header{
-    height: 5rem;
+    height: 7rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
-    &__logo{
+    @include breakpoint(computer){
+        height: 6rem;
+    }
+
+    &__campaign-logo{
+        height: 6rem;
+        width: 7rem;
+        margin-top: -1rem;
+
         @include breakpoint(phone){
             height: 4rem;
             width: 5rem;
         }
+
+        @include breakpoint(computer){
+            position: fixed;
+            right: 41%;
+            margin-top: -4px;
+            height: 6rem;
+            width: 8rem;
+            backdrop-filter: blur(6px);
+            border-radius: 34px;
+        }
+    }
+
+    &__ong-logo{
+        display: none;
+
+        @include breakpoint(tablet){
+            display: inline-block;
+            position: fixed;
+            left: 0rem;
+            height: 7rem;
+            width: 7rem;
+        }
+
+        @include breakpoint(computer){
+            height: 10rem;
+            width: 10rem;
+        }
+    }
+
+    &__slogan{
+        display: none;
+
+        @include breakpoint(computer){
+            display: inline-block;
+            width: 100%;
+            margin-top: 5rem;
+            height: 17rem;
+            z-index: -10;
+        }
+
+        @include breakpoint(smartTV){
+            background-color: #ffe14c;
+            margin-top: 17rem;
+            height: 32rem;
+        }    
     }
 }
