@@ -21,7 +21,6 @@ import UsersList from './Components/Users/UsersList';
 import Home from './Components/Home';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 
-
 function App() {
   return (
     <>
