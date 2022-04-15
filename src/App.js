@@ -19,6 +19,7 @@ import EditOrganization from './Components/Organization/EditOrganization';
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
 import Home from './Components/Home';
+import ActivitiesList from './Components/Activities/ActivitiesList';
 
 
 function App() {
@@ -33,10 +34,11 @@ function App() {
           <Route path="/activities/:id" component={ActivityDetails} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
-          <Route exact path="/backoffice" component={Backoffice} />
+          <Route path="/backoffice/activities" component={ActivitiesList} />
           <Route path="/backoffice/Slides" component={SlidesForm} />
           <Route path="/backoffice/organization/edit" component={EditOrganization} />
           <Route exact path="/backoffice/users" component={UsersList}/>
+          <Route exact path="/backoffice" component={Backoffice} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />
