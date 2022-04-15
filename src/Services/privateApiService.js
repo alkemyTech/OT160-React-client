@@ -1,5 +1,5 @@
 import axios from "axios";
-//JSON.parse
+
 const getToken = () => {
   return (localStorage.getItem("token"));
 };
@@ -15,10 +15,13 @@ const headerAuthorization = () => {
 
 const config = {
   headers: {
-    Group: 160,
-    Authorization: headerAuthorization().authorization
+    Group: 160
   },
 };
+
+const addTokenToHeader = () => {
+  config.headers.Authorization = headerAuthorization().authorization;
+}
 
 const get = async (url) => {
   const response = {};
@@ -35,7 +38,7 @@ const get = async (url) => {
 
 const post = async (url, data) => {
   const response = {};
-
+  addTokenToHeader();
   try {
     const axiosRes = await axios.post(url, data, config);
     response.data = axiosRes.data;
