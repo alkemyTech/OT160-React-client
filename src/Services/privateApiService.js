@@ -69,6 +69,7 @@ const put = async (url, id, data) => {
   const requestConfig = { ...config };
 
   buildHeaders(requestConfig);
+  
   try {
     const axiosRes = await axios.put(url, id, data, requestConfig);
     response.data = axiosRes.data;
