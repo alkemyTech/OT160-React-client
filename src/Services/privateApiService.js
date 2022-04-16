@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const getToken = () => {
   return (localStorage.getItem("token"));
@@ -6,9 +6,9 @@ const getToken = () => {
 
 const headerAuthorization = () => {
   const token = getToken();
-  const headerAuthorization = { authorization: "" };
+  const headerAuthorization = { Authorization: '' };
   if (token) {
-    headerAuthorization.authorization = `Bearer: ${token}`;
+    headerAuthorization.Authorization = `Bearer: ${token}`;
   }
   return headerAuthorization;
 };
@@ -19,9 +19,11 @@ const config = {
   },
 };
 
-const addTokenToHeader = () => {
-  config.headers.Authorization = headerAuthorization().authorization;
-}
+const buildHeaders = (requestConfig) => {
+  const authHeader = headerAuthorization();
+
+  Object.assign(requestConfig.headers, authHeader);
+};
 
 const get = async (url) => {
   const response = {};
@@ -38,9 +40,11 @@ const get = async (url) => {
 
 const post = async (url, data) => {
   const response = {};
-  addTokenToHeader();
+  const requestConfig = { ...config };
+
+  buildHeaders(requestConfig);
   try {
-    const axiosRes = await axios.post(url, data, config);
+    const axiosRes = await axios.post(url, data, requestConfig);
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;
@@ -62,4 +66,20 @@ const patch = async (url, data) => {
   }
 };
 
-export { get, post, patch };
+const remove = async (url, id) => {
+  const response = {};
+  const requestConfig = { ...config };
+
+  buildHeaders(requestConfig);
+
+  try {
+    const axiosRes = await axios.delete(`${url}/${id}`, requestConfig);
+    response.data = axiosRes.data;
+  } catch (error) {
+    response.error = error;
+  } finally {
+    return response;
+  }
+};
+
+export { get, post, patch, remove };
