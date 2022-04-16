@@ -1,0 +1,32 @@
+.footer{
+  
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-container{
+font-size: 1rem;
+border-radius: 50%;
+width: 1.4rem;
+height: 1.5rem;
+display: flex;
+align-items: center;
+justify-content: center;    
+}
+
+.hr{
+    width:86%;
+    height: 3px !important;
+    color:white;
+    margin:auto;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+}

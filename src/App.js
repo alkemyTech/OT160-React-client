@@ -20,7 +20,6 @@ import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 
-
 function App() {
   return (
     <>
