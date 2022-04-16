@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
-import ActivityDetails from './Components/Activities/Detail/ActivityDetails';
+import ActivityDetails from './Components/Activities/ActivityDetails/ActivityDetails';
 import Register from './Components/Auth/RegisterForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
