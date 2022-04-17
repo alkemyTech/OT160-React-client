@@ -80,5 +80,4 @@ const remove = async (url, id) => {
   }
 };
 
-
 export { get, post, patch, remove };
