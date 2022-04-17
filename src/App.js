@@ -18,6 +18,7 @@ import Backoffice from "./Components/Backoffice/backoffice";
 import EditOrganization from './Components/Organization/EditOrganization';
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
+import Home from './Components/Home';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-          {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
+          <Route path="/" exact component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/about" component={About}/>
           <Route path="/create-activity" component={ActivitiesForm} />
