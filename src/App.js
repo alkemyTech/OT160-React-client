@@ -22,6 +22,7 @@ import ActivitiesList from './Components/Activities/ActivitiesList';
 import { spring, AnimatedSwitch } from 'react-router-transition';
 
 function App() {
+  
   function mapStyles(styles) {
     return {
       opacity: styles.opacity,
@@ -29,7 +30,6 @@ function App() {
     };
   }
 
-  // wrap the `spring` helper to use a bouncy config
   function bounce(val) {
     return spring(val, {
       stiffness: 330,
@@ -56,6 +56,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+
         <AnimatedSwitch
           atEnter={bounceTransition.atEnter}
           atLeave={bounceTransition.atLeave}
