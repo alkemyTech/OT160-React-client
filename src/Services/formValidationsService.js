@@ -56,7 +56,7 @@ const fileValidationExtensions = (image, errors) => {
   } 
 };
 
-const terminos = (name,errors) => {
+const termsValidation = (name, errors) => {
   if(Object.keys(errors).length == 0 && name) {
     errors.terminos = "Debe aceptar los terminos y condiciones"
   }
@@ -71,5 +71,5 @@ export {
   nameValidation,
   lastNameValidation,
   confirmedPasswordValidation,
-  terminos
+  termsValidation
 };

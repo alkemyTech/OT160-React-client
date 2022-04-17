@@ -3,7 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import Pdfcontainer from './Pdfcontainer';
 import "./modal.scss"
 
-export function Terminos({ showErrorTermins }) {
+export function Terms({ showErrorTermins }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
