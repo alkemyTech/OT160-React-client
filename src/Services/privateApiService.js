@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const config = {
-
-    
+  
     headers: {
         Group: 160, //Aqui va el ID del equipo!!
     },
+
 };
 
 const getToken = () => {
@@ -99,3 +99,4 @@ const remove = async (url, id) => {
 };
 
 export { get, post, patch, remove, put };
+
