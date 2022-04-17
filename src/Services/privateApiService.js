@@ -25,11 +25,11 @@ const buildHeaders = (requestConfig) => {
   Object.assign(requestConfig.headers, authHeader);
 };
 
-const get = async (url) => {
+const get = async ( url, id=null) => {
   const response = {};
 
   try {
-    const axiosRes = await axios.get(url, config);
+    const axiosRes =  await axios.get(`${url}${id}`, headerAuthorization());
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;
@@ -80,17 +80,5 @@ const remove = async (url, id) => {
   }
 };
 
-const getAuthorization = async (url, id=null) => {
-  const response = {};
 
-  try {
-    const axiosRes = await axios.get(`${url}${id}`, headerAuthorization());
-    response.data = axiosRes.data;
-  } catch (error) {
-    response.error = error;
-  } finally {
-    return response;
-  }
-};
-
-export { get, post, patch, remove, getAuthorization };
+export { get, post, patch, remove };
