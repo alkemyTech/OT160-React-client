@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { get } from '../../Services/privateApiService';
+import { getUsers } from '../../Services/userApiService';
 
 export const getUsers = createAsyncThunk('user/getUser', async () => {
-    return  get('https://ongapi.alkemy.org/public/api/users')   
+    return await getUsers();  
 });
 
 export const usersSlice = createSlice({
@@ -25,6 +25,5 @@ export const usersSlice = createSlice({
         },
     }
 });
-
 
 export default usersSlice.reducer;
