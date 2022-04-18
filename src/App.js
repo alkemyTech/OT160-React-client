@@ -4,7 +4,7 @@ import {get} from "./Services/privateApiService";
 import UserRoute from './routes/UserRoute'; 
 import PrivateRoute from './routes/PrivateRoute';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
-import ActivityDetails from './Components/Activities/Detail/ActivityDetails';
+import ActivityDetails from './Components/Activities/ActivityDetails/ActivityDetails';
 import Register from './Components/Auth/RegisterForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
@@ -20,12 +20,14 @@ import Backoffice from "./Components/Backoffice/backoffice";
 import EditOrganization from './Components/Organization/EditOrganization';
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
-
+import HomeEditForm from './Components/Home/HomeEditForm';
+import Home from './Components/Home';
+import ActivitiesList from './Components/Activities/ActivitiesList';
 
 function App() {
 
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
-  const [isUsertAuthenticated, setIsUsertAuthenticated] = useState(false);
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(true);
+  const [isUsertAuthenticated, setIsUsertAuthenticated] = useState(true);
 
   useEffect(() => {
     
@@ -36,6 +38,7 @@ function App() {
       <BrowserRouter>
         <Suspense fallback={<div>Loading</div>}>
           <Switch>
+            <Route path="/" component={Home}/>
             <Route path="/register" component={Register} />
             <Route path="/about" component={About}/>
             <Route path="/login" component={Login} />
@@ -45,6 +48,9 @@ function App() {
             <Route path="/activity-details" component={ActivityDetails} />            
             <PrivateRoute path="/create-activity" isAuthenticated={isAdminAuthenticated}>
               <ActivitiesForm />
+            </PrivateRoute>
+            <PrivateRoute path="/home-edition" isAuthenticated={isAdminAuthenticated}>
+              <HomeEditForm />
             </PrivateRoute>
             <PrivateRoute path="/create-category" isAuthenticated={isAdminAuthenticated}>
               <CategoriesForm />
