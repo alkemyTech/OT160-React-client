@@ -1,0 +1,14 @@
+$breakpoints: (
+  "phone":  250px,
+  "tablet" : 390px,
+  "computer": 770px,
+  "smartTV": 1000px
+) !default;
+
+@mixin breakpoint($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+      @media (min-width: map-get($breakpoints, $breakpoint)) {
+        @content;
+      } 
+    }
+}
