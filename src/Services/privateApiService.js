@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const config = {
   headers: {
-    Group: 160,
+    Group: 160, //Aqui va el ID del equipo!!
   },
 };
 
@@ -67,6 +67,22 @@ const patch = async (url, data) => {
   }
 };
 
+const put = async (url, id, data) => {
+  const response = {};
+  const requestConfig = { ...config };
+
+  buildHeaders(requestConfig);
+  
+  try {
+    const axiosRes = await axios.put(url, id, data, requestConfig);
+    response.data = axiosRes.data;
+  } catch (error) {
+    response.error = error;
+  } finally {
+    return response;
+  }
+};
+
 const remove = async (url, id) => {
   const response = {};
   const requestConfig = { ...config };
@@ -83,4 +99,5 @@ const remove = async (url, id) => {
   }
 };
 
-export { get, post, patch, remove };
+export { get, post, patch, remove, put };
+
