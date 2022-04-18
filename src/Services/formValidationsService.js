@@ -58,7 +58,7 @@ const fileValidationExtensions = (image, errors) => {
 
 const termsValidation = (name, errors) => {
   if(Object.keys(errors).length == 0 && name) {
-    errors.terminos = "Debe aceptar los terminos y condiciones"
+    errors.terms = "Debe aceptar los terminos y condiciones"
   }
 };
 

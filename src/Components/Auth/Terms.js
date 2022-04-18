@@ -4,16 +4,16 @@ import Pdfcontainer from './Pdfcontainer';
 import "./modal.scss"
 
 export function Terms({ showErrorTermins }) {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
     const handleAceptTerims = () => {
-       setShow(false);
+        setShowModal(false);
        showErrorTermins(false);
     }
 
     const handleCancelTermins = ()=>{
-        setShow(false);
+        setShowModal(false);
         showErrorTermins(true);
     }
    
@@ -22,7 +22,7 @@ export function Terms({ showErrorTermins }) {
             <Button variant="primary" onClick={handleShow}>
                 Terminos y condiciones
             </Button>
-            <Modal size="lg" show={show} onHide={handleClose}>
+            <Modal size="lg" show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Términos y condiciones</Modal.Title>
                 </Modal.Header>

@@ -61,8 +61,8 @@ const RegisterForm = () => {
                     {errors.password && <div>{errors.password}</div>}
                     <input className="input-field" type="password" name="confirmedPassword" value={values.confirmedPassword} onBlur={handleBlur} onChange={handleChange} placeholder="Confirmar contraseña"></input>
                     {errors.confirmedPassword && <div>{errors.confirmedPassword}</div>}
-                    {errors.terminos && <Terms showErrorTermins={setShowErrortermins}/>}
-                    {(errors.terminos && showErrortermins) && <div>{errors.terminos}</div> }  
+                    {errors.terms && <Terms showErrorTermins={setShowErrortermins}/>}
+                    {(errors.terms && showErrortermins) && <div>{errors.terms}</div> }  
                     <button className="submit-btn" type="submit">Register</button>
                 </form>
               )}
