@@ -27,9 +27,12 @@ const buildHeaders = (requestConfig) => {
 
 const get = async ( url, id=null) => {
   const response = {};
+  const requestConfig = { ...config };
+  
+  buildHeaders(requestConfig);
 
   try {
-    const axiosRes =  await axios.get(`${url}${id}`, headerAuthorization());
+    const axiosRes =  await axios.get(`${url}/${id}`, requestConfig);
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;
