@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
+import ActivityDetails from './Components/Activities/ActivityDetails/ActivityDetails';
 import Register from './Components/Auth/RegisterForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
@@ -17,6 +18,7 @@ import Backoffice from './Components/Backoffice/backoffice';
 import EditOrganization from './Components/Organization/EditOrganization';
 import Login from './Components/Login/Login';
 import UsersList from './Components/Users/UsersList';
+import HomeEditForm from './Components/Home/HomeEditForm';
 import Home from './Components/Home';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 import { spring, AnimatedSwitch } from 'react-router-transition';
@@ -67,6 +69,7 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/about" component={About} />
           <Route path="/create-activity" component={ActivitiesForm} />
+          <Route path="/activities/:id" component={ActivityDetails} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/activities" component={ActivitiesList} />
