@@ -12,16 +12,16 @@ async function getNewsId(id) {
   return await get(`${BASE_URL}${BASE_ENDPOINT_NEWS}/:${id}`);
 };
 
-async function createNews(newDetails) {
-  return await post(`${BASE_URL}${BASE_ENDPOINT_NEWS}`, newDetails);
+async function createNews(newsData) {
+  return await post(`${BASE_URL}${BASE_ENDPOINT_NEWS}`, newsData);
 };
 
-async function updateNewsData(newDetails, id) {
-  return await put(`${BASE_URL}${BASE_ENDPOINT_NEWS}/:${id}`, newDetails);
+async function updateNewsData(newsData, id) {
+  return await put(`${BASE_URL}${BASE_ENDPOINT_NEWS}/:${id}`, newsData);
 };
 
-async function deleteNewsData(newDetails, id) {
-  return await remove(`${BASE_URL}${BASE_ENDPOINT_NEWS}/:${id}`, newDetails);
+async function deleteNewsData(newsData, id) {
+  return await remove(`${BASE_URL}${BASE_ENDPOINT_NEWS}/:${id}`, newsData);
 };
 
 async function getSlides() {
@@ -32,19 +32,16 @@ async function getSlidesId(id) {
   return await get(`${BASE_URL}${BASE_ENDPOINT_SLIDES}/:${id}`);
 };
 
-async function createSlides(slidesDetails) {
-  return await post(`${BASE_URL}${BASE_ENDPOINT_SLIDES}`, slidesDetails);
+async function createSlides(slidesData) {
+  return await post(`${BASE_URL}${BASE_ENDPOINT_SLIDES}`, slidesData);
 };
 
-async function updateSlidesData(slidesDetails, id) {
-  return await put(`${BASE_URL}${BASE_ENDPOINT_SLIDES}/:${id}`, slidesDetails);
+async function updateSlidesData(slidesData, id) {
+  return await put(`${BASE_URL}${BASE_ENDPOINT_SLIDES}/:${id}`, slidesData);
 };
 
-async function deleteSlidesData(slidesDetails, id) {
-  return await remove(
-    `${BASE_URL}${BASE_ENDPOINT_SLIDES}/:${id}`,
-    slidesDetails
-  );
+async function deleteSlidesData(slidesData, id) {
+  return await remove(`${BASE_URL}${BASE_ENDPOINT_SLIDES}/:${id}`, slidesData);
 };
 
 export {
