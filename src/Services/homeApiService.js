@@ -1,6 +1,6 @@
 import { get, post, put, remove } from "./privateApiService";
 
-const BASE_URL = "https://ongapi.alkemy.org/docs";
+const BASE_URL = "https://ongapi.alkemy.org/public/api";
 const BASE_ENDPOINT_NEWS = "/news";
 const BASE_ENDPOINT_SLIDES = "/slides";
 
