@@ -7,6 +7,7 @@ import { patch, post } from '../../Services/privateApiService';
 import { SUPPORTED_FORMATS_IMAGE } from '../../utilities/imagesUtility';
 import '../FormStyles.css';
 import { CREATE_SLIDE_API, UPDATE_SLIDE_API } from '../../utilities/urlApi';
+import { createSlides, updateSlidesData } from '../../Services/homeApiService'
 
 export default function Slides({slide}) {
 
@@ -22,9 +23,9 @@ export default function Slides({slide}) {
 		onSubmit: value => {
 			
 			if (!slide) {
-				post( CREATE_SLIDE_API ,formik.values);
+				post( createSlides ,formik.values);
 			} else {
-				patch(`${UPDATE_SLIDE_API} ${slide.id}`,formik.values);
+				patch(updateSlidesData ,formik.values);
 			}
 		},
 		validationSchema: yup.object({
