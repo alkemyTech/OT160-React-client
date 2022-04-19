@@ -9,7 +9,7 @@ const config = {
 };
 
 const getToken = () => {
-  return JSON.parse(localStorage.getItem('token'));
+  return (localStorage.getItem("token"));
 };
 
 const headerAuthorization = () => {
@@ -21,17 +21,26 @@ const headerAuthorization = () => {
   return headerAuthorization;
 };
 
+const config = {
+  headers: {
+    Group: 160
+  },
+};
+
 const buildHeaders = (requestConfig) => {
   const authHeader = headerAuthorization();
 
   Object.assign(requestConfig.headers, authHeader);
 };
 
-const get = async (url) => {
+const get = async ( url, id=null) => {
   const response = {};
+  const requestConfig = { ...config };
+  
+  buildHeaders(requestConfig);
 
   try {
-    const axiosRes = await axios.get(url, config);
+    const axiosRes =  await axios.get(`${url}/${id}`, requestConfig);
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;
@@ -42,9 +51,11 @@ const get = async (url) => {
 
 const post = async (url, data) => {
   const response = {};
+  const requestConfig = { ...config };
 
+  buildHeaders(requestConfig);
   try {
-    const axiosRes = await axios.post(url, data, config);
+    const axiosRes = await axios.post(url, data, requestConfig);
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;

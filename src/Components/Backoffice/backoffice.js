@@ -1,6 +1,6 @@
 import React,{Fragment} from 'react';
 import "./backoffice.scss";
-import BackofficeNavBar from '../Navbar/backofficeNavbar';
+import Header from '../Header/Header';
 import newsImg from "../../icons/backoffice/001-newspaper.png";
 import activitiesImg from "../../icons/backoffice/002-activities.png";
 import listImg from "../../icons/backoffice/003-list.png";
@@ -13,8 +13,8 @@ import membersImg from "../../icons/backoffice/008-teamwork.png";
 const Backoffice = () => {
 
     return (
-        <Fragment>
-            <BackofficeNavBar />
+        <div className='main-container'>
+            <Header />
             <div className='center-wrapper'>
                 <div className='container'>
                     <div className='box-1'>
@@ -66,7 +66,7 @@ const Backoffice = () => {
                     </div>
                 </div>
             </div>
-        </Fragment>
+        </div>
     );
 }
  
