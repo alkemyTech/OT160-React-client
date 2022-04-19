@@ -71,3 +71,21 @@ function handleForm(data, onSubmit) {
   confirmAlert('Are you sure you want to submit this form?', 'Once you send this data, you can't retract', () => onSubmit(data))
 }
 ```
+
+## Users reducer
+
+### Usage example
+
+```
+Component.js
+
+import {login} from "../../features/users/authReducer.js";
+/// import action directly from reducer
+import { useDispatch } from "react-redux";
+
+const dispatch = useDispatch();
+...
+dispatch(login(values));
+/// directly use values object as parameter 
+
+```
