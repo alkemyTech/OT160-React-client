@@ -1,13 +1,7 @@
 import axios from 'axios';
 
-const config = {
-  headers: {
-    Group: 160, //Aqui va el ID del equipo!!
-  },
-};
-
 const getToken = () => {
-  return JSON.parse(localStorage.getItem('token'));
+  return (localStorage.getItem("token"));
 };
 
 const headerAuthorization = () => {
@@ -17,6 +11,12 @@ const headerAuthorization = () => {
     headerAuthorization.Authorization = `Bearer: ${token}`;
   }
   return headerAuthorization;
+};
+
+const config = {
+  headers: {
+    Group: 160
+  },
 };
 
 const buildHeaders = (requestConfig) => {
@@ -43,9 +43,11 @@ const get = async ( url, id=null) => {
 
 const post = async (url, data) => {
   const response = {};
+  const requestConfig = { ...config };
 
+  buildHeaders(requestConfig);
   try {
-    const axiosRes = await axios.post(url, data, config);
+    const axiosRes = await axios.post(url, data, requestConfig);
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;
