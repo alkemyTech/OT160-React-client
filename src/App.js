@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
 import ActivityDetails from './Components/Activities/ActivityDetails/ActivityDetails';
 import Register from './Components/Auth/RegisterForm';
@@ -23,12 +23,50 @@ import UsersList from './Components/Users/UsersList';
 import HomeEditForm from './Components/Home/HomeEditForm';
 import Home from './Components/Home';
 import ActivitiesList from './Components/Activities/ActivitiesList';
+import { spring, AnimatedSwitch } from 'react-router-transition';
 
 function App() {
+  
+  function mapStyles(styles) {
+    return {
+      opacity: styles.opacity,
+      transform: `scale(${styles.scale})`,
+    };
+  }
+
+  function bounce(val) {
+    return spring(val, {
+      stiffness: 330,
+      damping: 22,
+    });
+  }
+
+  const bounceTransition = {
+    atEnter: {
+      opacity: 0.5,
+      scale: bounce(10),
+    },
+    atLeave: {
+      opacity: bounce(0),
+      scale: bounce(0.8),
+    },
+    atActive: {
+      opacity: bounce(1),
+
+      scale: bounce(1),
+    },
+  };
+
   return (
     <>
       <BrowserRouter>
-        <Switch>
+
+        <AnimatedSwitch
+          atEnter={bounceTransition.atEnter}
+          atLeave={bounceTransition.atLeave}
+          atActive={bounceTransition.atActive}
+          mapStyles={mapStyles}
+        >
           <Route path="/" exact component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/about" component={About} />
@@ -62,7 +100,7 @@ function App() {
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={Login} />
-        </Switch>
+        </AnimatedSwitch>
       </BrowserRouter>
     </>
   );
