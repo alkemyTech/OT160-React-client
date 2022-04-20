@@ -1,5 +1,13 @@
 import axios from 'axios';
 
+const config = {
+  
+    headers: {
+        Group: 160, //Aqui va el ID del equipo!!
+    },
+
+};
+
 const getToken = () => {
   return (localStorage.getItem("token"));
 };
