@@ -1,15 +1,13 @@
 import axios from 'axios';
 
 const config = {
-  
-    headers: {
-        Group: 160, //Aqui va el ID del equipo!!
-    },
-
+  headers: {
+    Group: 160,
+  },
 };
 
 const getToken = () => {
-  return (localStorage.getItem("token"));
+  return localStorage.getItem('token');
 };
 
 const headerAuthorization = () => {
@@ -21,26 +19,20 @@ const headerAuthorization = () => {
   return headerAuthorization;
 };
 
-const config = {
-  headers: {
-    Group: 160
-  },
-};
-
 const buildHeaders = (requestConfig) => {
   const authHeader = headerAuthorization();
 
   Object.assign(requestConfig.headers, authHeader);
 };
 
-const get = async ( url, id=null) => {
+const get = async (url, id = null) => {
   const response = {};
   const requestConfig = { ...config };
-  
+
   buildHeaders(requestConfig);
 
   try {
-    const axiosRes =  await axios.get(`${url}/${id}`, requestConfig);
+    const axiosRes = await axios.get(`${url}/${id}`, requestConfig);
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;
@@ -82,7 +74,7 @@ const put = async (url, id, data) => {
   const requestConfig = { ...config };
 
   buildHeaders(requestConfig);
-  
+
   try {
     const axiosRes = await axios.put(url, id, data, requestConfig);
     response.data = axiosRes.data;
@@ -110,4 +102,3 @@ const remove = async (url, id) => {
 };
 
 export { get, post, patch, remove, put };
-
