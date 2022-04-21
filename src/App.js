@@ -1,6 +1,6 @@
-import React,{ Suspense, useState, useEffect } from 'react';
+import React,{ Suspense, useState, useContext } from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import {get} from "./Services/privateApiService";
+import { ReactReduxContext } from 'react-redux'
 import UserRoute from './routes/UserRoute'; 
 import PrivateRoute from './routes/PrivateRoute';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
@@ -25,11 +25,18 @@ import Home from './Components/Home';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 
 function App() {
-
+  const [isUsertAuthenticated, setIsUsertAuthenticated] = useState(false);
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(true);
-  const [isUsertAuthenticated, setIsUsertAuthenticated] = useState(true);
 
-  useEffect(() => {
+  const {store} = useContext(ReactReduxContext);
+
+  store.subscribe(() => {
+    const stores = store.getState();
+    if(stores.user.userData.role_id === 1){
+      setIsAdminAuthenticated(true);
+    } else if (stores.user.userData.role_id === 2){
+      setIsUsertAuthenticated(true)
+    }
     
   });
 
@@ -38,7 +45,7 @@ function App() {
       <BrowserRouter>
         <Suspense fallback={<div>Loading</div>}>
           <Switch>
-            <Route path="/" component={Home}/>
+            <Route path="/" exact component={Home}/>
             <Route path="/register" component={Register} />
             <Route path="/about" component={About}/>
             <Route path="/login" component={Login} />
