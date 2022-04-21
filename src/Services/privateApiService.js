@@ -1,29 +1,38 @@
-import axios from "axios";
-
-const config = {
-  headers: {
-    Group: 160, //Aqui va el ID del equipo!!
-  },
-};
+import axios from 'axios';
 
 const getToken = () => {
-  return JSON.parse(localStorage.getItem("token"));
+  return (localStorage.getItem("token"));
 };
 
 const headerAuthorization = () => {
   const token = getToken();
-  const headerAuthorization = { authorization: "" };
+  const headerAuthorization = { Authorization: '' };
   if (token) {
-    headerAuthorization.authorization = `Bearer: ${token}`;
+    headerAuthorization.Authorization = `Bearer: ${token}`;
   }
   return headerAuthorization;
 };
 
-const get = async (url) => {
+const config = {
+  headers: {
+    Group: 160
+  },
+};
+
+const buildHeaders = (requestConfig) => {
+  const authHeader = headerAuthorization();
+
+  Object.assign(requestConfig.headers, authHeader);
+};
+
+const get = async ( url, id=null) => {
   const response = {};
+  const requestConfig = { ...config };
+  
+  buildHeaders(requestConfig);
 
   try {
-    const axiosRes = await axios.get(url, config);
+    const axiosRes =  await axios.get(`${url}/${id}`, requestConfig);
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;
@@ -34,9 +43,11 @@ const get = async (url) => {
 
 const post = async (url, data) => {
   const response = {};
+  const requestConfig = { ...config };
 
+  buildHeaders(requestConfig);
   try {
-    const axiosRes = await axios.post(url, data, config);
+    const axiosRes = await axios.post(url, data, requestConfig);
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;
@@ -58,4 +69,37 @@ const patch = async (url, data) => {
   }
 };
 
-export { get, post, patch };
+const put = async (url, id, data) => {
+  const response = {};
+  const requestConfig = { ...config };
+
+  buildHeaders(requestConfig);
+  
+  try {
+    const axiosRes = await axios.put(url, id, data, requestConfig);
+    response.data = axiosRes.data;
+  } catch (error) {
+    response.error = error;
+  } finally {
+    return response;
+  }
+};
+
+const remove = async (url, id) => {
+  const response = {};
+  const requestConfig = { ...config };
+
+  buildHeaders(requestConfig);
+
+  try {
+    const axiosRes = await axios.delete(`${url}/${id}`, requestConfig);
+    response.data = axiosRes.data;
+  } catch (error) {
+    response.error = error;
+  } finally {
+    return response;
+  }
+};
+
+export { get, post, patch, remove, put };
+

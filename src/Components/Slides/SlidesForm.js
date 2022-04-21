@@ -3,10 +3,9 @@ import { useFormik } from 'formik';
 import * as yup from 'yup'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { patch, post } from '../../Services/privateApiService';
 import { SUPPORTED_FORMATS_IMAGE } from '../../utilities/imagesUtility';
 import '../FormStyles.css';
-import { CREATE_SLIDE_API, UPDATE_SLIDE_API } from '../../utilities/urlApi';
+import { createSlides, updateSlidesData } from '../../Services/homeApiService'
 
 export default function Slides({slide}) {
 
@@ -22,9 +21,9 @@ export default function Slides({slide}) {
 		onSubmit: value => {
 			
 			if (!slide) {
-				post( CREATE_SLIDE_API ,formik.values);
+				createSlides(formik.values);
 			} else {
-				patch(`${UPDATE_SLIDE_API} ${slide.id}`,formik.values);
+				updateSlidesData(formik.values);
 			}
 		},
 		validationSchema: yup.object({
