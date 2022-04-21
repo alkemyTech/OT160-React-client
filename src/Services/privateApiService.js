@@ -21,12 +21,6 @@ const headerAuthorization = () => {
   return headerAuthorization;
 };
 
-const config = {
-  headers: {
-    Group: 160
-  },
-};
-
 const buildHeaders = (requestConfig) => {
   const authHeader = headerAuthorization();
 
