@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { errorAlert } from './alertService';
+
 const config = {
   headers: {
     Group: 160, //Aqui va el ID del equipo!!
