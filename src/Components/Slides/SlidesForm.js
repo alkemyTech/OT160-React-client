@@ -23,9 +23,9 @@ export default function Slides({slide}) {
 		onSubmit: value => {
 			
 			if (!slide) {
-				post( createSlides ,formik.values);
+				createSlides(formik.values);
 			} else {
-				patch(updateSlidesData ,formik.values);
+				updateSlidesData(formik.values);
 			}
 		},
 		validationSchema: yup.object({
