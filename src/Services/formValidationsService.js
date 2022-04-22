@@ -33,7 +33,7 @@ const passwordValidationEightLength = (password, errors) => {
 };
   
 const passwordValidationSpecialCharacters = (password, errors) => {
-  if (!/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i.test(password)) {
+  if (!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i.test(password)) {
     errors.password = "La contraseña debe tener al menos una letra, un número y un caracter especial";
   }
 };
@@ -62,6 +62,15 @@ const termsValidation = (name, errors) => {
   }
 };
 
+const titleValidation = (title, errors) => {
+  if(!title){
+    errors.title = "Requerido";
+  } 
+  if (title.length < 4){
+    errors.title = "El título debe ser de al menos 4 caracteres";
+  } 
+};
+
 export { 
   nameValidationFourLength, 
   passwordValidationEightLength,
@@ -71,5 +80,6 @@ export {
   nameValidation,
   lastNameValidation,
   confirmedPasswordValidation,
-  termsValidation
+  termsValidation,
+  titleValidation
 };
