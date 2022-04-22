@@ -2,7 +2,6 @@ import React,{ Suspense, useState, useContext } from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import { spring, AnimatedSwitch } from 'react-router-transition';
 import { ReactReduxContext } from 'react-redux'
-import UserRoute from './routes/UserRoute'; 
 import PrivateRoute from './routes/PrivateRoute';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
 import ActivityDetails from './Components/Activities/ActivityDetails/ActivityDetails';
@@ -28,8 +27,8 @@ import Home from './Components/Home';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 
 function App() {
-  const [isUsertAuthenticated, setIsUsertAuthenticated] = useState(false);
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(true);
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
 
   const {store} = useContext(ReactReduxContext);
 
@@ -38,11 +37,10 @@ function App() {
     if(stores.user.userData.role_id === 1){
       setIsAdminAuthenticated(true);
     } else if (stores.user.userData.role_id === 2){
-      setIsUsertAuthenticated(true)
+      setIsUserAuthenticated(true)
     }
-    
   });
-  
+
   function mapStyles(styles) {
     return {
       opacity: styles.opacity,
@@ -100,40 +98,40 @@ function App() {
             <Route path="/school-campaign" component={SchoolCampaign} />
             <Route path="/toys-campaign" component={ToysCampaign} />
             <Route path="/login" component={Login} />
-            <PrivateRoute path="/create-activity" isAuthenticated={isAdminAuthenticated}>
+            <PrivateRoute path="/create-activity" isAuthenticated={isAdminAuthenticated} redirect="/">
               <ActivitiesForm />
             </PrivateRoute>
-            <PrivateRoute path="/home-edition" isAuthenticated={isAdminAuthenticated}>
+            <PrivateRoute path="/home-edition" isAuthenticated={isAdminAuthenticated} redirect="/">
               <HomeEditForm />
             </PrivateRoute>
-            <PrivateRoute path="/create-category" isAuthenticated={isAdminAuthenticated}>
+            <PrivateRoute path="/create-category" isAuthenticated={isAdminAuthenticated} redirect="/">
               <CategoriesForm />
             </PrivateRoute>
-            <PrivateRoute path="/backoffice/organization/edit" isAuthenticated={isAdminAuthenticated}>
+            <PrivateRoute path="/backoffice/organization/edit" isAuthenticated={isAdminAuthenticated} redirect="/">
               <EditOrganization />
             </PrivateRoute>
-            <PrivateRoute path="/create-news" isAuthenticated={isAdminAuthenticated}>
+            <PrivateRoute path="/create-news" isAuthenticated={isAdminAuthenticated} redirect="/">
               <NewsForm />
             </PrivateRoute>
-            <UserRoute path="/create-testimonials" isAuthenticated={isUsertAuthenticated}>
+            <PrivateRoute path="/create-testimonials" isAuthenticated={isUserAuthenticated} redirect="/login">
               <TestimonialForm />
-            </UserRoute>
-            <PrivateRoute path="/create-member" isAuthenticated={isAdminAuthenticated}>
+            </PrivateRoute>
+            <PrivateRoute path="/create-member" isAuthenticated={isAdminAuthenticated} redirect="/">
               <MembersForm />
             </PrivateRoute>
-            <PrivateRoute path="/create-project" isAuthenticated={isAdminAuthenticated}>
+            <PrivateRoute path="/create-project" isAuthenticated={isAdminAuthenticated} redirect="/">
               <ProjectsForm />
             </PrivateRoute>
-            <PrivateRoute path="/backoffice" isAuthenticated={isAdminAuthenticated}>
+            <PrivateRoute path="/backoffice" isAuthenticated={isAdminAuthenticated} redirect="/">
               <Backoffice />
             </PrivateRoute>
-            <PrivateRoute path="/backoffice/slides" isAuthenticated={isAdminAuthenticated}>
+            <PrivateRoute path="/backoffice/slides" isAuthenticated={isAdminAuthenticated} redirect="/">
               <SlidesForm />
             </PrivateRoute>
-            <PrivateRoute path="/backoffice/activities" isAuthenticated={isAdminAuthenticated}>
+            <PrivateRoute path="/backoffice/activities" isAuthenticated={isAdminAuthenticated} redirect="/">
               <ActivitiesList />
             </PrivateRoute>
-            <PrivateRoute path="/backoffice/users" isAuthenticated={isAdminAuthenticated}>
+            <PrivateRoute path="/backoffice/users" isAuthenticated={isAdminAuthenticated} redirect="/">
               <UsersList />
             </PrivateRoute>
           </AnimatedSwitch>

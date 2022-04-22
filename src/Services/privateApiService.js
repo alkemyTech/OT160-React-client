@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { errorAlert } from './alertService';
+import { errorAlert } from './alertsService';
 
 const config = {
   headers: {
