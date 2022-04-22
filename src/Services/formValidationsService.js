@@ -56,6 +56,11 @@ const fileValidationExtensions = (image, errors) => {
   } 
 };
 
+const termsValidation = (name, errors) => {
+  if(Object.keys(errors).length == 0 && name) {
+    errors.terms = "Debe aceptar los terminos y condiciones"
+  }
+};
 
 export { 
   nameValidationFourLength, 
@@ -65,5 +70,6 @@ export {
   emailValidation,
   nameValidation,
   lastNameValidation,
-  confirmedPasswordValidation
+  confirmedPasswordValidation,
+  termsValidation
 };

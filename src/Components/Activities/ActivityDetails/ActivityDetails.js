@@ -36,8 +36,8 @@ export default function ActivityDetails() {
     <div>
       <h3>Detail Section</h3>
       <ActivityDetailsCard
-        title={response.title}
-        description={response.description}
+        title={response.data.title}
+        description={response.data.description}
       />
     </div>
   );

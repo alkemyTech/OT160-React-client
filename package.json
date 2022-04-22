@@ -25,7 +25,9 @@
     "react-transition-group": "^4.4.2",
     "sass": "^1.49.9",
     "sweetalert2": "^11.4.8",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "@react-pdf/renderer": "^2.1.1",
+    "react-pdf": "^5.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
