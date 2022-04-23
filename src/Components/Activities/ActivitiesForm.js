@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../FormStyles.css';
-
+import {createActivity} from '../../Services/activitiesService';
 const ActivitiesForm = () => {
     const [initialValues, setInitialValues] = useState({
         name: '',
@@ -17,7 +17,8 @@ const ActivitiesForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(initialValues);
+       
+        createActivity(initialValues)
     }
     
     return (

@@ -1,46 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { Table, Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
-
+import React, { useState, useEffect } from 'react';
+import { Table, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
+import {
+  showActivities,
+  updateActivity,
+  deleteActivity,
+} from '../../Services/activitiesService';
 const ActivitiesList = () => {
-  const activitiesMock = [
-    {
-      id: 1,
-      name: "Titulo de prueba",
-      image: "Descripcion de prueba",
-      createdAt: "Descripcion de prueba",
-    },
-    {
-      id: 2,
-      name: "Titulo de prueba",
-      image: "Descripcion de prueba",
-      createdAt: "Descripcion de prueba",
-    },
-    {
-      id: 3,
-      name: "Titulo de prueba",
-      image: "Descripcion de prueba",
-      createdAt: "Descripcion de prueba",
-    },
-  ];
-
   const [dataTable, setDataTable] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getDataActivities();
-  },[])
+  }, []);
 
   function getDataActivities() {
     //aqui deberia llamarse al endpoind de listado de actividades
-    setDataTable(activitiesMock);
-  };
-
-  function handleEditTable() {
-    //colocar aqui la posterior implementacion del boton editar
+    setDataTable(showActivities());
   }
-  function handleDeteleTable() {
-    //colocar aqui la posterior implementacion del boton eliminar
+
+  function handleEditTable(element) {
+    updateActivity(element.id, element);
+  }
+  function handleDeleteTable(id) {
+    deleteActivity(id);
   }
 
   return (
@@ -70,14 +53,14 @@ const ActivitiesList = () => {
                 <td>
                   <button
                     className="btn btn-secondary"
-                    onClick={handleEditTable}
+                    onClick={handleEditTable(element)}
                   >
                     Editar
                   </button>
                   {"  "}
                   <button
                     className="btn btn-danger"
-                    onClick={handleDeteleTable}
+                    onClick={handleDeleteTable(element.id)}
                   >
                     Eliminar
                   </button>
@@ -92,4 +75,3 @@ const ActivitiesList = () => {
 };
 
 export default ActivitiesList;
-
