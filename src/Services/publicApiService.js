@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { errorAlert } from './alertService';
 const config = {
     headers: {
         Group: 160
@@ -22,6 +22,8 @@ const post = async(url,body) => {
         response.data = data;
     } catch (err) {
         response.error = err;
+        errorAlert(`Error al realizar la peticion: ${response.error.status}`,response.error.message);
+
     }
 
     return response;
