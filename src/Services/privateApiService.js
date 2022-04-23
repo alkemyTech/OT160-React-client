@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { errorAlert } from './alertService';
+import { errorAlert } from './alertsService';
 
 const config = {
   headers: {
@@ -8,12 +8,12 @@ const config = {
 };
 
 const getToken = () => {
-  return localStorage.getItem("token");
+  return localStorage.getItem('token');
 };
 
 const headerAuthorization = () => {
   const token = getToken();
-  const headerAuthorization = { Authorization: "" };
+  const headerAuthorization = { Authorization: '' };
   if (token) {
     headerAuthorization.Authorization = `Bearer: ${token}`;
   }

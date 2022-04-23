@@ -8,12 +8,6 @@
   align-items: center;
 }
 
-.label-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
 .input-field {
   padding: 15px 30px;
   border: 1px solid #c1c1c1;
@@ -22,7 +16,6 @@
 .file-input-div {
   display: flex;
   align-items: center;
-  column-gap: 1.2%;
 }
 
 .form-input-div {
@@ -49,18 +42,7 @@
   color: #fff;
 }
 
-.secondary-btn {
-  color: #2e86c1;
-  padding: 10px 15px;
-  background-color: transparent;
-  border-color: #2e86c1;
-}
-
 .submit-btn:hover {
   cursor: pointer;
   background-color: #3498db;
-}
-
-.error {
-  color: red;
 }

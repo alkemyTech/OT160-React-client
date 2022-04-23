@@ -1,241 +1,151 @@
-import React, { useRef, useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import React from 'react';
+import { useFormik } from 'formik';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import PreviewImage from './PreviewImage';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import '../FormStyles.css';
+import {
+  fileValidationExtensions,
+  isUrlValid,
+} from '../../Services/formValidationsService';
 
-const MembersForm = () => {
+const MembersForm = (props) => {
+  const { member } = props;
 
-  const [sentForm, changeSentForm] = useState(false);
-  const [editMember, setEditMember] = useState(false);
+  const formik = useFormik({
+    initialValues: {
+      name: member?.name || '',
+      description: member?.description || '',
+      image: member?.image || '',
+      facebookUrl: member?.facebookUrl || '',
+      linkedinUrl: member?.linkedinUrl || '',
+    },
+    validate,
+    validateOnChange: false,
+    validateOnBlur: false,
+    onSubmit: handleFormSubmit,
+  });
 
-  const memberEditMock = {
-    name: 'Fer Leiva',
-    description: '<p>Description <strong>example</strong></p>',
-    linkedIn: 'https://www.linkedin.com/in/effeleiva/',
-    gitHub: 'https://github.com/FerLeiva/',
-};
+  function handleDescriptionChange(event, editor) {
+    formik.setValues((previous) => {
+      previous.description = editor.getData();
+      return previous;
+    });
+  }
 
-  const fileRef = useRef(null);
+  function handleFormSubmit(values) {
+    console.log(values); // @todo: submit service
+  }
 
-  const validateName = (values, errors) => {
-    if(!values.name){
-        errors.name = 'Por favor escribe un nombre.'
-    } else if(values.name.length <= 3){
-        errors.name = 'El nombre debe contener mas de tres caracteres.'
-    };
-  };
-  const validateDescription = (values, errors) => {
-    if(!values.description){
-        errors.description = 'Por favor escribe una descripcion.'
-    };
-  };
-  const validateImage = (values, errors, supportedFormats) => {
-        if(values.image === null){
-            errors.image = 'Por favor sube una imagen.'
-        } else if(!supportedFormats.includes(values.image.type)){
-            errors.image = 'Las imagenes deben ser en formato .jpg, .jpeg o .png .'
-        } else if(values.image.size > 1000000){
-            errors.image = 'El tamaño de la imagen no puede ser mayor a 1mb.'
-        };
-    };  
-  const validateLinkedIn = (values, errors) => {
-    if(!values.linkedIn){
-        errors.linkedIn = 'Por favor proporciona una cuenta de LinkedIn.'
-    } else if(!values.linkedIn.match(/(https?:\/\/(www.)|(www.))?linkedin.com\/(mwlite\/|m\/)?in\/[a-zA-Z0-9_.-]+\/?/)){
-        errors.linkedIn = 'Por favor proporciona una cuenta de LinkedIn valida.'
-    };
-  };
-  const validateGitHub = (values, errors) => {
-    if(!values.gitHub){
-        errors.gitHub = 'Por favor proporciona una cuenta de GitHub.'
-    } else if(!values.gitHub.match(/(https?:\/\/(www.)|(www.))?github.com\/[a-zA-Z0-9_.-]+\/?/)){
-        errors.gitHub = 'Por favor proporciona una cuenta de GitHub valida.'
-    };
-  };
+  function validateName(name, errors) {
+    if (!name) {
+      errors.name = 'Debes ingresar un nombre';
+    } else if (name.length < 4) {
+      errors.name = 'El nombre debe tener al menos 4 caracteres';
+    }
+  }
+
+  function validateDescription(description, errors) {
+    if (!description) {
+      errors.description = 'Debes ingresar una descripción';
+    }
+  }
+
+  function validateFacebook(url, errors) {
+    if (!url) {
+      errors.facebookUrl = 'Debes ingresar un usuario de Facebook';
+    } else if (!isUrlValid(url)) {
+      errors.facebookUrl = 'La url ingresada no es válida';
+    }
+  }
+
+  function validateLinkedin(url, errors) {
+    if (!url) {
+      errors.linkedinUrl = 'Debes ingresar un usuario de LinkedIn';
+    } else if (!isUrlValid(url)) {
+      errors.linkedinUrl = 'La url ingresada no es válida';
+    }
+  }
+
+  function validate(values) {
+    const errors = {};
+
+    validateName(values.name, errors);
+    validateDescription(values.description, errors);
+    fileValidationExtensions(values.image, errors);
+    validateFacebook(values.facebookUrl, errors);
+    validateLinkedin(values.linkedinUrl, errors);
+
+    return errors;
+  }
 
   return (
+    <form className="form-container" onSubmit={formik.handleSubmit}>
+      <div className="form-input-div">
+        <input
+          className="input-field"
+          type="text"
+          name="name"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          placeholder="Nombre del miembro"
+        />
+        <p className="error-message">{formik.errors.name}</p>
+      </div>
 
-    <>
-            <Formik
-                initialValues={{
-                    name: '',
-                    description: '',
-                    image: null,
-                    linkedIn: '',
-                    gitHub: '',
-                }}
-                validate={(values) => {
-                    const errors = {};
-                    const supportedFormats = ["image/jpg", "image/jpeg", "image/png"];
-                    validateName(values, errors);
-                    validateDescription(values, errors);
-                    validateImage(values, errors, supportedFormats);
-                    validateLinkedIn(values, errors);
-                    validateGitHub(values, errors);
-                    return errors;
-                }}
-                onSubmit={(values, { resetForm }) => {
-                    console.log(values);
-                    changeSentForm(true);
-                    setTimeout(() => changeSentForm(false), 5000);
-                    resetForm();
-                }}
-            >
-                {({ values, errors, setFieldValue, }) => {
-                    if (editMember) {
-                        values.name = memberEditMock.name;
-                        values.description = memberEditMock.description;
-                        values.linkedIn = memberEditMock.linkedIn;
-                        values.gitHub = memberEditMock.gitHub;
-                    };
-                    return (
-                        <Form className="form-container">
-                            <div className="form-group">
-                                <label htmlFor='name'>Name</label>
-                                <Field
-                                    className="form-control"
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    placeholder={"Escribe un nombre"}
-                                />
-                                <ErrorMessage name="name" component={() => (
-                                    <div className="error">{errors.name}</div>
-                                )} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor='description'>Description</label>
-                                <Field
-                                    className="form-control"
-                                    id="description"
-                                    name="description"
-                                >
-                                    {() => {
-                                        return (
-                                            <>
-                                                <CKEditor
-                                                    editor={ ClassicEditor }
-                                                    config={{placeholder: "Escribe una descripcion"}} 
-                                                    data={values.description}
-                                                    onChange={(e, editor) => {
-                                                        values.description= editor.getData();
-                                                    }}
-                                                />
-                                            </>
-                                        );
-                                    }}
-                                </Field>
-                                <ErrorMessage name="description" component={() => (
-                                    <div className="error">{errors.description}</div>
-                                )} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor='linkedIn'>LinkedIn</label>
-                                <Field
-                                    className="form-control"
-                                    type="text"
-                                    id="linkedIn"
-                                    name="linkedIn"
-                                    placeholder={"LinkedIn URL"}
-                                />
-                                <ErrorMessage name="linkedIn" component={() => (
-                                    <div className="error">{errors.linkedIn}</div>
-                                )} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor='gitHub'>GitHub</label>
-                                <Field
-                                    className="form-control"
-                                    type="text"
-                                    id="gitHub"
-                                    name="gitHub"
-                                    placeholder={"GitHub URL"}
-                                />
-                                <ErrorMessage name="gitHub" component={() => (
-                                    <div className="error">{errors.gitHub}</div>
-                                )} />
-                            </div>
-                            <div className="label-container">
-                                <input
-                                    ref={fileRef}
-                                    hidden
-                                    className="form-control-file"
-                                    type="file"
-                                    onChange={(e) => {
-                                        setFieldValue("image", e.target.files[0]);
-                                    }}
-                                />
-                                    {values.image && <PreviewImage image={values.image}/>}
-                                <button
-                                    type="button"
-                                    className='btn btn-outline-danger'
-                                    onClick={() => {
-                                        fileRef.current.click();
-                                    }}
-                                >
-                                    Sube una imagen
-                                </button>
-                                <ErrorMessage name="image" component={() => (
-                                    <div className="error">{errors.image}</div>
-                                )} />
-                            </div>
-                            <button className="btn btn-danger" type="submit">Enviar</button>
-                            {sentForm && <p className='success'>Formulario enviado correctamente</p>}
-                        </Form>
-                    )
-                }}
-            </Formik>
-        </>
+      <div className="form-input-div">
+        <CKEditor
+          editor={ClassicEditor}
+          data={formik.values.description}
+          onChange={handleDescriptionChange}
+        ></CKEditor>
+        <p className="error-message">{formik.errors.description}</p>
+      </div>
+
+      <div className="form-input-div">
+        <div className="file-input-div">
+          <label>
+            Imagen del miembro
+            <input
+              className="input-field"
+              type="file"
+              name="image"
+              value={formik.values.image}
+              onChange={formik.handleChange}
+            />
+          </label>
+        </div>
+        <p className="error-message">{formik.errors.image}</p>
+      </div>
+
+      <div className="form-input-div">
+        <input
+          className="input-field"
+          type="text"
+          name="facebookUrl"
+          value={formik.values.facebookUrl}
+          onChange={formik.handleChange}
+          placeholder="Direccion de Facebook"
+        />
+        <p className="error-message">{formik.errors.facebookUrl}</p>
+      </div>
+
+      <div className="form-input-div">
+        <input
+          className="input-field"
+          type="text"
+          name="linkedinUrl"
+          value={formik.values.linkedinUrl}
+          onChange={formik.handleChange}
+          placeholder="Direccion de Linkedin"
+        />
+        <p className="error-message">{formik.errors.linkedinUrl}</p>
+      </div>
+
+      <button className="submit-btn" type="submit">
+        Enviar
+      </button>
+    </form>
   );
-}
- 
+};
+
 export default MembersForm;
-
-// import React, { useRef, useState } from 'react';
-// import '../../Components/FormStyles.css';
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-// import { CKEditor } from '@ckeditor/ckeditor5-react';
-// import Previewimage from './PreviewImage';
-
-// let id = false;
-
-// const NewsForm = () => {
-//     // This state is for testing the form when submitted, it will be removed later.
-//     const [sentForm, changeSentForm] = useState(false);
-
-//     // The following code is a first approximation of how the form will act if it
-//     // recieves an id (editting form), or not (creation form). To test it, set
-//     // the variable id outise this component to true.
-//     const IsEdit = (values) => {
-//         let newsEditMock = {
-//             name: 'Title example',
-//             description: '<p>Content <strong>example</strong></p>',
-//             links: '2',
-//         };
-//         if (id === true) {
-//             values.name = newsEditMock.name;
-//             values.description = newsEditMock.description;
-//             values.links = newsEditMock.links;
-//             id=false;
-//         };
-//     };
-
-//     const fileRef = useRef(null);
-
-//     // This array of objects is for testing the links map. It will be replaced
-//     // with the existing categories in the endpoint/categories when existing.
-//     const categoriesMock = [
-//         {id: 1, name: 'Demo option 1'},
-//         {id: 2, name: 'Demo option 2'},
-//         {id: 3, name: 'Demo option 3'},
-//     ];
-
-//     return (
-        
-//     );
-// };
- 
-// export default NewsForm;
