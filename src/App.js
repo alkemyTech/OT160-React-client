@@ -24,6 +24,8 @@ import HomeEditForm from './Components/Home/HomeEditForm';
 import Home from './Components/Home';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 import { spring, AnimatedSwitch } from 'react-router-transition';
+import ActivitiesHome from './Components/Activities/ActivitiesHome';
+
 
 function App() {
   
@@ -70,6 +72,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/about" component={About} />
+          <Route path="/actividades" component={ActivitiesHome} />
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/activities/:id" component={ActivityDetails} />
           <Route path="/create-category" component={CategoriesForm} />
