@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { errorAlert } from './alertService';
+import { errorAlert } from './alertsService';
 
 const config = {
   headers: {
@@ -67,9 +67,10 @@ const post = async (url, data) => {
 
 const patch = async (url, data) => {
   const response = {};
-
+  const requestConfig = { ...config };
+  buildHeaders(requestConfig);
   try {
-    const axiosRes = await axios.patch(url, data, config);
+    const axiosRes = await axios.patch(url, data, requestConfig);
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;
