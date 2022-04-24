@@ -6,6 +6,7 @@ import ActivityDetails from './Components/Activities/ActivityDetails/ActivityDet
 import Register from './Components/Auth/RegisterForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
+import Slides from "./Components/Slides/Slides";
 import SlidesForm from './Components/Slides/SlidesForm';
 import TestimonialForm from './Components/Testimonials/TestimonialsForm';
 import UserForm from './Components/Users/UsersForm';
@@ -76,7 +77,8 @@ function App() {
           <Route path="/backoffice/members/edit" component={MembersForm} />
           <Route path="/backoffice/organization" component={HomeEditForm} />
           <Route path="/backoffice/activities" component={ActivitiesList} />
-          <Route path="/backoffice/Slides" component={SlidesForm} />
+          <Route path="/backoffice/Slides" component={Slides} />
+          <Route path="/backoffice/Slides/create" component={SlidesForm} />
           <Route
             path="/backoffice/organization/edit"
             component={EditOrganization}
