@@ -26,7 +26,6 @@ import ActivitiesList from './Components/Activities/ActivitiesList';
 import { spring, AnimatedSwitch } from 'react-router-transition';
 
 function App() {
-  
   function mapStyles(styles) {
     return {
       opacity: styles.opacity,
@@ -60,7 +59,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-
         <AnimatedSwitch
           atEnter={bounceTransition.atEnter}
           atLeave={bounceTransition.atLeave}
@@ -75,6 +73,7 @@ function App() {
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route exact path="/backoffice" component={Backoffice} />
+          <Route path="/backoffice/members/edit" component={MembersForm} />
           <Route path="/backoffice/organization" component={HomeEditForm} />
           <Route path="/backoffice/activities" component={ActivitiesList} />
           <Route path="/backoffice/Slides" component={SlidesForm} />
@@ -88,9 +87,8 @@ function App() {
           <Route path="/create-user" component={UserForm} />
           <Route
             path="/donate"
-            component={
-            () => {
-              const welcomeText = "Bienvenido a la seccion de donacines.";
+            component={() => {
+              const welcomeText = 'Bienvenido a la seccion de donacines.';
               return <Donation text={welcomeText} />;
             }}
           />
