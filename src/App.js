@@ -1,6 +1,8 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import React,{ Suspense, useState, useContext } from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
+import { spring, AnimatedSwitch } from 'react-router-transition';
+import { ReactReduxContext } from 'react-redux'
+import PrivateRoute from './routes/PrivateRoute';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
 import ActivityDetails from './Components/Activities/ActivityDetails/ActivityDetails';
 import Register from './Components/Auth/RegisterForm';
@@ -24,9 +26,22 @@ import UsersList from './Components/Users/UsersList';
 import HomeEditForm from './Components/Home/HomeEditForm';
 import Home from './Components/Home';
 import ActivitiesList from './Components/Activities/ActivitiesList';
-import { spring, AnimatedSwitch } from 'react-router-transition';
 
 function App() {
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+
+  const {store} = useContext(ReactReduxContext);
+
+  store.subscribe(() => {
+    const stores = store.getState();
+    if(stores.user.userData.role_id === 1){
+      setIsAdminAuthenticated(true);
+    } else if (stores.user.userData.role_id === 2){
+      setIsUserAuthenticated(true)
+    }
+  });
+
   function mapStyles(styles) {
     return {
       opacity: styles.opacity,
@@ -60,47 +75,68 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <AnimatedSwitch
-          atEnter={bounceTransition.atEnter}
-          atLeave={bounceTransition.atLeave}
-          atActive={bounceTransition.atActive}
-          mapStyles={mapStyles}
-        >
-          <Route path="/" exact component={Home} />
-          <Route path="/register" component={Register} />
-          <Route path="/about" component={About} />
-          <Route path="/create-activity" component={ActivitiesForm} />
-          <Route path="/activities/:id" component={ActivityDetails} />
-          <Route path="/create-category" component={CategoriesForm} />
-          <Route path="/create-news" component={NewsForm} />
-          <Route exact path="/backoffice" component={Backoffice} />
-          <Route path="/backoffice/members/edit" component={MembersForm} />
-          <Route path="/backoffice/organization" component={HomeEditForm} />
-          <Route path="/backoffice/activities" component={ActivitiesList} />
-          <Route path="/backoffice/Slides" component={Slides} />
-          <Route path="/backoffice/Slides/create" component={SlidesForm} />
-          <Route
-            path="/backoffice/organization/edit"
-            component={EditOrganization}
-          />
-          <Route exact path="/backoffice/users" component={UsersList} />
-          <Route exact path="/backoffice" component={Backoffice} />
-          <Route path="/create-testimonials" component={TestimonialForm} />
-          <Route path="/create-user" component={UserForm} />
-          <Route
-            path="/donate"
-            component={() => {
-              const welcomeText = 'Bienvenido a la seccion de donacines.';
-              return <Donation text={welcomeText} />;
-            }}
-          />
-          <Route path="/thanks" component={Thanks} />
-          <Route path="/create-member" component={MembersForm} />
-          <Route path="/create-project" component={ProjectsForm} />
-          <Route path="/school-campaign" component={SchoolCampaign} />
-          <Route path="/toys-campaign" component={ToysCampaign} />
-          <Route path="/login" component={Login} />
-        </AnimatedSwitch>
+        <Suspense fallback={<div>Loading</div>}>
+          <AnimatedSwitch
+            atEnter={bounceTransition.atEnter}
+            atLeave={bounceTransition.atLeave}
+            atActive={bounceTransition.atActive}
+            mapStyles={mapStyles}
+          >
+            <Route path="/" exact component={Home} />
+            <Route path="/register" component={Register} />
+            <Route path="/about" component={About} />
+            <Route path="/activities/:id" component={ActivityDetails} />
+            <Route
+              path="/donate"
+              component={
+              () => {
+                const welcomeText = "Bienvenido a la seccion de donacines.";
+                return <Donation text={welcomeText} />;
+              }}
+            />
+            <Route path="/create-user" component={UserForm} />
+            <Route path="/thanks" component={Thanks} />
+            <Route path="/school-campaign" component={SchoolCampaign} />
+            <Route path="/toys-campaign" component={ToysCampaign} />
+            <Route path="/login" component={Login} />
+            <PrivateRoute path="/create-activity" isAuthenticated={isAdminAuthenticated} redirect="/">
+              <ActivitiesForm />
+            </PrivateRoute>
+            <PrivateRoute path="/home-edition" isAuthenticated={isAdminAuthenticated} redirect="/">
+              <HomeEditForm />
+            </PrivateRoute>
+            <PrivateRoute path="/create-category" isAuthenticated={isAdminAuthenticated} redirect="/">
+              <CategoriesForm />
+            </PrivateRoute>
+            <PrivateRoute path="/backoffice/organization/edit" isAuthenticated={isAdminAuthenticated} redirect="/">
+              <EditOrganization />
+            </PrivateRoute>
+            <PrivateRoute path="/create-news" isAuthenticated={isAdminAuthenticated} redirect="/">
+              <NewsForm />
+            </PrivateRoute>
+            <PrivateRoute path="/create-testimonials" isAuthenticated={isUserAuthenticated} redirect="/login">
+              <TestimonialForm />
+            </PrivateRoute>
+            <PrivateRoute path="/create-member" isAuthenticated={isAdminAuthenticated} redirect="/">
+              <MembersForm />
+            </PrivateRoute>
+            <PrivateRoute path="/create-project" isAuthenticated={isAdminAuthenticated} redirect="/">
+              <ProjectsForm />
+            </PrivateRoute>
+            <PrivateRoute path="/backoffice" isAuthenticated={isAdminAuthenticated} redirect="/">
+              <Backoffice />
+            </PrivateRoute>
+            <PrivateRoute path="/backoffice/slides" isAuthenticated={isAdminAuthenticated} redirect="/">
+              <SlidesForm />
+            </PrivateRoute>
+            <PrivateRoute path="/backoffice/activities" isAuthenticated={isAdminAuthenticated} redirect="/">
+              <ActivitiesList />
+            </PrivateRoute>
+            <PrivateRoute path="/backoffice/users" isAuthenticated={isAdminAuthenticated} redirect="/">
+              <UsersList />
+            </PrivateRoute>
+          </AnimatedSwitch>
+        </Suspense>
       </BrowserRouter>
     </>
   );

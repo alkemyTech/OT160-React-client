@@ -5,8 +5,8 @@ import userSlice from '../features/users/userSlice';
 
 export default configureStore({
   reducer: {
+    userSlide:userSlice,
     user: userReducer,
     categories: categoriesReducer,
-    user:userSlice
   },
 });
