@@ -7,8 +7,10 @@ import axios from 'axios';
 
 export default function Footer() {  
 
-  const [news, setnews] = useState([])
+  const [news, setnews] = useState([]);
+
   useEffect(() => {
+    //deberia hacer consulta con el services public
    axios.get('https://ongapi.alkemy.org/public/api/news').then(e=>setnews(e.data.data))
   }, []);
   
