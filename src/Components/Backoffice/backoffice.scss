@@ -1,9 +1,13 @@
 @import "./mixins.scss";
 
+.main-container{
+    display: flex
+}
+
 .center-wrapper{
+    width: 100%;
     @include flex-center-horizontal;
     background-color: #eff1f3;
-
 }
 
 .container{
