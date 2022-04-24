@@ -8,6 +8,7 @@ import ActivityDetails from './Components/Activities/ActivityDetails/ActivityDet
 import Register from './Components/Auth/RegisterForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
+import Slides from "./Components/Slides/Slides";
 import SlidesForm from './Components/Slides/SlidesForm';
 import TestimonialForm from './Components/Testimonials/TestimonialsForm';
 import UserForm from './Components/Users/UsersForm';
@@ -27,6 +28,7 @@ import Home from './Components/Home';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 
 function App() {
+<<<<<<< HEAD
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
 
@@ -41,6 +43,8 @@ function App() {
     }
   });
 
+=======
+>>>>>>> 79094065ba132bd5252333067dd519b2496a0344
   function mapStyles(styles) {
     return {
       opacity: styles.opacity,
