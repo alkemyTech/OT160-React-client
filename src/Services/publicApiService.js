@@ -6,11 +6,19 @@ const config = {
     }
 }
 
-const Get = () => {
-    axios.get('https://jsonplaceholder.typicode.com/users', config)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+const get = async(url) => {
 
+    const response = {};
+
+    try {
+        const { data } = axios.get(url);
+        response.data = data;
+    } catch (err) {
+        response.error = err;
+        errorAlert(`Error al realizar la peticion: ${response.error.status}`,response.error.message);
+    }
+
+    return response;
 }
 
 const post = async(url,body) => {
@@ -28,5 +36,3 @@ const post = async(url,body) => {
 
     return response;
 }
-
-export { post, Get }
