@@ -12,11 +12,6 @@ const NewsForm = (id) => {
     const [editNews, setEditNews] = useState(false);
     const [categories, setCategories] = useState([]);
 
-/*     getCategories()
-    .then((res) => {console.log(res)})
-    .catch(err => console.log(err)) */
-
-
     const newsEditMock = {
         title: 'Title example',
         content: '<p>Content <strong>example</strong></p>',
@@ -32,11 +27,15 @@ const NewsForm = (id) => {
     ];
 
     useEffect(() => {
-        async function fetchCategories() {
+        getCategories()
+        .then((res) => {console.log(res)})
+        .catch(err => console.log(err)); 
+
+       /*  async function fetchCategories() {
             const response = categoriesMock
             setCategories(response)
         }
-        fetchCategories();
+        fetchCategories(); */
     }, []);
 
     return (
