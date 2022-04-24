@@ -5,7 +5,8 @@ import './members.css';
 const membersMock = [
   {
     name: 'member 1',
-    image: 'member1.jpg',
+    image:
+      'https://img.europapress.es/fotoweb/fotonoticia_20100107193345_420.jpg',
     description:
       'member 1 description member 1 description member 1 description member 1 description',
     facebookUrl: 'member 1 fbURL',
@@ -13,7 +14,8 @@ const membersMock = [
   },
   {
     name: 'member 2',
-    image: 'member2.jpg',
+    image:
+      'https://img.europapress.es/fotoweb/fotonoticia_20100107193345_420.jpg',
     description:
       'member 2 description member 2 description member 2 description member 2 description',
     facebookUrl: 'member 2 fbURL',
@@ -21,7 +23,8 @@ const membersMock = [
   },
   {
     name: 'member 3',
-    image: 'member3.jpg',
+    image:
+      'https://img.europapress.es/fotoweb/fotonoticia_20100107193345_420.jpg',
     description:
       'member 3 description member 3 description member 3 description member 3 description',
     facebookUrl: 'member 3 fbURL',
@@ -29,7 +32,8 @@ const membersMock = [
   },
   {
     name: 'member 4',
-    image: 'member4.jpg',
+    image:
+      'https://img.europapress.es/fotoweb/fotonoticia_20100107193345_420.jpg',
     description:
       'member 4 description member 4 description member 4 description member 4 description',
     facebookUrl: 'member 4 fbURL',
@@ -37,7 +41,8 @@ const membersMock = [
   },
   {
     name: 'member 5',
-    image: 'member5.jpg',
+    image:
+      'https://img.europapress.es/fotoweb/fotonoticia_20100107193345_420.jpg',
     description:
       'member 5 description member 5 description member 5 description member 5 description',
     facebookUrl: 'member 5 fbURL',
@@ -49,8 +54,12 @@ function memberCard(memberDetails) {
   const { name, image, description, facebookUrl, linkedinUrl } = memberDetails;
 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={image} />
+    <Card style={{ width: '13.5rem', textAlign: 'center' }}>
+      <Card.Img
+        variant="top"
+        src={image}
+        style={{ width: '100%', height: 'auto' }}
+      />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>{description}</Card.Text>
