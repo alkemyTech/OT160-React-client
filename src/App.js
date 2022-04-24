@@ -28,7 +28,6 @@ import Home from './Components/Home';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 
 function App() {
-<<<<<<< HEAD
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
 
@@ -43,8 +42,6 @@ function App() {
     }
   });
 
-=======
->>>>>>> 79094065ba132bd5252333067dd519b2496a0344
   function mapStyles(styles) {
     return {
       opacity: styles.opacity,
