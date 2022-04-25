@@ -1,0 +1,17 @@
+.react-pdf__Page{
+    display: flex;
+    justify-content: center;
+}
+
+.container_button{
+    display: flex;
+    justify-content: center;
+
+    button{
+        margin: 0 0.5rem;
+    }
+}
+
+.modal-footer{
+    justify-content: space-around !important;
+}

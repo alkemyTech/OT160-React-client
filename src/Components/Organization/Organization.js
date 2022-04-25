@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
-import GetOrganization from '../../Services/getOrganization';
+import { getDataOrganization } from '../../Services/getOrganization';
 
 
 const Organization =()=>{
@@ -12,8 +12,9 @@ const Organization =()=>{
 
     useEffect(()=>{
         async function  Data (){
-            let value = await GetOrganization();
-            setOrganization(value.data.data);
+            let value = await getDataOrganization();
+            console.log(value)
+            /* setOrganization(value.data.data); */
         }
         Data();
     },[])
