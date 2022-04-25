@@ -1,6 +1,6 @@
 import { post, get, patch } from './privateApiService';
 
-const BASE_URL = 'https://ongapi.alkemy.org/docs';
+const BASE_URL = 'https://ongapi.alkemy.org/api';
 const BASE_ENDPOINT = '/members';
 
 async function getMembers() {
