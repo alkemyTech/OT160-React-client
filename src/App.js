@@ -21,9 +21,7 @@ import Backoffice from './Components/Backoffice/backoffice';
 import EditOrganization from './Components/Organization/EditOrganization';
 import Login from './Components/Login/Login';
 import Organization from './Components/Organization/Organization'
-import OrganizationEdit from './Components/Organization/OrganizationEdit';
 import UsersList from './Components/Users/UsersList';
-import HomeEditForm from './Components/Home/HomeEditForm';
 import Home from './Components/Home';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 import { spring, AnimatedSwitch } from 'react-router-transition';

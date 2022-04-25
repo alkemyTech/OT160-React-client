@@ -32,12 +32,6 @@ const get = async (url, id = null) => {
 
   buildHeaders(requestConfig);
 
-  if (id == null) {
-    id = 1;
-    const axiosRes = await axios.get(`${url}/${id}`, requestConfig);
-    response.data = axiosRes.data;
- }else {
-
   try {
     const axiosRes = await axios.get(`${url}/${id}`, requestConfig);
     response.data = axiosRes.data;
@@ -51,8 +45,6 @@ const get = async (url, id = null) => {
   } finally {
     return response;
   }
-
- }
 };
 
 const post = async (url, data) => {

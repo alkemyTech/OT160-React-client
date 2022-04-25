@@ -31,7 +31,7 @@ const Organization =()=>{
                     <p dangerouslySetInnerHTML={{__html: organization.short_description}} />
                 </Card.Text>
                 </Card.Body>
-                <NavLink to='/backoffice/organizationEdit'>Editar Organizacion</NavLink>
+                <NavLink to='/backoffice/organization/edit'>Editar Organizacion</NavLink>
             </Card>  
         </Container>
 
