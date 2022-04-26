@@ -35,6 +35,7 @@ const get = async (url, id = null) => {
   try {
     const axiosRes = await axios.get(`${url}/${id}`, requestConfig);
     response.data = axiosRes.data;
+    
   } catch (error) {
     response.error = error;
     errorAlert(
@@ -67,9 +68,10 @@ const post = async (url, data) => {
 
 const patch = async (url, data) => {
   const response = {};
-
+  const requestConfig = { ...config };
+  buildHeaders(requestConfig);
   try {
-    const axiosRes = await axios.patch(url, data, config);
+    const axiosRes = await axios.patch(url, data, requestConfig);
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;

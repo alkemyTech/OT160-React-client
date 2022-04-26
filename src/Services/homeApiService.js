@@ -25,7 +25,7 @@ async function deleteNewsData(newsData, id) {
 };
 
 async function getSlides() {
-  return await get(`${BASE_URL}${BASE_ENDPOINT_SLIDES}`);
+  return await get(`${BASE_URL}${BASE_ENDPOINT_SLIDES}`, "");
 };
 
 async function getSlidesId(id) {
