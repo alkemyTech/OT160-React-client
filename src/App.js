@@ -71,7 +71,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/about" component={About} />
-          <Route path="/actividades" component={ActivitiesHome} />
+          <Route path="/activities" component={ActivitiesHome} />
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/activities/:id" component={ActivityDetails} />
           <Route path="/create-category" component={CategoriesForm} />
