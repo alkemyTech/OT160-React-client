@@ -20,8 +20,8 @@ import About from './Components/About/About';
 import Backoffice from './Components/Backoffice/backoffice';
 import EditOrganization from './Components/Organization/EditOrganization';
 import Login from './Components/Login/Login';
+import Organization from './Components/Organization/Organization'
 import UsersList from './Components/Users/UsersList';
-import HomeEditForm from './Components/Home/HomeEditForm';
 import Home from './Components/Home';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 import { spring, AnimatedSwitch } from 'react-router-transition';
@@ -73,9 +73,8 @@ function App() {
           <Route path="/activities/:id" component={ActivityDetails} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
-          <Route exact path="/backoffice" component={Backoffice} />
           <Route path="/backoffice/members/edit" component={MembersForm} />
-          <Route path="/backoffice/organization" component={HomeEditForm} />
+          <Route path="/backoffice/organization" component={Organization} />
           <Route path="/backoffice/activities" component={ActivitiesList} />
           <Route path="/backoffice/Slides" component={Slides} />
           <Route path="/backoffice/Slides/create" component={SlidesForm} />
