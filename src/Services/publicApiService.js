@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { errorAlert } from './alertService';
+import { errorAlert } from './alertsService';
 const config = {
     headers: {
         Group: 160
@@ -36,3 +36,5 @@ const post = async(url,body) => {
 
     return response;
 }
+
+export {get, post}
