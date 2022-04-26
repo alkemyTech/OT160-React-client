@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { getDataOrganization } from "../../Services/getOrganization";
+import { getDataOrganization } from "../../Services/organizationService";
 
 const Organization = () => {
   const [organization, setOrganization] = useState({});
