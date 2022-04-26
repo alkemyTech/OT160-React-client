@@ -26,14 +26,14 @@ const buildHeaders = (requestConfig) => {
   Object.assign(requestConfig.headers, authHeader);
 };
 
-const get = async (url, config) => {
+const get = async (url, id = "") => {
   const response = {};
   const requestConfig = { ...config };
 
   buildHeaders(requestConfig);
 
   try {
-    const axiosRes = await axios.get(url, requestConfig);
+    const axiosRes = await axios.get(`${url}/${id}`, requestConfig);
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;
