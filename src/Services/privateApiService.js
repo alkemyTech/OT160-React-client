@@ -35,6 +35,7 @@ const get = async (url, id = null) => {
   try {
     const axiosRes = await axios.get(`${url}/${id}`, requestConfig);
     response.data = axiosRes.data;
+    
   } catch (error) {
     response.error = error;
     errorAlert(
