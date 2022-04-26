@@ -7,6 +7,7 @@ import {
   fileValidationExtensions,
   isUrlValid,
 } from '../../Services/formValidationsService';
+import { createMember, editMember } from '../../Services/membersService';
 
 const MembersForm = (props) => {
   const { member } = props;
@@ -33,7 +34,11 @@ const MembersForm = (props) => {
   }
 
   function handleFormSubmit(values) {
-    console.log(values); // @todo: submit service
+    if (member) {
+      editMember(values);
+    } else {
+      createMember(values);
+    }
   }
 
   function validateName(name, errors) {
