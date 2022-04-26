@@ -1,32 +1,71 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react'
+import { useFormik } from 'formik';
+import * as yup from 'yup'
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { patch, post } from '../../Services/privateApiService';
+import { SUPPORTED_FORMATS_IMAGE } from '../../utilities/imagesUtility';
 import '../FormStyles.css';
 
-const ActivitiesForm = () => {
-    const [initialValues, setInitialValues] = useState({
-        name: '',
-        description: ''
-    });
+export default function ActivitiesForm({activities}) {
 
-    const handleChange = (e) => {
-        if(e.target.name === 'name'){
-            setInitialValues({...initialValues, name: e.target.value})
-        } if(e.target.name === 'description'){
-            setInitialValues({...initialValues, description: e.target.value})
-        }
-    }
+    const fileInputImage = useRef();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(initialValues);
-    }
+	const formik = useFormik({
+		initialValues: {
+			name: activities?.name || '',
+			description: activities?.description || '',
+			imagen: activities?.imagen || ''
+		},
+		onSubmit: value => {
+			
+			if (!activities) {
+				post('/activities/create',formik.values);
+			} else {
+				patch(`/activities/:${activities.id}`,formik.values);
+			}
+		},
+		validationSchema: yup.object({
+			name: yup.string().required('Campo obligatorio'),
+			description: yup.string().required('Campo obligatorio'),
+			imagen: yup.mixed().nullable().required('Campo obligatorio').test('format', 'Formato no permitido', (value) => !value || (value && SUPPORTED_FORMATS_IMAGE.includes(value.type)))
+		})
+	});
+
+	const handleChangeCkeditor = (e, editor) => {
+		formik.setValues(previous => {
+			previous.description = editor.getData();
+			return previous;
+		});
+	}
     
-    return (
-        <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Activity Title"></input>
-            <input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Write some activity description"></input>
-            <button className="submit-btn" type="submit">Send</button>
-        </form>
-    );
-}
- 
-export default ActivitiesForm;
+	const handleBlurCkeditor = () => {
+		formik.setTouched({
+			...formik.touched,
+			description: true
+		});
+	}
+
+    const handleChangeImage= () =>{
+        formik.setFieldValue('imagen',fileInputImage.current.files[0]);
+    }
+
+return (
+        <div>
+            <form className="form-container" onSubmit={formik.handleSubmit}>
+                <input className="input-field" type="text" name="name" value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder="Slide Title"></input>                
+                {formik.touched.name && formik.errors.name }
+                <input className="input-field" type="file" name="imagen"  onChange={handleChangeImage} onBlur={formik.handleBlur} ref={fileInputImage} placeholder="upload imagen"></input>
+                {formik.touched.imagen && formik.errors.imagen }
+                <CKEditor
+                    editor={ClassicEditor}
+                    data={formik.values.description}
+                    onChange={handleChangeCkeditor}
+                    onBlur={handleBlurCkeditor}
+                />
+                {formik.touched.description && formik.errors.description }
+                <button  className="submit-btn" type="submit">Send</button>
+            </form>
+        </div>
+    );}
+
