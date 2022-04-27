@@ -1,0 +1,11 @@
+.about-layout {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+}
+
+.align-self-center {
+  background: rgba(187, 187, 187, 0.199);
+  padding: 1em;
+  border-radius: 6px;
+}

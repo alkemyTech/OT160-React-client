@@ -38,11 +38,11 @@ const PublicHeader = () => {
         </nav>
       </div>
       <div className="buttons">
-        <Link to="/login" className="btn btn-light">
-          Log in
+        <Link to="/login" className="btn btn-dark">
+          Ingresar
         </Link>
-        <Link to="/create-user" className="btn btn-primary">
-          Registrate
+        <Link to="/create-user" className="btn btn-secondary">
+          Registrarse
         </Link>
       </div>
     </div>
