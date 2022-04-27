@@ -32,7 +32,7 @@ const NewsList = () => {
               >
                 <h2
                   style={{
-                    color: 'lightblue',
+                    color: '#DB5752',
                     fontWeight: 'bold',
                     textShadow: '1px 1px 3px black',
                     marginTop: '0.5em',
@@ -42,9 +42,8 @@ const NewsList = () => {
                 </h2>
                 <div
                   style={{
-                    fontSize: '1.5em',
                     color: 'black',
-                    background: 'rgba(211, 211, 211, 0.35)',
+                    background: 'rgba(211, 211, 211, 0.6)',
                   }}
                   dangerouslySetInnerHTML={{ __html: element.content }}
                 ></div>

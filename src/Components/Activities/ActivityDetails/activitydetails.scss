@@ -1,14 +1,25 @@
 .detail-container {
-    display : flex;
-    justify-content : center;
-    align-items : center;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
 }
 
 .detail-card {
-    width : 50%;
-    background-color : aquamarine;
-    border-radius : 5px;
-    padding :5px 20px;
+  width: 50%;
+  background-color: rgb(178, 230, 212);
+  border-radius: 5px;
+  padding: 5px 20px;
+}
 
+.activity-image {
+  width: 700px;
+  height: auto;
+}
+
+.activity-description {
+  font-size: 1.3em;
+  text-align: center;
+  padding: 1em;
 }
