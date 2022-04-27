@@ -29,10 +29,11 @@ import ActivitiesDisplay from './Components/Activities/ActivitiesDisplay';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 import TestimonialsDisplay from './Components/Testimonials/TestimonialsDisplay';
 import ContactForm from './Components/Contact/ContactForm';
+import Footer from './Components/Footer/Footer';
 
 function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(true);
 
   const { store } = useContext(ReactReduxContext);
 
@@ -55,10 +56,7 @@ function App() {
         <Route path="/activities/:id" element={<ActivityDetails />} />
         <Route
           path="/donate"
-          element={() => {
-            const welcomeText = 'Bienvenido a la seccion de donacines.';
-            return <Donation text={welcomeText} />;
-          }}
+          element={<Donation text={'Bienvenido a la seccion de donaciones.'} />}
         />
         <Route path="/testimonials" element={<TestimonialsDisplay />} />
         <Route path="/news" element={<News />} />
@@ -132,6 +130,7 @@ function App() {
           element={isAdminAuthenticated ? <UsersList /> : <Navigate to="/" />}
         />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

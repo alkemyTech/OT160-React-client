@@ -7,7 +7,7 @@ const getUsers = async () => {
 };
 
 const getUserById = async (userData) => {
-  return await get(USERS_URL + userData.id, { userData });
+  return await get(USERS_URL + "/" + userData.id, { userData });
 };
 
 const deleteUser = async (userData) => {
@@ -15,7 +15,7 @@ const deleteUser = async (userData) => {
 };
 
 const updateUserData = (userData) => {
-  return patch(USERS_URL + userData.id, userData);
+  return patch(USERS_URL + "/" + userData.id, userData);
 };
 
 const createUser = (userData) => {

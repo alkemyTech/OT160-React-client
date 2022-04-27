@@ -12,9 +12,11 @@ const BackofficeHeader = () => {
             </div>
             <div>
               <div class="items">
-                <Link to="/backoffice">
-                Some item
-                </Link>
+                <Link to="/backoffice">Home</Link>
+                <Link to="/create-news">Crear novedad</Link>
+                <Link to="/create-activity">Crear actividad</Link>
+                <Link to="/create-member">Crear admin</Link>
+                <Link to="/backoffice/organization/edit">Organización</Link>
               </div>
             </div>
           </div>

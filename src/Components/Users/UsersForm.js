@@ -47,7 +47,7 @@ const UserForm = ({ prevUserData }) => {
     if (prevUserDataExist) {
       updateUserData(newUserData);
     } else {
-      console.log(await createUser(newUserData));
+      createUser(newUserData);
     }
   };
 
