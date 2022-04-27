@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { getDataOrganization } from "../../Services/organizationService";
+import PublicHeader from "../Header/PublicHeader";
 
 const Organization = () => {
   const [organization, setOrganization] = useState({});
@@ -18,6 +19,8 @@ const Organization = () => {
   }, []);
 
   return (
+    <div>
+      <PublicHeader />
     <Container fluid>
       <h2 style={styles.title}>{organization.name}</h2>
       <Card style={styles.containerCard}>
@@ -38,6 +41,7 @@ const Organization = () => {
         </Link>
       </Card>
     </Container>
+    </div>
   );
 };
 

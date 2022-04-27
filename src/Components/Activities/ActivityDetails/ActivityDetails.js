@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ActivityDetailsCard from './ActivityDetailsCard';
 import './activitydetails.scss';
+import PublicHeader from "../../Header/PublicHeader";
 
 export default function ActivityDetails() {
   const { id } = useParams();
@@ -34,6 +35,7 @@ export default function ActivityDetails() {
    * will sent the title and the description of the activity to the ActivityDetailsCard */
   return (
     <div>
+      <PublicHeader />
       <h3>Detail Section</h3>
       <ActivityDetailsCard
         title={response.data.title}

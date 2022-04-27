@@ -4,8 +4,31 @@
   gap: 1em;
 }
 
+.header-item{
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  font-weight: 100;
+}
+
 .header-public {
   display: flex;
-  justify-content: start;
-  gap: 1em;
+  align-items: center;
+  height: 4rem;
+  background-color: #e3f1ea;
+}
+
+img{
+  width: 9rem;
+  height: 9rem;
+  margin: 0 1rem;
+}
+
+.buttons{
+  position: relative;
+  right: -18rem;
+}
+
+button{
+  margin: 0 1rem;
 }

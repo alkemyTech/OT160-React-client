@@ -11,6 +11,7 @@ import {
   termsValidation 
   } from "../../Services/formValidationsService";
 import { Terms } from './Terms';
+import PublicHeader from "../Header/PublicHeader";
 
 const RegisterForm = () => {
     const [registerData, setRegisterData] = useState([]);
@@ -30,6 +31,7 @@ const RegisterForm = () => {
     
     return (
         <div>
+          <PublicHeader />
             <Formik 
             initialValues={{
                 name: "",

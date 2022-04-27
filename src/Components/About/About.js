@@ -4,6 +4,7 @@ import Stack from 'react-bootstrap/Stack';
 import Title from '../Title/Title';
 import MembersDisplay from '../Members/MembersDisplay';
 import { getDataOrganization } from '../../Services/organizationService';
+import PublicHeader from "../Header/PublicHeader";
 
 function About() {
   const [aboutUsContent, setAboutUsContent] = useState('');
@@ -23,6 +24,8 @@ function About() {
   }
 
   return (
+    <div>
+      <PublicHeader />
     <Stack as="section" className="align-items-center mt-4" gap="4">
       <Title title="Nosotros" />
       <Stack className="align-items-center align-self-center w-75">
@@ -35,6 +38,7 @@ function About() {
         <MembersDisplay />
       </Stack>
     </Stack>
+    </div>
   );
 }
 

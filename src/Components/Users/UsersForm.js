@@ -12,6 +12,7 @@ import {
   updateUserData, 
   createUser
 } from "../../Services/userApiService";
+import PublicHeader from "../Header/PublicHeader";
 
 const UserForm = ({prevUserData}) => {
   const initialUserData =  {
@@ -54,6 +55,8 @@ const UserForm = ({prevUserData}) => {
   };
 
   return (
+    <div>
+      <PublicHeader />
     <Formik
      initialValues={ prevUserData || initialUserData }
      validate= {validate}
@@ -115,6 +118,7 @@ const UserForm = ({prevUserData}) => {
       </form>
      )}
     </Formik>
+    </div>
   );
 }
  

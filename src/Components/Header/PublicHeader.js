@@ -1,24 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import SomosMasLogoImg from "../../icons/somos-mas-logotype.png";
 import './header.css';
 
 const PublicHeader = () => {
   return (
     <div className="header-public">
-      <div>
-        <div className="container-fluid">
+        <div>
+          <img src={SomosMasLogoImg} alt="logo"/>
           <button className="navbar-toggler shadow-none mt-2 " type="button">
             <span className="navbar-toggler-icon"></span>
           </button>
         </div>
         <div>
           <nav className="header-items-public">
-            <Link to="/">Inicio</Link>
-            <Link to="/contact">Contacto</Link>
-            <Link to="/about">Nosotros</Link>
+            <a className='header-item' href='/'>Inicio</a>
+            <a className='header-item' href='/about'>Nosotros</a>
+            <a className='header-item' href='/activities'>Actividades</a>
+            <a className='header-item' href='/news'>Novedades</a>
+            <a className='header-item' href='/testimonials'>Testimonios</a>
+            <a className='header-item' href='/contact-us'>Contacto</a>
+            <a className='header-item' href='/donate'>Contribuye</a>
           </nav>
         </div>
-      </div>
+        <div className='buttons'>
+          <button className='btn btn-light'>Log in</button>
+          <button className='btn btn-primary'>Registate</button>
+        </div>
     </div>
   );
 };
