@@ -5,6 +5,7 @@ import Title from '../Title/Title';
 import MembersDisplay from '../Members/MembersDisplay';
 import { getDataOrganization } from '../../Services/organizationService';
 import PublicHeader from '../Header/PublicHeader';
+import './about.css';
 
 function About() {
   const [aboutUsContent, setAboutUsContent] = useState('');
@@ -24,11 +25,11 @@ function About() {
   }
 
   return (
-    <div>
+    <div className="about-layout">
       <PublicHeader />
-      <Stack as="section" className="align-items-center mt-4" gap="4">
+      <Stack as="section" className="align-items-center mt-4" gap="5">
         <Title title="Sobre nosotros" />
-        <Stack className="align-items-center align-self-center w-75">
+        <Stack className="align-items-center align-self-center  w-50">
           <div dangerouslySetInnerHTML={{ __html: aboutUsContent }}></div>
         </Stack>
 

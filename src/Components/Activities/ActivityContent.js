@@ -9,7 +9,6 @@ export default function ActivityContent({ activity }) {
       <Link to={`/activities/${id}`}>
         <img className="activity-image" alt="activity" src={image} />
       </Link>
-
       <div
         className="activity-name"
         dangerouslySetInnerHTML={{ __html: name }}

@@ -13,7 +13,7 @@ function memberCard(memberDetails) {
         src={image}
         style={{
           width: '100%',
-          height: '200px',
+          height: '180px',
           objectFit: 'contain',
         }}
       />
@@ -40,7 +40,7 @@ function MembersDisplay() {
   }
 
   return (
-    <div className="membersGrid">
+    <div className="membersGrid p-3">
       {members.length ? (
         members.map((member) => memberCard(member))
       ) : (
