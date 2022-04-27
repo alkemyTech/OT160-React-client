@@ -1,29 +1,42 @@
 .activities-display {
-  padding: 2em 5em;
+  padding: 3em 5em;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2em;
+  grid-template-columns: repeat(2, max-content);
+  gap: 4em;
   justify-content: center;
   align-items: flex-end;
-  background-color: #cdece4cb;
+  background-color: #79ccb769;
 }
 
 .activity-image {
   width: 200px;
   height: auto;
-  border-radius: 15px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 20px black;
 }
 
 .activity-name {
   font-size: 1.2em;
   font-weight: bold;
-  align-self: flex-end;
   text-decoration: none;
-  color: rgb(6, 91, 131);
 }
 
 .activity-content {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
   gap: 1em;
+}
+
+.fill {
+  width: 180px;
+  height: 1000px;
+  background-color: #db5752;
+}
+
+.activities-display-layout {
+  display: flex;
+  column-gap: 3em;
+  justify-content: center;
 }
