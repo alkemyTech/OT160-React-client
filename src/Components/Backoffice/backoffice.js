@@ -1,6 +1,6 @@
 import React,{Fragment} from 'react';
 import "./backoffice.scss";
-import Header from '../Header/Header';
+import Header from '../Header/BackofficeHeader';
 import newsImg from "../../icons/backoffice/001-newspaper.png";
 import activitiesImg from "../../icons/backoffice/002-activities.png";
 import listImg from "../../icons/backoffice/003-list.png";

@@ -23,7 +23,6 @@ import Login from './Components/Login/Login';
 import Organization from './Components/Organization/Organization';
 import UsersList from './Components/Users/UsersList';
 import Home from './Components/Home';
-import Header from './Components/Header/Header';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 import { spring, AnimatedSwitch } from 'react-router-transition';
 
@@ -61,7 +60,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
         <AnimatedSwitch
           atEnter={bounceTransition.atEnter}
           atLeave={bounceTransition.atLeave}

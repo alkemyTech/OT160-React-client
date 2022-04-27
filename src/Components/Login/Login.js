@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import '../FormStyles.css';
 import '../Login/LoginStyles.css'
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import PublicHeader from "../Header/PublicHeader";
 
 function Login() {
     const [valuesForm , setValuesForm] = useState({});
@@ -39,6 +40,8 @@ function Login() {
     };
     
     return (
+      <div>
+        <PublicHeader />
         <div className='form-login'>
         <Formik
         initialValues={{
@@ -101,6 +104,7 @@ function Login() {
           </Form>
         )}
       </Formik>
+      </div>
       </div>
     );
 }
