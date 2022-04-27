@@ -1,5 +1,6 @@
 .header-items-public {
   display: flex;
+  justify-self: flex-start;
   margin: 0 0 0 1em;
   gap: 1em;
 }
