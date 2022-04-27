@@ -33,7 +33,7 @@ import Footer from './Components/Footer/Footer';
 
 function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(true);
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
 
   const { store } = useContext(ReactReduxContext);
 

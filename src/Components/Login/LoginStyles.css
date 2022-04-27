@@ -1,7 +1,7 @@
 
 .form-login {
     width: 400px;
-    height: 340px;
+    height: 30rem;
     background: #4e4d4d;
     margin: auto;
     margin-top: 1rem;
@@ -10,7 +10,6 @@
     border-top: 4px solid #017bab;
     color: white;
 }
-
 
 
 .form-login h5{
