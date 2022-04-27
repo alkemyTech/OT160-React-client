@@ -20,10 +20,14 @@ function ActivitiesDisplay() {
   return (
     <>
       <PublicHeader />
-      <div className="activities-display">
-        {activities?.map((act) => (
-          <ActivityContent activity={act} />
-        ))}
+      <div className="activities-display-layout">
+        <div className="fill" />
+        <div className="activities-display">
+          {activities?.map((act) => (
+            <ActivityContent activity={act} />
+          ))}
+        </div>
+        <div className="fill" />
       </div>
     </>
   );
