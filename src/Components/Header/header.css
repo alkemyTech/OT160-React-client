@@ -29,6 +29,6 @@ img{
   right: -18rem;
 }
 
-button{
-  margin: 0 1rem;
+.btn{
+  margin: 0 1rem 0 0;
 }

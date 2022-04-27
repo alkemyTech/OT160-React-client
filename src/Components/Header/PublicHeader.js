@@ -16,15 +16,15 @@ const PublicHeader = () => {
             <a className='header-item' href='/'>Inicio</a>
             <a className='header-item' href='/about'>Nosotros</a>
             <a className='header-item' href='/activities'>Actividades</a>
-            <a className='header-item' href='/news'>Novedades</a>
-            <a className='header-item' href='/testimonials'>Testimonios</a>
+            <a className='header-item' href='/#news'>Novedades</a>
+            <a className='header-item' href='/#testimonials'>Testimonios</a>
             <a className='header-item' href='/contact-us'>Contacto</a>
             <a className='header-item' href='/donate'>Contribuye</a>
           </nav>
         </div>
         <div className='buttons'>
-          <button className='btn btn-light'>Log in</button>
-          <button className='btn btn-primary'>Registate</button>
+        <a className='btn btn-light' href='/login'>Login</a>
+        <a className='btn btn-primary' href='/create-user'>Registrarse</a>
         </div>
     </div>
   );

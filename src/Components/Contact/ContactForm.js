@@ -7,7 +7,7 @@ import {
 import { errorAlert } from '../../Services/alertsService';
 import { createContact } from '../../Services/contactsService';
 import '../FormStyles.css';
-
+import PublicHeader from '../Header/PublicHeader';
 const ContactForm = () => {
   const formik = useFormik({
     initialValues: {
@@ -60,7 +60,10 @@ const ContactForm = () => {
   }
 
   return (
+    <div>
+      <PublicHeader />
     <form className="form-container" onSubmit={formik.handleSubmit}>
+      <h1>Contactanos!</h1>
       <div className="form-input-div">
         <input
           className="input-field"
@@ -109,6 +112,7 @@ const ContactForm = () => {
         Enviar
       </button>
     </form>
+    </div>
   );
 };
 

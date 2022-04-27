@@ -7,7 +7,7 @@ export default function Donation({ text }) {
   return (
     <div>
       <PublicHeader />
-      <h1>{text}</h1>
+      <h1 className='text-center fw-lighter'>{text}</h1>
 
       <CardGroup className="d-flex justify-content-center align-items-center flex-wrap">
         <DonationCard

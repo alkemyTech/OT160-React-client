@@ -94,7 +94,7 @@ function App() {
               path="/donate"
               component={
               () => {
-                const welcomeText = "Bienvenido a la seccion de donacines.";
+                const welcomeText = "Bienvenido a la seccion de donaciones.";
                 return <Donation text={welcomeText} />;
               }}
             />

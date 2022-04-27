@@ -18,7 +18,7 @@ function Home() {
           </div>
         </Row>
         <Row>
-          <div className="text-center mt-3 mb-3 container-xl">
+          <div id="news" className="text-center mt-3 mb-3 container-xl">
             <p className="section-title">Ultimas Novedades</p>
             <div className="row justify-content-center">
               <NewsList />
@@ -26,7 +26,7 @@ function Home() {
           </div>
         </Row>
         <Row>
-          <div className="text-center mt-3 mb-3 container-xl">
+          <div id="testimonials" className="text-center mt-3 mb-3 container-xl">
             <p className="section-title">Testimonios</p>
             <div className="row justify-content-center">
               <Testimonials />
