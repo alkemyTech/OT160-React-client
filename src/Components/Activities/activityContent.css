@@ -1,11 +1,11 @@
 .activities-display {
   padding: 2em 5em;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 2em;
   justify-content: center;
-  align-items: flex-start;
-  background-color: #5fada9b0;
+  align-items: flex-end;
+  background-color: #cdece4cb;
 }
 
 .activity-image {
