@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Stack from 'react-bootstrap/Stack';
 import Title from '../Title/Title';
+import MembersDisplay from '../Members/MembersDisplay';
 
 const contentMock = {
   data: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -33,6 +34,11 @@ function About() {
       <Stack className="align-items-center">
         <h4>Sobre nosotros</h4>
         <p className="text-left w-50">{aboutUsContent}</p>
+      </Stack>
+
+      <Stack className="align-items-center" gap="4">
+        <Title title="Miembros" />
+        <MembersDisplay />
       </Stack>
     </Stack>
   );
