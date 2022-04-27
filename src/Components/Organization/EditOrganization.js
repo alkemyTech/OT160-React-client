@@ -13,6 +13,7 @@ import {
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {nameValidation, fileValidationExtensions} from '../../Services/formValidationsService';
+import BackofficeHeader from "../Header/BackofficeHeader";
 
 function EditOrganization() {
 
@@ -74,6 +75,8 @@ function EditOrganization() {
   };
 
   return (
+    <div>
+      <BackofficeHeader />
     <div className="my-3 form-container">
       <div className="text-center mt-2 fs-3">
         <p>Edite los datos de su organizacion</p>
@@ -182,6 +185,7 @@ function EditOrganization() {
             </div>
           </Col>
         </form>
+    </div>
     </div>
   );
 }

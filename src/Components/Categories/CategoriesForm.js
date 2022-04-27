@@ -5,6 +5,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { patch, post } from "../../Services/privateApiService";
 import { fileValidationExtensions } from "../../Services/formValidationsService";
 import "../FormStyles.css";
+import BackofficeHeader from "../Header/BackofficeHeader";
 
 const CategoriesForm = (props) => {
   const { category } = props;
@@ -61,6 +62,8 @@ const CategoriesForm = (props) => {
   }
 
   return (
+    <div>
+      <BackofficeHeader />
     <form className="form-container" onSubmit={formik.handleSubmit}>
       <div className="form-input-div">
         <input
@@ -101,6 +104,7 @@ const CategoriesForm = (props) => {
         Enviar
       </button>
     </form>
+    </div>
   );
 };
 

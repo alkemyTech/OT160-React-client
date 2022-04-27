@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../FormStyles.css';
+import BackofficeHeader from '../Header/BackofficeHeader';
 
 const ProjectsForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -21,11 +22,14 @@ const ProjectsForm = () => {
   }
 
   return (
+    <div>
+      <BackofficeHeader />
     <form className="form-container" onSubmit={handleSubmit}>
       <input className="input-field" type="text" name="title" value={initialValues.title} onChange={handleChange} placeholder="Title"></input>
       <input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Write some description"></input>
       <button className="submit-btn" type="submit">Send</button>
     </form>
+    </div>
   );
 }
  

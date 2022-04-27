@@ -3,6 +3,7 @@ import { Formik, Form } from "formik";
 import "../FormStyles.css";
 import SlidesForm from "../Slides/SlidesForm.js";
 import InputForm from "./InputForm.js";
+import BackofficeHeader from "../Header/BackofficeHeader";
 
 export default function HomeEditForm() {
   const [valuesForm, setValuesForm] = useState({});
@@ -38,6 +39,7 @@ export default function HomeEditForm() {
 
   return (
     <div>
+      <BackofficeHeader />
       <Formik
         initialValues={{
           welcomeText: "",

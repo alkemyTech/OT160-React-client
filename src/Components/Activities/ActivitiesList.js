@@ -3,6 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { getActivities } from '../../Services/activitiesService';
+import BackofficeHeader from '../Header/BackofficeHeader';
 
 const ActivitiesList = () => {
   const [activities, setActivities] = useState([]);
@@ -24,6 +25,8 @@ const ActivitiesList = () => {
   }
 
   return (
+    <div>
+      <BackofficeHeader />
     <div className="mt-2 container-xxl">
       <h1 className="text-center">Listado Actividades</h1>
       <div className="container-xl mt-4">
@@ -67,6 +70,7 @@ const ActivitiesList = () => {
           </tbody>
         </Table>
       </div>
+    </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@
 
 .center-wrapper{
     width: 100%;
+    margin-left: 6rem;
     @include flex-center-horizontal;
     background-color: #eff1f3;
 }

@@ -8,6 +8,7 @@ import {
   isUrlValid,
 } from '../../Services/formValidationsService';
 import { createMember, editMember } from '../../Services/membersService';
+import BackofficeHeader from '../Header/BackofficeHeader';
 
 const MembersForm = (props) => {
   const { member } = props;
@@ -84,6 +85,8 @@ const MembersForm = (props) => {
   }
 
   return (
+    <div>
+      <BackofficeHeader />
     <form className="form-container" onSubmit={formik.handleSubmit}>
       <div className="form-input-div">
         <input
@@ -150,6 +153,7 @@ const MembersForm = (props) => {
         Enviar
       </button>
     </form>
+    </div>
   );
 };
 

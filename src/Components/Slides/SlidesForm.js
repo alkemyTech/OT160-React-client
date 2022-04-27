@@ -6,6 +6,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { SUPPORTED_FORMATS_IMAGE } from '../../utilities/imagesUtility';
 import '../FormStyles.css';
 import { createSlides, updateSlidesData } from '../../Services/homeApiService'
+import BackofficeHeader from '../Header/BackofficeHeader';
 
 export default function Slides({slide}) {
 
@@ -54,6 +55,7 @@ export default function Slides({slide}) {
 
 return (
         <div>
+			<BackofficeHeader />
             <form className="form-container" onSubmit={formik.handleSubmit}>
                 <input className="input-field" type="text" name="name" value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder="Slide Title"></input>                
                 {formik.touched.name && formik.errors.name }

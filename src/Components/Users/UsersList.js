@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Stack, Button } from "react-bootstrap/";
+import BackofficeHeader from "../Header/BackofficeHeader";
 
 const usersMock = [
   {
@@ -42,6 +43,8 @@ function UsersList() {
     const { name, email } = userDetails;
 
     return (
+      <div>
+        <BackofficeHeader />
       <tr>
         <td>{name}</td>
         <td>{email}</td>
@@ -56,6 +59,7 @@ function UsersList() {
           </Button>
         </td>
       </tr>
+      </div>
     );
   }
 
