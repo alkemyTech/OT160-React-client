@@ -4,7 +4,6 @@ import { Row, Col } from 'react-bootstrap';
 import NewsList from '../News/NewsList';
 import Testimonials from '../Testimonials/TestimonialsDisplay';
 import PublicHeader from '../Header/PublicHeader';
-import Footer from '../Footer/Footer';
 import './index.css';
 
 function Home() {
@@ -39,7 +38,6 @@ function Home() {
           </Row>
         </Col>
       </div>
-      <Footer />
     </div>
   );
 }

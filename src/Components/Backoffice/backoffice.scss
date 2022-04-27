@@ -34,6 +34,7 @@
 }
 
 .box{
+    
     &-1{
         
         grid-area: 1 / 1 / 2 / 2;
@@ -88,9 +89,12 @@ h4{
     text-align: center;
     font-size: 17px;
 }
-
+.buttons{
+    display: flex;
+    justify-content: center;
+}
 button{
-    align-self: center;
+    width: 3rem;
 }
 
 img{
