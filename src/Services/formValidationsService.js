@@ -72,8 +72,17 @@ const isUrlValid = (url) => {
   );
 };
 
-export {
-  nameValidationFourLength,
+const titleValidation = (title, errors) => {
+  if(!title){
+    errors.title = "Requerido";
+  } 
+  if (title.length < 4){
+    errors.title = "El título debe ser de al menos 4 caracteres";
+  } 
+};
+
+export { 
+  nameValidationFourLength, 
   passwordValidationEightLength,
   passwordValidationSpecialCharacters,
   fileValidationExtensions,
@@ -83,4 +92,5 @@ export {
   confirmedPasswordValidation,
   termsValidation,
   isUrlValid,
+  titleValidation
 };
