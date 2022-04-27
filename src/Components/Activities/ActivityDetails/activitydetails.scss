@@ -1,4 +1,5 @@
 .detail-container {
+  padding: 1em;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,14 +8,14 @@
 }
 
 .detail-card {
-  width: 50%;
+  width: 80%;
   background-color: rgb(178, 230, 212);
   border-radius: 5px;
   padding: 5px 20px;
 }
 
 .activity-image {
-  width: 700px;
+  width: 100%;
   height: auto;
 }
 

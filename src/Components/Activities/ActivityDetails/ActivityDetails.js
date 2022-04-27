@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ActivityDetailsCard from './ActivityDetailsCard';
+import PublicHeader from '../../Header/PublicHeader';
 import { getActivity } from '../../../Services/activitiesService';
 import { errorAlert } from '../../../Services/alertsService';
 import './activitydetails.scss';
@@ -24,13 +25,15 @@ export default function ActivityDetails() {
   }
 
   return (
-    <div>
-      <h4>Detalle de la actividad</h4>
-      <ActivityDetailsCard
-        title={activity?.name}
-        description={activity?.description}
-        image={activity?.image}
-      />
-    </div>
+    <>
+      <PublicHeader />
+      <div>
+        <ActivityDetailsCard
+          title={activity?.name}
+          description={activity?.description}
+          image={activity?.image}
+        />
+      </div>
+    </>
   );
 }

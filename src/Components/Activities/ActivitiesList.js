@@ -1,40 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Table, Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Table, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
+import { getActivities } from '../../Services/activitiesService';
 
 const ActivitiesList = () => {
-  const activitiesMock = [
-    {
-      id: 1,
-      name: "Titulo de prueba",
-      image: "Descripcion de prueba",
-      createdAt: "Descripcion de prueba",
-    },
-    {
-      id: 2,
-      name: "Titulo de prueba",
-      image: "Descripcion de prueba",
-      createdAt: "Descripcion de prueba",
-    },
-    {
-      id: 3,
-      name: "Titulo de prueba",
-      image: "Descripcion de prueba",
-      createdAt: "Descripcion de prueba",
-    },
-  ];
+  const [activities, setActivities] = useState([]);
 
-  const [dataTable, setDataTable] = useState([]);
-
-  useEffect(()=>{
+  useEffect(() => {
     getDataActivities();
-  },[])
+  }, []);
 
-  function getDataActivities() {
-    //aqui deberia llamarse al endpoind de listado de actividades
-    setDataTable(activitiesMock);
-  };
+  async function getDataActivities() {
+    const { data } = await getActivities();
+    setActivities(data);
+  }
 
   function handleEditTable() {
     //colocar aqui la posterior implementacion del boton editar
@@ -56,17 +36,17 @@ const ActivitiesList = () => {
               <th>#</th>
               <th>Name</th>
               <th>Image</th>
-              <th>CreateAt</th>
-              <th>Accions</th>
+              <th>CreatedAt</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {dataTable.map((element) => (
+            {activities?.map((element) => (
               <tr>
                 <td>{element.id}</td>
                 <td>{element.name}</td>
                 <td>{element.image}</td>
-                <td>{element.createdAt}</td>
+                <td>{element.created_at.split('T')[0]}</td>
                 <td>
                   <button
                     className="btn btn-secondary"
@@ -74,7 +54,7 @@ const ActivitiesList = () => {
                   >
                     Editar
                   </button>
-                  {"  "}
+                  {'  '}
                   <button
                     className="btn btn-danger"
                     onClick={handleDeteleTable}
@@ -92,4 +72,3 @@ const ActivitiesList = () => {
 };
 
 export default ActivitiesList;
-

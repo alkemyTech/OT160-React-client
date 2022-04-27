@@ -6,7 +6,6 @@ import './header.css';
 const PublicHeader = () => {
   return (
     <div className="header-public">
-        
       <div>
         <img src={SomosMasLogoImg} alt="logo" />
         <button className="navbar-toggler shadow-none mt-2 " type="button">
@@ -39,8 +38,12 @@ const PublicHeader = () => {
         </nav>
       </div>
       <div className="buttons">
-        <Link to="/login" className="btn btn-light">Log in</Link>
-        <Link to="/create-user" className="btn btn-primary">Registrate</Link>
+        <Link to="/login" className="btn btn-light">
+          Log in
+        </Link>
+        <Link to="/create-user" className="btn btn-primary">
+          Registrate
+        </Link>
       </div>
     </div>
   );

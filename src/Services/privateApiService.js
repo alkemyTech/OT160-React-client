@@ -53,7 +53,7 @@ const post = async (url, data) => {
 
   buildHeaders(requestConfig);
   try {
-    const axiosRes = await axios.post(url, data, requestConfig);
+    const axiosRes = await axios.post(url, data);
     response.data = axiosRes.data;
   } catch (error) {
     response.error = error;

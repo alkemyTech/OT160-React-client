@@ -25,6 +25,7 @@ import HomeEditForm from './Components/Home/HomeEditForm';
 import Organization from './Components/Organization/Organization';
 import UsersList from './Components/Users/UsersList';
 import Home from './Components/Home';
+import ActivitiesDisplay from './Components/Activities/ActivitiesDisplay';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 import TestimonialsDisplay from './Components/Testimonials/TestimonialsDisplay';
 import ContactForm from './Components/Contact/ContactForm';
@@ -50,6 +51,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About />} />
+        <Route path="/activities" element={<ActivitiesDisplay />} />
         <Route path="/activities/:id" element={<ActivityDetails />} />
         <Route
           path="/donate"
