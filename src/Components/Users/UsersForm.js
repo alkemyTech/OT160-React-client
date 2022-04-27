@@ -10,6 +10,7 @@ import {
 } from '../../Services/formValidationsService';
 import { updateUserData, createUser } from '../../Services/userApiService';
 import PublicHeader from '../Header/PublicHeader';
+import { errorAlert, infoAlert } from '../../Services/alertsService';
 
 const UserForm = ({ prevUserData }) => {
   const initialUserData = {
@@ -43,11 +44,17 @@ const UserForm = ({ prevUserData }) => {
     const newUserData = {
       ...values,
       role_id: parseInt(values.role_id),
+      profile_image: values.image,
     };
     if (prevUserDataExist) {
       updateUserData(newUserData);
     } else {
-      createUser(newUserData);
+      const { error } = await createUser(newUserData);
+      if (error) {
+        errorAlert('Error', 'No se ha podido crear el usuario');
+      } else {
+        infoAlert('Felicidades!', 'Usuario creado con éxito');
+      }
     }
   };
 
@@ -59,7 +66,7 @@ const UserForm = ({ prevUserData }) => {
         validate={validate}
         onSubmit={onSubmitHandler}
       >
-        {({ values, errors, handleChange, handleSubmit }) => (
+        {({ values, errors, handleChange, handleSubmit, setFieldValue }) => (
           <form className="form-container" onSubmit={handleSubmit}>
             <Field
               className="input-field"
@@ -83,7 +90,15 @@ const UserForm = ({ prevUserData }) => {
               type="file"
               className="input-field"
               value={values.profile_image}
-              onChange={handleChange}
+              onChange={(event) => {
+                setFieldValue('profile_image', event.currentTarget.value);
+                const file = event.currentTarget.files[0];
+                const reader = new FileReader();
+                reader.addEventListener('load', () => {
+                  setFieldValue('image', reader.result);
+                });
+                reader.readAsDataURL(file);
+              }}
             />
             {errors.image && errors.image}
             <Field
