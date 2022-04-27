@@ -6,7 +6,7 @@ import ActivityDetails from './Components/Activities/ActivityDetails/ActivityDet
 import Register from './Components/Auth/RegisterForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
-import Slides from "./Components/Slides/Slides";
+import Slides from './Components/Slides/Slides';
 import SlidesForm from './Components/Slides/SlidesForm';
 import TestimonialForm from './Components/Testimonials/TestimonialsForm';
 import UserForm from './Components/Users/UsersForm';
@@ -20,9 +20,10 @@ import About from './Components/About/About';
 import Backoffice from './Components/Backoffice/backoffice';
 import EditOrganization from './Components/Organization/EditOrganization';
 import Login from './Components/Login/Login';
-import Organization from './Components/Organization/Organization'
+import Organization from './Components/Organization/Organization';
 import UsersList from './Components/Users/UsersList';
 import Home from './Components/Home';
+import Header from './Components/Header/Header';
 import ActivitiesList from './Components/Activities/ActivitiesList';
 import { spring, AnimatedSwitch } from 'react-router-transition';
 
@@ -60,6 +61,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Header />
         <AnimatedSwitch
           atEnter={bounceTransition.atEnter}
           atLeave={bounceTransition.atLeave}

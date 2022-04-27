@@ -1,0 +1,11 @@
+.header-items-public {
+  display: flex;
+  margin: 0 0 0 1em;
+  gap: 1em;
+}
+
+.header-public {
+  display: flex;
+  justify-content: start;
+  gap: 1em;
+}

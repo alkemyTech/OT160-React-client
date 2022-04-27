@@ -3,14 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Stack from 'react-bootstrap/Stack';
 import Title from '../Title/Title';
 import MembersDisplay from '../Members/MembersDisplay';
-
-const contentMock = {
-  data: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  Morbi nunc tellus, condimentum pellentesque nunc in, volutpat
-  laoreet dui. Aliquam metus ipsum, iaculis in imperdiet eu,
-  consequat ac purus. Nam sed placerat nibh.`,
-  error: '',
-};
+import { getDataOrganization } from '../../Services/organizationService';
 
 function About() {
   const [aboutUsContent, setAboutUsContent] = useState('');
@@ -20,20 +13,21 @@ function About() {
   }, []);
 
   async function getAboutUsContent() {
-    const { data, error } = contentMock; // @todo: implement service to request content
+    const { data, error } = await getDataOrganization();
     if (error) {
       console.log(error); // @todo: error handling
     } else {
-      setAboutUsContent(data);
+      const content = data.long_description;
+      setAboutUsContent(content);
     }
   }
 
   return (
     <Stack as="section" className="align-items-center mt-4" gap="4">
       <Title title="Nosotros" />
-      <Stack className="align-items-center">
+      <Stack className="align-items-center align-self-center w-75">
         <h4>Sobre nosotros</h4>
-        <p className="text-left w-50">{aboutUsContent}</p>
+        <div dangerouslySetInnerHTML={{ __html: aboutUsContent }}></div>
       </Stack>
 
       <Stack className="align-items-center" gap="4">

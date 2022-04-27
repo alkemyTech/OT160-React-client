@@ -1,25 +1,26 @@
-import React  from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './header.css';
 
-const Header = () => {   
-    return(
-        <nav class="navbar-light bg-light d-flex justify-content-around align-items-start">
-          <div>
-            <div class="container-fluid">
-              <button class="navbar-toggler shadow-none mt-2 " type="button">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-            </div>
-            <div>
-              <div class="items">
-                <Link to="/backoffice">
-                Some item
-                </Link>
-              </div>
-            </div>
-          </div>
-        </nav>
-    )
+const Header = () => {
+  return (
+    <div className="header-public">
+      <div>
+        <div className="container-fluid">
+          <button className="navbar-toggler shadow-none mt-2 " type="button">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div>
+          <nav className="header-items-public">
+            <Link to="/">Inicio</Link>
+            <Link to="/contact">Contacto</Link>
+            <Link to="/about">Nosotros</Link>
+          </nav>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Header;

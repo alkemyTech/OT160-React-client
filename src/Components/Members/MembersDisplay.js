@@ -7,17 +7,21 @@ function memberCard(memberDetails) {
   const { name, image, description, facebookUrl, linkedinUrl } = memberDetails;
 
   return (
-    <Card style={{ width: '13.5rem', textAlign: 'center' }}>
+    <Card style={{ width: '200px', textAlign: 'center' }}>
       <Card.Img
         variant="top"
         src={image}
-        style={{ width: '100%', height: 'auto' }}
+        style={{
+          width: '100%',
+          height: '200px',
+          objectFit: 'contain',
+        }}
       />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
-        <Card.Text>{description}</Card.Text>
-        <Card.Link href={facebookUrl}>Facebook</Card.Link>
-        <Card.Link href={linkedinUrl}>Linkedin</Card.Link>
+        <div dangerouslySetInnerHTML={{ __html: description }}></div>
+        <Card.Link href={`https://${facebookUrl}`}>Facebook</Card.Link>
+        <Card.Link href={`https://${linkedinUrl}`}>Linkedin</Card.Link>
       </Card.Body>
     </Card>
   );
@@ -31,8 +35,8 @@ function MembersDisplay() {
   }, []);
 
   async function getMembersList() {
-    const members = await getMembers();
-    setMembers(members);
+    const { data } = await getMembers();
+    setMembers(data);
   }
 
   return (

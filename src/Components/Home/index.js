@@ -1,8 +1,9 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Row, Col } from "react-bootstrap";
-import Slides from '../Slides/SlidesForm'
-import NewsList from "../News/NewsList";
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Row, Col } from 'react-bootstrap';
+import NewsList from '../News/NewsList';
+import Testimonials from '../Testimonials/TestimonialsDisplay';
+import './index.css';
 
 function Home() {
   return (
@@ -10,12 +11,12 @@ function Home() {
       <Col>
         <Row>
           <div className="w-100">
-            <h1 className="fs-1 text-center">Bienvenido a Somos Mas</h1>
+            <h1 className="main-title text-center">Bienvenido a Somos Mas</h1>
           </div>
         </Row>
         <Row>
-          <div className='text-center mt-3 mb-3 container-xl'>
-            <p className="fs-3">Ultimas Novedades</p>
+          <div className="text-center mt-3 mb-3 container-xl">
+            <p className="section-title">Ultimas Novedades</p>
             <div className="row justify-content-center">
               <NewsList />
             </div>
@@ -23,9 +24,9 @@ function Home() {
         </Row>
         <Row>
           <div className="text-center mt-3 mb-3 container-xl">
-            <p className="fs-3">Slides form</p>
+            <p className="section-title">Testimonios</p>
             <div className="row justify-content-center">
-                <Slides/>
+              <Testimonials />
             </div>
           </div>
         </Row>

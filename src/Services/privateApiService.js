@@ -3,17 +3,17 @@ import { errorAlert } from './alertsService';
 
 const config = {
   headers: {
-    Group: 160, //Aqui va el ID del equipo!!
+    //Group: 160,
   },
 };
 
 const getToken = () => {
-  return localStorage.getItem("token");
+  return localStorage.getItem('token');
 };
 
 const headerAuthorization = () => {
   const token = getToken();
-  const headerAuthorization = { Authorization: "" };
+  const headerAuthorization = { Authorization: '' };
   if (token) {
     headerAuthorization.Authorization = `Bearer: ${token}`;
   }
@@ -26,16 +26,16 @@ const buildHeaders = (requestConfig) => {
   Object.assign(requestConfig.headers, authHeader);
 };
 
-const get = async (url, id = null) => {
+const get = async (url, id = '') => {
   const response = {};
   const requestConfig = { ...config };
+  const finalUrl = id ? `${url}/${id}` : url;
 
   buildHeaders(requestConfig);
 
   try {
-    const axiosRes = await axios.get(`${url}/${id}`, requestConfig);
-    response.data = axiosRes.data;
-    
+    const axiosRes = await axios.get(finalUrl);
+    response.data = axiosRes.data.data;
   } catch (error) {
     response.error = error;
     errorAlert(

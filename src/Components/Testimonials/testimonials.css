@@ -1,0 +1,21 @@
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  gap: 1em;
+}
+
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  font-size: 1.2em;
+  max-width: 250px;
+}
+
+.testimonial-image {
+  width: 250px;
+  height: auto;
+  border: 2px solid;
+}
