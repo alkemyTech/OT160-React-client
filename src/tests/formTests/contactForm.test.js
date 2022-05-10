@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render, waitFor, fireEvent } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import ContactForm from '../../Components/Contact/ContactForm';
 import { createContact } from '../../Services/contactsService';
