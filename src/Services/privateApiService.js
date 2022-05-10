@@ -8,12 +8,12 @@ const config = {
 };
 
 const getToken = () => {
-  return localStorage.getItem('token');
+  return localStorage.getItem("token");
 };
 
 const headerAuthorization = () => {
   const token = getToken();
-  const headerAuthorization = { Authorization: '' };
+  const headerAuthorization = { Authorization: "" };
   if (token) {
     headerAuthorization.Authorization = `Bearer: ${token}`;
   }
@@ -35,6 +35,7 @@ const get = async (url, id = null) => {
   try {
     const axiosRes = await axios.get(`${url}/${id}`, requestConfig);
     response.data = axiosRes.data;
+    
   } catch (error) {
     response.error = error;
     errorAlert(
