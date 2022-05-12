@@ -26,7 +26,7 @@ const buildHeaders = (requestConfig) => {
   Object.assign(requestConfig.headers, authHeader);
 };
 
-const get = async (url, id = null) => {
+const get = async (url, id = "") => {
   const response = {};
   const requestConfig = { ...config };
 

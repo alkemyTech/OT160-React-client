@@ -1,4 +1,4 @@
-import {get, patch, post} from "./privateApiService";
+import {get, patch, post, remove} from "./privateApiService";
 
 const USERS_URL = "https://ongapi.alkemy.org/api/users/";
 
@@ -7,11 +7,11 @@ const getUsers = async () => {
 };
 
 const getUserById = async (userData) => {
-    return await get(USERS_URL + userData.id, {userData});
+    return await get(USERS_URL + userData.id);
 };
 
 const deleteUser = async (userData) => {
-    //waiting for delete function
+    return await remove(USERS_URL, userData.id);
 };
 
 const updateUserData = (userData) => { 
